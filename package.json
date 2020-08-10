@@ -1,7 +1,7 @@
 {
-  "name": "finance-backend",
+  "name": "finance-api",
   "version": "0.1.0",
-  "description": "Backend for my asset tracking finance application",
+  "description": "API for my asset tracking finance application",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
