@@ -1,16 +1,23 @@
 {
-  "name": "finance-api",
-  "version": "0.1.0",
-  "description": "API for my asset tracking finance application",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nexus dev",
-    "build": "nexus build"
-  },
-  "author": "Amin Mushehid (https://github.com/aminmus)",
-  "license": "ISC",
+  "name": "api",
+  "license": "UNLICENSED",
+  "version": "0.0.0",
   "dependencies": {
     "nexus": "^0.26.1",
     "nexus-plugin-prisma": "^0.17.0"
+  },
+  "scripts": {
+    "format": "npx prettier --write './**/*.{ts,md}'",
+    "dev": "nexus dev",
+    "build": "nexus build",
+    "start": "node .nexus/build/api"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
   }
 }
