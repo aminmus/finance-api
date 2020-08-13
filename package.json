@@ -4,8 +4,13 @@
   "description": "API for my asset tracking finance application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nexus dev",
+    "build": "nexus build"
   },
   "author": "Amin Mushehid (https://github.com/aminmus)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "nexus": "^0.26.1",
+    "nexus-plugin-prisma": "^0.17.0"
+  }
 }
