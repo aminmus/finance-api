@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    restart: on-failure
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+    volumes: 
+        - /var/lib/postgresql/data
+    ports: 
+    - "5432:5432"
+  adminer:
+    image: adminer
+    restart: on-failure
+    ports:
+      - "${ADMINER_PORT}:8080"
