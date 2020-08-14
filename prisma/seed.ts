@@ -27,5 +27,5 @@ async function main() {
 
   console.log('Seeded: %j', results)
 
-  db.disconnect()
+  db.$disconnect()
 }
