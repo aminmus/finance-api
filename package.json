@@ -16,9 +16,11 @@
         "trailingComma": "all"
     },
     "devDependencies": {
+        "@types/bcrypt": "^3.0.0",
         "prettier": "^2.0.5"
     },
     "dependencies": {
+        "bcrypt": "^5.0.0",
         "nexus": "^0.26.1",
         "nexus-plugin-prisma": "^0.17.0"
     }
