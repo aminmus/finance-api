@@ -21,6 +21,7 @@ schema.extendType({
 schema.extendType({
   type: 'Mutation',
   definition(t) {
+    t.crud.deleteOneUser();
     t.crud.createOneUser({
       async resolve(root, args, ctx, info, originalResolve) {
         // Encrypt password before saving user
@@ -41,7 +42,7 @@ schema.extendType({
         const res = await originalResolve(root, processedArgs, ctx, info);
         return res;
       }
-    })
+    });
   },
 });
 

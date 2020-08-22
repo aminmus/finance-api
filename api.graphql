@@ -16,6 +16,7 @@ scalar Json
 
 type Mutation {
   createOneUser(data: UserCreateInput!): User!
+  deleteOneUser(where: UserWhereUniqueInput!): User
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
