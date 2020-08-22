@@ -14,6 +14,7 @@ schema.extendType({
   type: 'Query',
   definition(t) {
     t.crud.users();
+    t.crud.user();
   },
 });
 

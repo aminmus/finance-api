@@ -21,6 +21,7 @@ type Mutation {
 
 type Query {
   hello(world: String): World
+  user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
   worlds: [World!]
 }
