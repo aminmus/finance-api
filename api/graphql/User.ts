@@ -24,7 +24,7 @@ schema.extendType({
     t.crud.createOneUser({
       async resolve(root, args, ctx, info, originalResolve) {
         // Encrypt password before saving user
-        const encryptedPassword = await bcrypt.hash(args.data.password, 10);
+        const encryptedPassword = await hashPassword(args.data.password);
         const processedArgs = { data: { ...args.data, password: encryptedPassword } };
         const res = await originalResolve(root, processedArgs, ctx, info);
         return res;
@@ -35,7 +35,7 @@ schema.extendType({
         const processedArgs = { ...args };
         if (args.data.password) {
           // Encrypt password before updating user
-          const encryptedPassword = await bcrypt.hash(args.data.password, 10);
+          const encryptedPassword = await hashPassword(args.data.password);
           processedArgs.data.password = encryptedPassword;
         }
         const res = await originalResolve(root, processedArgs, ctx, info);
@@ -44,3 +44,5 @@ schema.extendType({
     })
   },
 });
+
+const hashPassword = (password: string) => bcrypt.hash(password, 10);
