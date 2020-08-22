@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "bcrypt": "^5.0.0",
+        "jsonwebtoken": "^8.5.1",
         "nexus": "^0.26.1",
         "nexus-plugin-prisma": "^0.17.0"
     }
