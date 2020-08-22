@@ -16,6 +16,7 @@ scalar Json
 
 type Mutation {
   createOneUser(data: UserCreateInput!): User!
+  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
 type Query {
@@ -34,6 +35,12 @@ input UserCreateInput {
   email: String!
   name: String!
   password: String!
+}
+
+input UserUpdateInput {
+  email: String
+  name: String
+  password: String
 }
 
 input UserWhereUniqueInput {
