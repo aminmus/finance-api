@@ -5,8 +5,8 @@ import jwt from 'jsonwebtoken';
 const AuthPayload = schema.objectType({
   name: 'AuthPayload',
   definition(t) {
-    t.string('token');
-    t.field('user', { type: 'User' });
+    t.string('token', { nullable: false });
+    t.field('user', { type: 'User', nullable: false });
   },
 });
 
