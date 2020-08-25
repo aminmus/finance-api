@@ -12,6 +12,17 @@ type Asset {
   updatedAt: DateTime!
 }
 
+input AssetCreateInput {
+  createdAt: DateTime
+  description: String
+  name: String!
+  Portfolio: PortfolioCreateOneWithoutAssetsInput
+  quantity: Int
+  ticker: String
+  Transaction: TransactionCreateManyWithoutAssetInput
+  updatedAt: DateTime
+}
+
 input AssetCreateManyWithoutPortfolioInput {
   connect: [AssetWhereUniqueInput!]
   create: [AssetCreateWithoutPortfolioInput!]
@@ -46,6 +57,17 @@ input AssetScalarWhereInput {
   ticker: NullableStringFilter
   Transaction: TransactionFilter
   updatedAt: DateTimeFilter
+}
+
+input AssetUpdateInput {
+  createdAt: DateTime
+  description: String
+  name: String
+  Portfolio: PortfolioUpdateOneWithoutAssetsInput
+  quantity: Int
+  ticker: String
+  Transaction: TransactionUpdateManyWithoutAssetInput
+  updatedAt: DateTime
 }
 
 input AssetUpdateManyDataInput {
@@ -155,11 +177,15 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 scalar Json
 
 type Mutation {
+  createOneAsset(data: AssetCreateInput!): Asset!
   createOnePortfolio(data: PortfolioCreateInput!): Portfolio!
   createOneUser(data: UserCreateInput!): User!
+  deleteOneAsset(where: AssetWhereUniqueInput!): Asset
   deleteOnePortfolio(where: PortfolioWhereUniqueInput!): Portfolio
   deleteOneUser(where: UserWhereUniqueInput!): User
   login(email: String!, password: String!): AuthPayload
+  updateOneAsset(data: AssetUpdateInput!, where: AssetWhereUniqueInput!): Asset
+  updateOnePortfolio(data: PortfolioUpdateInput!, where: PortfolioWhereUniqueInput!): Portfolio
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
@@ -212,6 +238,19 @@ input PortfolioCreateManyWithoutUserInput {
   create: [PortfolioCreateWithoutUserInput!]
 }
 
+input PortfolioCreateOneWithoutAssetsInput {
+  connect: PortfolioWhereUniqueInput
+  create: PortfolioCreateWithoutAssetsInput
+}
+
+input PortfolioCreateWithoutAssetsInput {
+  createdAt: DateTime
+  description: String
+  name: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutPortfoliosInput
+}
+
 input PortfolioCreateWithoutUserInput {
   assets: AssetCreateManyWithoutPortfolioInput
   createdAt: DateTime
@@ -239,6 +278,15 @@ input PortfolioScalarWhereInput {
   userId: NullableIntFilter
 }
 
+input PortfolioUpdateInput {
+  assets: AssetUpdateManyWithoutPortfolioInput
+  createdAt: DateTime
+  description: String
+  name: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutPortfoliosInput
+}
+
 input PortfolioUpdateManyDataInput {
   createdAt: DateTime
   description: String
@@ -263,6 +311,23 @@ input PortfolioUpdateManyWithWhereNestedInput {
   where: PortfolioScalarWhereInput!
 }
 
+input PortfolioUpdateOneWithoutAssetsInput {
+  connect: PortfolioWhereUniqueInput
+  create: PortfolioCreateWithoutAssetsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: PortfolioUpdateWithoutAssetsDataInput
+  upsert: PortfolioUpsertWithoutAssetsInput
+}
+
+input PortfolioUpdateWithoutAssetsDataInput {
+  createdAt: DateTime
+  description: String
+  name: String
+  updatedAt: DateTime
+  User: UserUpdateOneWithoutPortfoliosInput
+}
+
 input PortfolioUpdateWithoutUserDataInput {
   assets: AssetUpdateManyWithoutPortfolioInput
   createdAt: DateTime
@@ -274,6 +339,11 @@ input PortfolioUpdateWithoutUserDataInput {
 input PortfolioUpdateWithWhereUniqueWithoutUserInput {
   data: PortfolioUpdateWithoutUserDataInput!
   where: PortfolioWhereUniqueInput!
+}
+
+input PortfolioUpsertWithoutAssetsInput {
+  create: PortfolioCreateWithoutAssetsInput!
+  update: PortfolioUpdateWithoutAssetsDataInput!
 }
 
 input PortfolioUpsertWithWhereUniqueWithoutUserInput {
@@ -469,6 +539,28 @@ input UserUpdateInput {
   password: String
   portfolios: PortfolioUpdateManyWithoutUserInput
   updatedAt: DateTime
+}
+
+input UserUpdateOneWithoutPortfoliosInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutPortfoliosInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutPortfoliosDataInput
+  upsert: UserUpsertWithoutPortfoliosInput
+}
+
+input UserUpdateWithoutPortfoliosDataInput {
+  createdAt: DateTime
+  email: String
+  name: String
+  password: String
+  updatedAt: DateTime
+}
+
+input UserUpsertWithoutPortfoliosInput {
+  create: UserCreateWithoutPortfoliosInput!
+  update: UserUpdateWithoutPortfoliosDataInput!
 }
 
 input UserWhereInput {

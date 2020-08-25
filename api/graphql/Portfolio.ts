@@ -26,6 +26,6 @@ schema.extendType({
   definition(t) {
     t.crud.createOnePortfolio();
     t.crud.deleteOnePortfolio();
-    t.crud.updateOneUser();
+    t.crud.updateOnePortfolio();
   },
 });
