@@ -278,10 +278,8 @@ input PortfolioWhereUniqueInput {
 type Query {
   asset(where: AssetWhereUniqueInput!): Asset
   assets(after: AssetWhereUniqueInput, before: AssetWhereUniqueInput, first: Int, last: Int): [Asset!]!
-  hello(world: String): World
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
-  worlds: [World!]
 }
 
 input StringFilter {
@@ -340,10 +338,4 @@ input UserWhereInput {
 input UserWhereUniqueInput {
   email: String
   id: Int
-}
-
-type World {
-  id: Int!
-  name: String!
-  population: Float!
 }
