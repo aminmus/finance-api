@@ -20,3 +20,12 @@ schema.extendType({
     t.crud.assets();
   },
 });
+
+schema.extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.crud.createOneAsset();
+    t.crud.deleteOneAsset();
+    t.crud.updateOneAsset();
+  },
+});
