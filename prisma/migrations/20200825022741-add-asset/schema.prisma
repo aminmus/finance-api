@@ -1,0 +1,29 @@
+datasource db {
+  provider = "postgresql"
+  url = "***"
+}
+
+generator prisma_client {
+  provider = "prisma-client-js"
+}
+
+model World {
+  id         Int    @id @default(autoincrement())
+  name       String @unique
+  population Float
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String @unique
+  password String
+}
+
+model Asset {
+    id Int @id @default(autoincrement())
+    name String
+    ticker String?
+    description String?
+    quantity Int @default(0)
+}

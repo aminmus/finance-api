@@ -43,4 +43,4 @@ schema.extendType({
       }
     });
   },
-})
+});

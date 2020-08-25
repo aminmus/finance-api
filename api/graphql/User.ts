@@ -7,6 +7,8 @@ schema.objectType({
     t.model.id();
     t.model.email();
     t.model.name();
+    t.model.createdAt(),
+    t.model.updatedAt();
   },
 });
 

@@ -2,6 +2,20 @@
 ### Do not make changes to this file directly
 
 
+type Asset {
+  createdAt: DateTime!
+  description: String
+  id: Int!
+  name: String!
+  quantity: Int!
+  ticker: String
+  updatedAt: DateTime!
+}
+
+input AssetWhereUniqueInput {
+  id: Int
+}
+
 type AuthPayload {
   token: String!
   user: User!
@@ -27,6 +41,8 @@ type Mutation {
 }
 
 type Query {
+  asset(where: AssetWhereUniqueInput!): Asset
+  assets(after: AssetWhereUniqueInput, before: AssetWhereUniqueInput, first: Int, last: Int): [Asset!]!
   hello(world: String): World
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
@@ -34,21 +50,27 @@ type Query {
 }
 
 type User {
+  createdAt: DateTime!
   email: String!
   id: Int!
   name: String!
+  updatedAt: DateTime!
 }
 
 input UserCreateInput {
+  createdAt: DateTime
   email: String!
   name: String!
   password: String!
+  updatedAt: DateTime
 }
 
 input UserUpdateInput {
+  createdAt: DateTime
   email: String
   name: String
   password: String
+  updatedAt: DateTime
 }
 
 input UserWhereUniqueInput {
