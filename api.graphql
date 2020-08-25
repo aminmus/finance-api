@@ -12,6 +12,101 @@ type Asset {
   updatedAt: DateTime!
 }
 
+input AssetCreateManyWithoutPortfolioInput {
+  connect: [AssetWhereUniqueInput!]
+  create: [AssetCreateWithoutPortfolioInput!]
+}
+
+input AssetCreateWithoutPortfolioInput {
+  createdAt: DateTime
+  description: String
+  name: String!
+  quantity: Int
+  ticker: String
+  updatedAt: DateTime
+}
+
+input AssetFilter {
+  every: AssetWhereInput
+  none: AssetWhereInput
+  some: AssetWhereInput
+}
+
+input AssetScalarWhereInput {
+  AND: [AssetScalarWhereInput!]
+  createdAt: DateTimeFilter
+  description: NullableStringFilter
+  id: IntFilter
+  name: StringFilter
+  NOT: [AssetScalarWhereInput!]
+  OR: [AssetScalarWhereInput!]
+  portfolioId: NullableIntFilter
+  quantity: IntFilter
+  ticker: NullableStringFilter
+  updatedAt: DateTimeFilter
+}
+
+input AssetUpdateManyDataInput {
+  createdAt: DateTime
+  description: String
+  name: String
+  quantity: Int
+  ticker: String
+  updatedAt: DateTime
+}
+
+input AssetUpdateManyWithoutPortfolioInput {
+  connect: [AssetWhereUniqueInput!]
+  create: [AssetCreateWithoutPortfolioInput!]
+  delete: [AssetWhereUniqueInput!]
+  deleteMany: [AssetScalarWhereInput!]
+  disconnect: [AssetWhereUniqueInput!]
+  set: [AssetWhereUniqueInput!]
+  update: [AssetUpdateWithWhereUniqueWithoutPortfolioInput!]
+  updateMany: [AssetUpdateManyWithWhereNestedInput!]
+  upsert: [AssetUpsertWithWhereUniqueWithoutPortfolioInput!]
+}
+
+input AssetUpdateManyWithWhereNestedInput {
+  data: AssetUpdateManyDataInput!
+  where: AssetScalarWhereInput!
+}
+
+input AssetUpdateWithoutPortfolioDataInput {
+  createdAt: DateTime
+  description: String
+  name: String
+  quantity: Int
+  ticker: String
+  updatedAt: DateTime
+}
+
+input AssetUpdateWithWhereUniqueWithoutPortfolioInput {
+  data: AssetUpdateWithoutPortfolioDataInput!
+  where: AssetWhereUniqueInput!
+}
+
+input AssetUpsertWithWhereUniqueWithoutPortfolioInput {
+  create: AssetCreateWithoutPortfolioInput!
+  update: AssetUpdateWithoutPortfolioDataInput!
+  where: AssetWhereUniqueInput!
+}
+
+input AssetWhereInput {
+  AND: [AssetWhereInput!]
+  createdAt: DateTimeFilter
+  description: NullableStringFilter
+  id: IntFilter
+  name: StringFilter
+  NOT: [AssetWhereInput!]
+  OR: [AssetWhereInput!]
+  Portfolio: PortfolioWhereInput
+  portfolioId: NullableIntFilter
+  quantity: IntFilter
+  ticker: NullableStringFilter
+  updatedAt: DateTimeFilter
+}
+
 input AssetWhereUniqueInput {
   id: Int
 }
@@ -28,6 +123,28 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
 """
 scalar DateTime
 
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: DateTime
+  notIn: [DateTime!]
+}
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: Int
+  notIn: [Int!]
+}
+
 """
 The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -40,6 +157,124 @@ type Mutation {
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
+input NullableIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: Int
+  notIn: [Int!]
+}
+
+input NullableStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+input PortfolioCreateManyWithoutUserInput {
+  connect: [PortfolioWhereUniqueInput!]
+  create: [PortfolioCreateWithoutUserInput!]
+}
+
+input PortfolioCreateWithoutUserInput {
+  assets: AssetCreateManyWithoutPortfolioInput
+  createdAt: DateTime
+  description: String
+  name: String!
+  updatedAt: DateTime
+}
+
+input PortfolioFilter {
+  every: PortfolioWhereInput
+  none: PortfolioWhereInput
+  some: PortfolioWhereInput
+}
+
+input PortfolioScalarWhereInput {
+  AND: [PortfolioScalarWhereInput!]
+  assets: AssetFilter
+  createdAt: DateTimeFilter
+  description: NullableStringFilter
+  id: IntFilter
+  name: StringFilter
+  NOT: [PortfolioScalarWhereInput!]
+  OR: [PortfolioScalarWhereInput!]
+  updatedAt: DateTimeFilter
+  userId: NullableIntFilter
+}
+
+input PortfolioUpdateManyDataInput {
+  createdAt: DateTime
+  description: String
+  name: String
+  updatedAt: DateTime
+}
+
+input PortfolioUpdateManyWithoutUserInput {
+  connect: [PortfolioWhereUniqueInput!]
+  create: [PortfolioCreateWithoutUserInput!]
+  delete: [PortfolioWhereUniqueInput!]
+  deleteMany: [PortfolioScalarWhereInput!]
+  disconnect: [PortfolioWhereUniqueInput!]
+  set: [PortfolioWhereUniqueInput!]
+  update: [PortfolioUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [PortfolioUpdateManyWithWhereNestedInput!]
+  upsert: [PortfolioUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input PortfolioUpdateManyWithWhereNestedInput {
+  data: PortfolioUpdateManyDataInput!
+  where: PortfolioScalarWhereInput!
+}
+
+input PortfolioUpdateWithoutUserDataInput {
+  assets: AssetUpdateManyWithoutPortfolioInput
+  createdAt: DateTime
+  description: String
+  name: String
+  updatedAt: DateTime
+}
+
+input PortfolioUpdateWithWhereUniqueWithoutUserInput {
+  data: PortfolioUpdateWithoutUserDataInput!
+  where: PortfolioWhereUniqueInput!
+}
+
+input PortfolioUpsertWithWhereUniqueWithoutUserInput {
+  create: PortfolioCreateWithoutUserInput!
+  update: PortfolioUpdateWithoutUserDataInput!
+  where: PortfolioWhereUniqueInput!
+}
+
+input PortfolioWhereInput {
+  AND: [PortfolioWhereInput!]
+  assets: AssetFilter
+  createdAt: DateTimeFilter
+  description: NullableStringFilter
+  id: IntFilter
+  name: StringFilter
+  NOT: [PortfolioWhereInput!]
+  OR: [PortfolioWhereInput!]
+  updatedAt: DateTimeFilter
+  User: UserWhereInput
+  userId: NullableIntFilter
+}
+
+input PortfolioWhereUniqueInput {
+  id: Int
+}
+
 type Query {
   asset(where: AssetWhereUniqueInput!): Asset
   assets(after: AssetWhereUniqueInput, before: AssetWhereUniqueInput, first: Int, last: Int): [Asset!]!
@@ -47,6 +282,20 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
   worlds: [World!]
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: String
+  notIn: [String!]
+  startsWith: String
 }
 
 type User {
@@ -62,6 +311,7 @@ input UserCreateInput {
   email: String!
   name: String!
   password: String!
+  portfolios: PortfolioCreateManyWithoutUserInput
   updatedAt: DateTime
 }
 
@@ -70,7 +320,21 @@ input UserUpdateInput {
   email: String
   name: String
   password: String
+  portfolios: PortfolioUpdateManyWithoutUserInput
   updatedAt: DateTime
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  createdAt: DateTimeFilter
+  email: StringFilter
+  id: IntFilter
+  name: StringFilter
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  password: StringFilter
+  portfolios: PortfolioFilter
+  updatedAt: DateTimeFilter
 }
 
 input UserWhereUniqueInput {
