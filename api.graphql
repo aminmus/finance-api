@@ -23,6 +23,7 @@ input AssetCreateWithoutPortfolioInput {
   name: String!
   quantity: Int
   ticker: String
+  Transaction: TransactionCreateManyWithoutAssetInput
   updatedAt: DateTime
 }
 
@@ -43,6 +44,7 @@ input AssetScalarWhereInput {
   portfolioId: NullableIntFilter
   quantity: IntFilter
   ticker: NullableStringFilter
+  Transaction: TransactionFilter
   updatedAt: DateTimeFilter
 }
 
@@ -78,6 +80,7 @@ input AssetUpdateWithoutPortfolioDataInput {
   name: String
   quantity: Int
   ticker: String
+  Transaction: TransactionUpdateManyWithoutAssetInput
   updatedAt: DateTime
 }
 
@@ -104,6 +107,7 @@ input AssetWhereInput {
   portfolioId: NullableIntFilter
   quantity: IntFilter
   ticker: NullableStringFilter
+  Transaction: TransactionFilter
   updatedAt: DateTimeFilter
 }
 
@@ -151,7 +155,9 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 scalar Json
 
 type Mutation {
+  createOnePortfolio(data: PortfolioCreateInput!): Portfolio!
   createOneUser(data: UserCreateInput!): User!
+  deleteOnePortfolio(where: PortfolioWhereUniqueInput!): Portfolio
   deleteOneUser(where: UserWhereUniqueInput!): User
   login(email: String!, password: String!): AuthPayload
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
@@ -180,6 +186,25 @@ input NullableStringFilter {
   not: String
   notIn: [String!]
   startsWith: String
+}
+
+type Portfolio {
+  assets(after: AssetWhereUniqueInput, before: AssetWhereUniqueInput, first: Int, last: Int): [Asset!]!
+  createdAt: DateTime!
+  description: String
+  id: Int!
+  name: String!
+  updatedAt: DateTime!
+  User: User
+}
+
+input PortfolioCreateInput {
+  assets: AssetCreateManyWithoutPortfolioInput
+  createdAt: DateTime
+  description: String
+  name: String!
+  updatedAt: DateTime
+  User: UserCreateOneWithoutPortfoliosInput
 }
 
 input PortfolioCreateManyWithoutUserInput {
@@ -278,6 +303,8 @@ input PortfolioWhereUniqueInput {
 type Query {
   asset(where: AssetWhereUniqueInput!): Asset
   assets(after: AssetWhereUniqueInput, before: AssetWhereUniqueInput, first: Int, last: Int): [Asset!]!
+  portfolio(where: PortfolioWhereUniqueInput!): Portfolio
+  portfolios(after: PortfolioWhereUniqueInput, before: PortfolioWhereUniqueInput, first: Int, last: Int): [Portfolio!]!
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
 }
@@ -296,6 +323,115 @@ input StringFilter {
   startsWith: String
 }
 
+input TransactionCreateManyWithoutAssetInput {
+  connect: [TransactionWhereUniqueInput!]
+  create: [TransactionCreateWithoutAssetInput!]
+}
+
+input TransactionCreateWithoutAssetInput {
+  assetQuantity: Int!
+  createdAt: DateTime
+  currency: String!
+  date: DateTime
+  note: String
+  totalPrice: Int!
+  unitPrice: Int!
+  updatedAt: DateTime
+}
+
+input TransactionFilter {
+  every: TransactionWhereInput
+  none: TransactionWhereInput
+  some: TransactionWhereInput
+}
+
+input TransactionScalarWhereInput {
+  AND: [TransactionScalarWhereInput!]
+  assetId: IntFilter
+  assetQuantity: IntFilter
+  createdAt: DateTimeFilter
+  currency: StringFilter
+  date: DateTimeFilter
+  id: IntFilter
+  NOT: [TransactionScalarWhereInput!]
+  note: NullableStringFilter
+  OR: [TransactionScalarWhereInput!]
+  totalPrice: IntFilter
+  unitPrice: IntFilter
+  updatedAt: DateTimeFilter
+}
+
+input TransactionUpdateManyDataInput {
+  assetQuantity: Int
+  createdAt: DateTime
+  currency: String
+  date: DateTime
+  note: String
+  totalPrice: Int
+  unitPrice: Int
+  updatedAt: DateTime
+}
+
+input TransactionUpdateManyWithoutAssetInput {
+  connect: [TransactionWhereUniqueInput!]
+  create: [TransactionCreateWithoutAssetInput!]
+  delete: [TransactionWhereUniqueInput!]
+  deleteMany: [TransactionScalarWhereInput!]
+  disconnect: [TransactionWhereUniqueInput!]
+  set: [TransactionWhereUniqueInput!]
+  update: [TransactionUpdateWithWhereUniqueWithoutAssetInput!]
+  updateMany: [TransactionUpdateManyWithWhereNestedInput!]
+  upsert: [TransactionUpsertWithWhereUniqueWithoutAssetInput!]
+}
+
+input TransactionUpdateManyWithWhereNestedInput {
+  data: TransactionUpdateManyDataInput!
+  where: TransactionScalarWhereInput!
+}
+
+input TransactionUpdateWithoutAssetDataInput {
+  assetQuantity: Int
+  createdAt: DateTime
+  currency: String
+  date: DateTime
+  note: String
+  totalPrice: Int
+  unitPrice: Int
+  updatedAt: DateTime
+}
+
+input TransactionUpdateWithWhereUniqueWithoutAssetInput {
+  data: TransactionUpdateWithoutAssetDataInput!
+  where: TransactionWhereUniqueInput!
+}
+
+input TransactionUpsertWithWhereUniqueWithoutAssetInput {
+  create: TransactionCreateWithoutAssetInput!
+  update: TransactionUpdateWithoutAssetDataInput!
+  where: TransactionWhereUniqueInput!
+}
+
+input TransactionWhereInput {
+  AND: [TransactionWhereInput!]
+  asset: AssetWhereInput
+  assetId: IntFilter
+  assetQuantity: IntFilter
+  createdAt: DateTimeFilter
+  currency: StringFilter
+  date: DateTimeFilter
+  id: IntFilter
+  NOT: [TransactionWhereInput!]
+  note: NullableStringFilter
+  OR: [TransactionWhereInput!]
+  totalPrice: IntFilter
+  unitPrice: IntFilter
+  updatedAt: DateTimeFilter
+}
+
+input TransactionWhereUniqueInput {
+  id: Int
+}
+
 type User {
   createdAt: DateTime!
   email: String!
@@ -310,6 +446,19 @@ input UserCreateInput {
   name: String!
   password: String!
   portfolios: PortfolioCreateManyWithoutUserInput
+  updatedAt: DateTime
+}
+
+input UserCreateOneWithoutPortfoliosInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutPortfoliosInput
+}
+
+input UserCreateWithoutPortfoliosInput {
+  createdAt: DateTime
+  email: String!
+  name: String!
+  password: String!
   updatedAt: DateTime
 }
 
