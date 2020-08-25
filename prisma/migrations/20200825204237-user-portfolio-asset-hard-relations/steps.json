@@ -1,0 +1,29 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "Asset",
+      "field": "Portfolio",
+      "arity": "Required"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Asset",
+      "field": "portfolioId",
+      "arity": "Required"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Portfolio",
+      "field": "User",
+      "arity": "Required"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Portfolio",
+      "field": "userId",
+      "arity": "Required"
+    }
+  ]
+}

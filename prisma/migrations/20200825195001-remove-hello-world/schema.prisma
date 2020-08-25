@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator prisma_client {
@@ -25,8 +25,8 @@ model Asset {
   ticker      String?
   description String?
   quantity    Int           @default(0)
-  Portfolio   Portfolio    @relation(fields: [portfolioId], references: [id])
-  portfolioId Int
+  Portfolio   Portfolio?    @relation(fields: [portfolioId], references: [id])
+  portfolioId Int?
   Transaction Transaction[]
 }
 
@@ -37,8 +37,8 @@ model Portfolio {
   name        String
   description String?
   assets      Asset[]
-  User        User    @relation(fields: [userId], references: [id])
-  userId      Int
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      Int?
 }
 
 model Transaction {
