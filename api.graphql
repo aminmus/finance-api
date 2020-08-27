@@ -380,6 +380,19 @@ input StringFilter {
   startsWith: String
 }
 
+type Transaction {
+  asset: Asset!
+  assetQuantity: Int!
+  createdAt: DateTime!
+  currency: String!
+  date: DateTime!
+  id: Int!
+  note: String
+  totalPrice: Int!
+  unitPrice: Int!
+  updatedAt: DateTime!
+}
+
 input TransactionCreateManyWithoutAssetInput {
   connect: [TransactionWhereUniqueInput!]
   create: [TransactionCreateWithoutAssetInput!]
