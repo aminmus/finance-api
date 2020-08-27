@@ -7,6 +7,7 @@ type Asset {
   description: String
   id: Int!
   name: String!
+  portfolioId: Int!
   quantity: Int!
   ticker: String
   updatedAt: DateTime!
@@ -16,8 +17,7 @@ input AssetCreateInput {
   createdAt: DateTime
   description: String
   name: String!
-  Portfolio: PortfolioCreateOneWithoutAssetsInput
-  quantity: Int
+  Portfolio: PortfolioCreateOneWithoutAssetsInput!
   ticker: String
   Transaction: TransactionCreateManyWithoutAssetInput
   updatedAt: DateTime
@@ -52,7 +52,7 @@ input AssetScalarWhereInput {
   name: StringFilter
   NOT: [AssetScalarWhereInput!]
   OR: [AssetScalarWhereInput!]
-  portfolioId: NullableIntFilter
+  portfolioId: IntFilter
   quantity: IntFilter
   ticker: NullableStringFilter
   Transaction: TransactionFilter
@@ -63,7 +63,7 @@ input AssetUpdateInput {
   createdAt: DateTime
   description: String
   name: String
-  Portfolio: PortfolioUpdateOneWithoutAssetsInput
+  Portfolio: PortfolioUpdateOneRequiredWithoutAssetsInput
   quantity: Int
   ticker: String
   Transaction: TransactionUpdateManyWithoutAssetInput
@@ -126,7 +126,7 @@ input AssetWhereInput {
   NOT: [AssetWhereInput!]
   OR: [AssetWhereInput!]
   Portfolio: PortfolioWhereInput
-  portfolioId: NullableIntFilter
+  portfolioId: IntFilter
   quantity: IntFilter
   ticker: NullableStringFilter
   Transaction: TransactionFilter
@@ -189,17 +189,6 @@ type Mutation {
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
-input NullableIntFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int!]
-  lt: Int
-  lte: Int
-  not: Int
-  notIn: [Int!]
-}
-
 input NullableStringFilter {
   contains: String
   endsWith: String
@@ -221,7 +210,7 @@ type Portfolio {
   id: Int!
   name: String!
   updatedAt: DateTime!
-  User: User
+  User: User!
 }
 
 input PortfolioCreateInput {
@@ -230,7 +219,7 @@ input PortfolioCreateInput {
   description: String
   name: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutPortfoliosInput
+  User: UserCreateOneWithoutPortfoliosInput!
 }
 
 input PortfolioCreateManyWithoutUserInput {
@@ -248,7 +237,7 @@ input PortfolioCreateWithoutAssetsInput {
   description: String
   name: String!
   updatedAt: DateTime
-  User: UserCreateOneWithoutPortfoliosInput
+  User: UserCreateOneWithoutPortfoliosInput!
 }
 
 input PortfolioCreateWithoutUserInput {
@@ -275,7 +264,7 @@ input PortfolioScalarWhereInput {
   NOT: [PortfolioScalarWhereInput!]
   OR: [PortfolioScalarWhereInput!]
   updatedAt: DateTimeFilter
-  userId: NullableIntFilter
+  userId: IntFilter
 }
 
 input PortfolioUpdateInput {
@@ -284,7 +273,7 @@ input PortfolioUpdateInput {
   description: String
   name: String
   updatedAt: DateTime
-  User: UserUpdateOneWithoutPortfoliosInput
+  User: UserUpdateOneRequiredWithoutPortfoliosInput
 }
 
 input PortfolioUpdateManyDataInput {
@@ -311,11 +300,9 @@ input PortfolioUpdateManyWithWhereNestedInput {
   where: PortfolioScalarWhereInput!
 }
 
-input PortfolioUpdateOneWithoutAssetsInput {
+input PortfolioUpdateOneRequiredWithoutAssetsInput {
   connect: PortfolioWhereUniqueInput
   create: PortfolioCreateWithoutAssetsInput
-  delete: Boolean
-  disconnect: Boolean
   update: PortfolioUpdateWithoutAssetsDataInput
   upsert: PortfolioUpsertWithoutAssetsInput
 }
@@ -325,7 +312,7 @@ input PortfolioUpdateWithoutAssetsDataInput {
   description: String
   name: String
   updatedAt: DateTime
-  User: UserUpdateOneWithoutPortfoliosInput
+  User: UserUpdateOneRequiredWithoutPortfoliosInput
 }
 
 input PortfolioUpdateWithoutUserDataInput {
@@ -363,7 +350,7 @@ input PortfolioWhereInput {
   OR: [PortfolioWhereInput!]
   updatedAt: DateTimeFilter
   User: UserWhereInput
-  userId: NullableIntFilter
+  userId: IntFilter
 }
 
 input PortfolioWhereUniqueInput {
@@ -541,11 +528,9 @@ input UserUpdateInput {
   updatedAt: DateTime
 }
 
-input UserUpdateOneWithoutPortfoliosInput {
+input UserUpdateOneRequiredWithoutPortfoliosInput {
   connect: UserWhereUniqueInput
   create: UserCreateWithoutPortfoliosInput
-  delete: Boolean
-  disconnect: Boolean
   update: UserUpdateWithoutPortfoliosDataInput
   upsert: UserUpsertWithoutPortfoliosInput
 }

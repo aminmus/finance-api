@@ -10,6 +10,7 @@ schema.objectType({
     t.model.quantity();
     t.model.createdAt();
     t.model.updatedAt();
+    t.model.portfolioId();
   },
 });
 
@@ -24,7 +25,11 @@ schema.extendType({
 schema.extendType({
   type: 'Mutation',
   definition(t) {
-    t.crud.createOneAsset();
+    t.crud.createOneAsset({
+      computedInputs: {
+        quantity: () => undefined, 
+      }, 
+    });
     t.crud.deleteOneAsset();
     t.crud.updateOneAsset();
   },
