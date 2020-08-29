@@ -27,8 +27,8 @@ schema.extendType({
   definition(t) {
     t.crud.createOneAsset({
       computedInputs: {
-        quantity: () => undefined, 
-      }, 
+        quantity: () => undefined,
+      },
     });
     t.crud.deleteOneAsset();
     t.crud.updateOneAsset();

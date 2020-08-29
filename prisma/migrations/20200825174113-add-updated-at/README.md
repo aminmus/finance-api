@@ -58,5 +58,3 @@ migration 20200825022741-add-asset..20200825174113-add-updated-at
 +  createdAt   DateTime @default(now())
  }
 ```
-
-

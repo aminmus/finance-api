@@ -44,5 +44,3 @@ migration 20200821165629-add-user..20200825022741-add-asset
 +    quantity Int @default(0)
 +}
 ```
-
-

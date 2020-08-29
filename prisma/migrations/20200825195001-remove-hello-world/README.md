@@ -36,5 +36,3 @@ migration 20200825191918-add-transaction..20200825195001-remove-hello-world
    updatedAt  DateTime    @updatedAt @default(now())
    createdAt  DateTime    @default(now())
 ```
-
-

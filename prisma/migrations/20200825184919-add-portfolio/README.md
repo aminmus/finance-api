@@ -80,5 +80,3 @@ migration 20200825174113-add-updated-at..20200825184919-add-portfolio
 +  userId      Int?
  }
 ```
-
-

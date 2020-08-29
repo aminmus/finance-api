@@ -79,5 +79,3 @@ migration 20200825184919-add-portfolio..20200825191918-add-transaction
 +  assetId       Int
 +}
 ```
-
-

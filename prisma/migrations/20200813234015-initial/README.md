@@ -31,12 +31,10 @@ migration ..20200813234015-initial
 +generator prisma_client {
 +  provider = "prisma-client-js"
 +}
-+     
++
 +model World {
 +  id         Int    @id @default(autoincrement())
 +  name       String @unique
 +  population Float
 +}
 ```
-
-

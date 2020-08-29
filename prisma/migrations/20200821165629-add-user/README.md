@@ -32,7 +32,7 @@ migration 20200813234015-initial..20200821165629-add-user
  generator prisma_client {
    provider = "prisma-client-js"
  }
--     
+-
 +
  model World {
    id         Int    @id @default(autoincrement())
@@ -48,5 +48,3 @@ migration 20200813234015-initial..20200821165629-add-user
 +  password String
 +}
 ```
-
-

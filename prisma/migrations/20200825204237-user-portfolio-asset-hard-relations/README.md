@@ -51,5 +51,3 @@ migration 20200825195001-remove-hello-world..20200825204237-user-portfolio-asset
  model Transaction {
    id            Int      @id @default(autoincrement())
 ```
-
-
