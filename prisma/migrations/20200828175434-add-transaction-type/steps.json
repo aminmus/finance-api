@@ -1,0 +1,20 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateEnum",
+      "enum": "TransactionType",
+      "values": [
+        "buy",
+        "sell"
+      ]
+    },
+    {
+      "tag": "CreateField",
+      "model": "Transaction",
+      "field": "TransactionType",
+      "type": "TransactionType",
+      "arity": "Required"
+    }
+  ]
+}
