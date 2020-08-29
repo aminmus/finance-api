@@ -4,4 +4,4 @@ import dotenv from 'dotenv';
 
 dotenv.config()
 
-use(prisma({ features: { crud: true } }))
+use(prisma({ features: { crud: true } }));
