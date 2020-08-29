@@ -9,7 +9,7 @@ type Asset {
   name: String!
   portfolioId: Int!
   quantity: Int!
-  ticker: String
+  symbol: String
   updatedAt: DateTime!
 }
 
@@ -19,7 +19,7 @@ input AssetCreateInput {
   description: String
   name: String!
   Portfolio: PortfolioCreateOneWithoutAssetsInput!
-  ticker: String
+  symbol: String
   Transaction: TransactionCreateManyWithoutAssetInput
   updatedAt: DateTime
 }
@@ -45,7 +45,7 @@ input AssetCreateWithoutCustomAssetInput {
   name: String!
   Portfolio: PortfolioCreateOneWithoutAssetsInput!
   quantity: Int
-  ticker: String
+  symbol: String
   Transaction: TransactionCreateManyWithoutAssetInput
   updatedAt: DateTime
 }
@@ -56,7 +56,7 @@ input AssetCreateWithoutPortfolioInput {
   description: String
   name: String!
   quantity: Int
-  ticker: String
+  symbol: String
   Transaction: TransactionCreateManyWithoutAssetInput
   updatedAt: DateTime
 }
@@ -68,7 +68,7 @@ input AssetCreateWithoutTransactionInput {
   name: String!
   Portfolio: PortfolioCreateOneWithoutAssetsInput!
   quantity: Int
-  ticker: String
+  symbol: String
   updatedAt: DateTime
 }
 
@@ -88,7 +88,7 @@ input AssetScalarWhereInput {
   OR: [AssetScalarWhereInput!]
   portfolioId: IntFilter
   quantity: IntFilter
-  ticker: NullableStringFilter
+  symbol: NullableStringFilter
   Transaction: TransactionFilter
   updatedAt: DateTimeFilter
 }
@@ -100,7 +100,7 @@ input AssetUpdateInput {
   name: String
   Portfolio: PortfolioUpdateOneRequiredWithoutAssetsInput
   quantity: Int
-  ticker: String
+  symbol: String
   Transaction: TransactionUpdateManyWithoutAssetInput
   updatedAt: DateTime
 }
@@ -110,7 +110,7 @@ input AssetUpdateManyDataInput {
   description: String
   name: String
   quantity: Int
-  ticker: String
+  symbol: String
   updatedAt: DateTime
 }
 
@@ -144,7 +144,7 @@ input AssetUpdateWithoutCustomAssetDataInput {
   name: String
   Portfolio: PortfolioUpdateOneRequiredWithoutAssetsInput
   quantity: Int
-  ticker: String
+  symbol: String
   Transaction: TransactionUpdateManyWithoutAssetInput
   updatedAt: DateTime
 }
@@ -155,7 +155,7 @@ input AssetUpdateWithoutPortfolioDataInput {
   description: String
   name: String
   quantity: Int
-  ticker: String
+  symbol: String
   Transaction: TransactionUpdateManyWithoutAssetInput
   updatedAt: DateTime
 }
@@ -188,7 +188,7 @@ input AssetWhereInput {
   Portfolio: PortfolioWhereInput
   portfolioId: IntFilter
   quantity: IntFilter
-  ticker: NullableStringFilter
+  symbol: NullableStringFilter
   Transaction: TransactionFilter
   updatedAt: DateTimeFilter
 }
