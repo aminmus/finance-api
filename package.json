@@ -8,10 +8,11 @@
         "format": "npx prettier --write './**/*.{ts,md}'",
         "dev": "nexus dev",
         "build": "nexus build",
-        "start": "node .nexus/build/api"
+        "start": "node .nexus/build/api",
+        "docker": "docker-compose up -d && docker-compose logs -f"
     },
     "prettier": {
-        "semi": false,
+        "semi": true,
         "singleQuote": true,
         "trailingComma": "all"
     },
