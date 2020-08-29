@@ -15,6 +15,7 @@ type Asset {
 
 input AssetCreateInput {
   createdAt: DateTime
+  CustomAsset: CustomAssetCreateOneWithoutAssetInput
   description: String
   name: String!
   Portfolio: PortfolioCreateOneWithoutAssetsInput!
@@ -28,13 +29,30 @@ input AssetCreateManyWithoutPortfolioInput {
   create: [AssetCreateWithoutPortfolioInput!]
 }
 
+input AssetCreateOneWithoutTransactionInput {
+  connect: AssetWhereUniqueInput
+  create: AssetCreateWithoutTransactionInput
+}
+
 input AssetCreateWithoutPortfolioInput {
   createdAt: DateTime
+  CustomAsset: CustomAssetCreateOneWithoutAssetInput
   description: String
   name: String!
   quantity: Int
   ticker: String
   Transaction: TransactionCreateManyWithoutAssetInput
+  updatedAt: DateTime
+}
+
+input AssetCreateWithoutTransactionInput {
+  createdAt: DateTime
+  CustomAsset: CustomAssetCreateOneWithoutAssetInput
+  description: String
+  name: String!
+  Portfolio: PortfolioCreateOneWithoutAssetsInput!
+  quantity: Int
+  ticker: String
   updatedAt: DateTime
 }
 
@@ -61,6 +79,7 @@ input AssetScalarWhereInput {
 
 input AssetUpdateInput {
   createdAt: DateTime
+  CustomAsset: CustomAssetUpdateOneRequiredWithoutAssetInput
   description: String
   name: String
   Portfolio: PortfolioUpdateOneRequiredWithoutAssetsInput
@@ -98,6 +117,7 @@ input AssetUpdateManyWithWhereNestedInput {
 
 input AssetUpdateWithoutPortfolioDataInput {
   createdAt: DateTime
+  CustomAsset: CustomAssetUpdateOneRequiredWithoutAssetInput
   description: String
   name: String
   quantity: Int
@@ -120,6 +140,7 @@ input AssetUpsertWithWhereUniqueWithoutPortfolioInput {
 input AssetWhereInput {
   AND: [AssetWhereInput!]
   createdAt: DateTimeFilter
+  CustomAsset: CustomAssetWhereInput
   description: NullableStringFilter
   id: IntFilter
   name: StringFilter
@@ -142,6 +163,44 @@ type AuthPayload {
   user: User!
 }
 
+input CustomAssetCreateOneWithoutAssetInput {
+  connect: CustomAssetWhereUniqueInput
+  create: CustomAssetCreateWithoutAssetInput
+}
+
+input CustomAssetCreateWithoutAssetInput {
+  HistoricalValue: HistoricalValueCreateManyWithoutAssetInput
+}
+
+input CustomAssetUpdateOneRequiredWithoutAssetInput {
+  connect: CustomAssetWhereUniqueInput
+  create: CustomAssetCreateWithoutAssetInput
+  update: CustomAssetUpdateWithoutAssetDataInput
+  upsert: CustomAssetUpsertWithoutAssetInput
+}
+
+input CustomAssetUpdateWithoutAssetDataInput {
+  HistoricalValue: HistoricalValueUpdateManyWithoutAssetInput
+}
+
+input CustomAssetUpsertWithoutAssetInput {
+  create: CustomAssetCreateWithoutAssetInput!
+  update: CustomAssetUpdateWithoutAssetDataInput!
+}
+
+input CustomAssetWhereInput {
+  AND: [CustomAssetWhereInput!]
+  asset: AssetWhereInput
+  HistoricalValue: HistoricalValueFilter
+  id: IntFilter
+  NOT: [CustomAssetWhereInput!]
+  OR: [CustomAssetWhereInput!]
+}
+
+input CustomAssetWhereUniqueInput {
+  id: Int
+}
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
 `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
@@ -158,6 +217,95 @@ input DateTimeFilter {
   lte: DateTime
   not: DateTime
   notIn: [DateTime!]
+}
+
+input HistoricalValueCreateManyWithoutAssetInput {
+  connect: [HistoricalValueWhereUniqueInput!]
+  create: [HistoricalValueCreateWithoutAssetInput!]
+}
+
+input HistoricalValueCreateWithoutAssetInput {
+  createdAt: DateTime
+  date: DateTime
+  unitPrice: Int!
+  updatedAt: DateTime
+}
+
+input HistoricalValueFilter {
+  every: HistoricalValueWhereInput
+  none: HistoricalValueWhereInput
+  some: HistoricalValueWhereInput
+}
+
+input HistoricalValueScalarWhereInput {
+  AND: [HistoricalValueScalarWhereInput!]
+  assetId: IntFilter
+  createdAt: DateTimeFilter
+  date: DateTimeFilter
+  id: IntFilter
+  NOT: [HistoricalValueScalarWhereInput!]
+  OR: [HistoricalValueScalarWhereInput!]
+  unitPrice: IntFilter
+  updatedAt: DateTimeFilter
+}
+
+input HistoricalValueUpdateManyDataInput {
+  createdAt: DateTime
+  date: DateTime
+  unitPrice: Int
+  updatedAt: DateTime
+}
+
+input HistoricalValueUpdateManyWithoutAssetInput {
+  connect: [HistoricalValueWhereUniqueInput!]
+  create: [HistoricalValueCreateWithoutAssetInput!]
+  delete: [HistoricalValueWhereUniqueInput!]
+  deleteMany: [HistoricalValueScalarWhereInput!]
+  disconnect: [HistoricalValueWhereUniqueInput!]
+  set: [HistoricalValueWhereUniqueInput!]
+  update: [HistoricalValueUpdateWithWhereUniqueWithoutAssetInput!]
+  updateMany: [HistoricalValueUpdateManyWithWhereNestedInput!]
+  upsert: [HistoricalValueUpsertWithWhereUniqueWithoutAssetInput!]
+}
+
+input HistoricalValueUpdateManyWithWhereNestedInput {
+  data: HistoricalValueUpdateManyDataInput!
+  where: HistoricalValueScalarWhereInput!
+}
+
+input HistoricalValueUpdateWithoutAssetDataInput {
+  createdAt: DateTime
+  date: DateTime
+  unitPrice: Int
+  updatedAt: DateTime
+}
+
+input HistoricalValueUpdateWithWhereUniqueWithoutAssetInput {
+  data: HistoricalValueUpdateWithoutAssetDataInput!
+  where: HistoricalValueWhereUniqueInput!
+}
+
+input HistoricalValueUpsertWithWhereUniqueWithoutAssetInput {
+  create: HistoricalValueCreateWithoutAssetInput!
+  update: HistoricalValueUpdateWithoutAssetDataInput!
+  where: HistoricalValueWhereUniqueInput!
+}
+
+input HistoricalValueWhereInput {
+  AND: [HistoricalValueWhereInput!]
+  asset: CustomAssetWhereInput
+  assetId: IntFilter
+  createdAt: DateTimeFilter
+  date: DateTimeFilter
+  id: IntFilter
+  NOT: [HistoricalValueWhereInput!]
+  OR: [HistoricalValueWhereInput!]
+  unitPrice: IntFilter
+  updatedAt: DateTimeFilter
+}
+
+input HistoricalValueWhereUniqueInput {
+  id: Int
 }
 
 input IntFilter {
@@ -179,6 +327,7 @@ scalar Json
 type Mutation {
   createOneAsset(data: AssetCreateInput!): Asset!
   createOnePortfolio(data: PortfolioCreateInput!): Portfolio!
+  createOneTransaction(data: TransactionCreateInput!): Transaction!
   createOneUser(data: UserCreateInput!): User!
   deleteOneAsset(where: AssetWhereUniqueInput!): Asset
   deleteOnePortfolio(where: PortfolioWhereUniqueInput!): Portfolio
@@ -393,6 +542,18 @@ type Transaction {
   updatedAt: DateTime!
 }
 
+input TransactionCreateInput {
+  asset: AssetCreateOneWithoutTransactionInput!
+  assetQuantity: Int!
+  createdAt: DateTime
+  currency: String!
+  date: DateTime
+  note: String
+  TransactionType: TransactionType!
+  unitPrice: Int!
+  updatedAt: DateTime
+}
+
 input TransactionCreateManyWithoutAssetInput {
   connect: [TransactionWhereUniqueInput!]
   create: [TransactionCreateWithoutAssetInput!]
@@ -405,6 +566,7 @@ input TransactionCreateWithoutAssetInput {
   date: DateTime
   note: String
   totalPrice: Int!
+  TransactionType: TransactionType!
   unitPrice: Int!
   updatedAt: DateTime
 }
@@ -427,8 +589,14 @@ input TransactionScalarWhereInput {
   note: NullableStringFilter
   OR: [TransactionScalarWhereInput!]
   totalPrice: IntFilter
+  TransactionType: TransactionType
   unitPrice: IntFilter
   updatedAt: DateTimeFilter
+}
+
+enum TransactionType {
+  buy
+  sell
 }
 
 input TransactionUpdateManyDataInput {
@@ -438,6 +606,7 @@ input TransactionUpdateManyDataInput {
   date: DateTime
   note: String
   totalPrice: Int
+  TransactionType: TransactionType
   unitPrice: Int
   updatedAt: DateTime
 }
@@ -466,6 +635,7 @@ input TransactionUpdateWithoutAssetDataInput {
   date: DateTime
   note: String
   totalPrice: Int
+  TransactionType: TransactionType
   unitPrice: Int
   updatedAt: DateTime
 }
@@ -494,6 +664,7 @@ input TransactionWhereInput {
   note: NullableStringFilter
   OR: [TransactionWhereInput!]
   totalPrice: IntFilter
+  TransactionType: TransactionType
   unitPrice: IntFilter
   updatedAt: DateTimeFilter
 }
