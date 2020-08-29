@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Transaction",
+      "field": "transactionType",
+      "type": "TransactionType",
+      "arity": "Required"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Transaction",
+      "field": "TransactionType"
+    }
+  ]
+}

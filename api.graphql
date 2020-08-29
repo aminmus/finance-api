@@ -34,6 +34,11 @@ input AssetCreateOneWithoutCustomAssetInput {
   create: AssetCreateWithoutCustomAssetInput
 }
 
+input AssetCreateOneWithoutTransactionInput {
+  connect: AssetWhereUniqueInput
+  create: AssetCreateWithoutTransactionInput
+}
+
 input AssetCreateWithoutCustomAssetInput {
   createdAt: DateTime
   description: String
@@ -53,6 +58,17 @@ input AssetCreateWithoutPortfolioInput {
   quantity: Int
   ticker: String
   Transaction: TransactionCreateManyWithoutAssetInput
+  updatedAt: DateTime
+}
+
+input AssetCreateWithoutTransactionInput {
+  createdAt: DateTime
+  CustomAsset: CustomAssetCreateOneWithoutAssetInput
+  description: String
+  name: String!
+  Portfolio: PortfolioCreateOneWithoutAssetsInput!
+  quantity: Int
+  ticker: String
   updatedAt: DateTime
 }
 
@@ -418,6 +434,7 @@ type Mutation {
   createOneCustomAsset(data: CustomAssetCreateInput!): CustomAsset!
   createOneHistoricalValue(data: HistoricalValueCreateInput!): HistoricalValue!
   createOnePortfolio(data: PortfolioCreateInput!): Portfolio!
+  createOneTransaction(data: TransactionCreateInput!): Transaction!
   createOneUser(data: UserCreateInput!): User!
   deleteOneAsset(where: AssetWhereUniqueInput!): Asset
   deleteOneCustomAsset(where: CustomAssetWhereUniqueInput!): CustomAsset
@@ -633,9 +650,22 @@ type Transaction {
   date: DateTime!
   id: Int!
   note: String
-  totalPrice: Int!
+  totalPrice: Int
+  transactionType: TransactionType!
   unitPrice: Int!
   updatedAt: DateTime!
+}
+
+input TransactionCreateInput {
+  asset: AssetCreateOneWithoutTransactionInput!
+  assetQuantity: Int!
+  createdAt: DateTime
+  currency: String!
+  date: DateTime
+  note: String
+  transactionType: TransactionType!
+  unitPrice: Int!
+  updatedAt: DateTime
 }
 
 input TransactionCreateManyWithoutAssetInput {
@@ -649,8 +679,7 @@ input TransactionCreateWithoutAssetInput {
   currency: String!
   date: DateTime
   note: String
-  totalPrice: Int!
-  TransactionType: TransactionType!
+  transactionType: TransactionType!
   unitPrice: Int!
   updatedAt: DateTime
 }
@@ -672,8 +701,7 @@ input TransactionScalarWhereInput {
   NOT: [TransactionScalarWhereInput!]
   note: NullableStringFilter
   OR: [TransactionScalarWhereInput!]
-  totalPrice: IntFilter
-  TransactionType: TransactionType
+  transactionType: TransactionType
   unitPrice: IntFilter
   updatedAt: DateTimeFilter
 }
@@ -689,8 +717,7 @@ input TransactionUpdateManyDataInput {
   currency: String
   date: DateTime
   note: String
-  totalPrice: Int
-  TransactionType: TransactionType
+  transactionType: TransactionType
   unitPrice: Int
   updatedAt: DateTime
 }
@@ -718,8 +745,7 @@ input TransactionUpdateWithoutAssetDataInput {
   currency: String
   date: DateTime
   note: String
-  totalPrice: Int
-  TransactionType: TransactionType
+  transactionType: TransactionType
   unitPrice: Int
   updatedAt: DateTime
 }
@@ -747,8 +773,7 @@ input TransactionWhereInput {
   NOT: [TransactionWhereInput!]
   note: NullableStringFilter
   OR: [TransactionWhereInput!]
-  totalPrice: IntFilter
-  TransactionType: TransactionType
+  transactionType: TransactionType
   unitPrice: IntFilter
   updatedAt: DateTimeFilter
 }
