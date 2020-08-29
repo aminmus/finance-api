@@ -20,11 +20,7 @@ schema.extendType({
 schema.extendType({
   type: 'Mutation',
   definition(t) {
-    t.crud.createOneCustomAsset({
-      computedInputs: {
-        quantity: () => undefined, 
-      }, 
-    });
+    t.crud.createOneCustomAsset();
     t.crud.deleteOneCustomAsset();
     t.crud.updateOneCustomAsset();
   },
