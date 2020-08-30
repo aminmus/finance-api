@@ -5,7 +5,6 @@ schema.objectType({
   definition(t) {
     t.model.id();
     t.model.name();
-    t.model.symbol();
     t.model.description();
     t.model.quantity();
     t.model.createdAt();

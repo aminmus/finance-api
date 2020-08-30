@@ -1,0 +1,259 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateModel",
+      "model": "PubliclyTradedAsset"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PubliclyTradedAsset",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "PubliclyTradedAsset",
+          "field": "id"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "PubliclyTradedAsset",
+      "field": "asset",
+      "type": "Asset",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "PubliclyTradedAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PubliclyTradedAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PubliclyTradedAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PubliclyTradedAsset",
+      "field": "symbol",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PubliclyTradedAsset",
+      "field": "market",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "PrivatelyTradedAsset"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PrivatelyTradedAsset",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "PrivatelyTradedAsset",
+          "field": "id"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "PrivatelyTradedAsset",
+      "field": "asset",
+      "type": "Asset",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "PrivatelyTradedAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PrivatelyTradedAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PrivatelyTradedAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PrivatelyTradedAsset",
+      "field": "historicalValues",
+      "type": "HistoricalValue",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "CustomAsset"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Asset",
+      "field": "portfolio",
+      "type": "Portfolio",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Asset",
+          "field": "portfolio"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Asset",
+          "field": "portfolio"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[portfolioId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Asset",
+          "field": "portfolio"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Asset",
+      "field": "transaction",
+      "type": "Transaction",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Asset",
+      "field": "privatelyTradedAsset",
+      "type": "PrivatelyTradedAsset",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Asset",
+      "field": "publiclyTradedAsset",
+      "type": "PubliclyTradedAsset",
+      "arity": "Required"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Asset",
+      "field": "Portfolio"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Asset",
+      "field": "Transaction"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Asset",
+      "field": "CustomAsset"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Asset",
+      "field": "symbol"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "HistoricalValue",
+      "field": "asset",
+      "type": "PrivatelyTradedAsset"
+    }
+  ]
+}

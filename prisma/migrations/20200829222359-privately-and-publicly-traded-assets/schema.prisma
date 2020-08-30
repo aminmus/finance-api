@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator prisma_client {
@@ -27,18 +27,18 @@ model Asset {
   portfolio            Portfolio            @relation(fields: [portfolioId], references: [id])
   portfolioId          Int
   transaction          Transaction[]
-  PrivateAsset PrivateAsset
-  PublicAsset  PublicAsset
+  privatelyTradedAsset PrivatelyTradedAsset
+  publiclyTradedAsset  PubliclyTradedAsset
 }
 
-model PublicAsset {
+model PubliclyTradedAsset {
   id     Int     @unique
   asset  Asset   @relation(fields: [id], references: [id])
   symbol String?
   market String?
 }
 
-model PrivateAsset {
+model PrivatelyTradedAsset {
   id               Int               @unique
   asset            Asset             @relation(fields: [id], references: [id])
   historicalValues HistoricalValue[]
@@ -50,7 +50,7 @@ model HistoricalValue {
   createdAt DateTime             @default(now())
   date      DateTime             @default(now())
   unitPrice Int
-  asset     PrivateAsset @relation(fields: [assetId], references: [id])
+  asset     PrivatelyTradedAsset @relation(fields: [assetId], references: [id])
   assetId   Int
 }
 

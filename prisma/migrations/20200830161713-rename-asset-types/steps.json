@@ -1,0 +1,200 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateModel",
+      "model": "PublicAsset"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PublicAsset",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "PublicAsset",
+          "field": "id"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "PublicAsset",
+      "field": "asset",
+      "type": "Asset",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "PublicAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PublicAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PublicAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PublicAsset",
+      "field": "symbol",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PublicAsset",
+      "field": "market",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "PrivateAsset"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PrivateAsset",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "PrivateAsset",
+          "field": "id"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "PrivateAsset",
+      "field": "asset",
+      "type": "Asset",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "PrivateAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PrivateAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PrivateAsset",
+          "field": "asset"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PrivateAsset",
+      "field": "historicalValues",
+      "type": "HistoricalValue",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "PubliclyTradedAsset"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "PrivatelyTradedAsset"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Asset",
+      "field": "PrivateAsset",
+      "type": "PrivateAsset",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Asset",
+      "field": "PublicAsset",
+      "type": "PublicAsset",
+      "arity": "Required"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Asset",
+      "field": "privatelyTradedAsset"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Asset",
+      "field": "publiclyTradedAsset"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "HistoricalValue",
+      "field": "asset",
+      "type": "PrivateAsset"
+    }
+  ]
+}
