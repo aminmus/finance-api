@@ -7,7 +7,7 @@ schema.objectType({
     t.model.id();
     t.model.symbol();
     t.model.market();
-
+    t.model.asset();
   }
 });
 

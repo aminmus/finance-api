@@ -21,19 +21,30 @@ schema.objectType({
          * TODO: Use a reliable way to work with currency and prices 
          */
       resolve: (root, _args, _ctx, _info) => root.unitPrice * root.assetQuantity,
+      nullable: false,
     })
     t.model.transactionType();
     t.model.assetQuantity();
     t.model.asset();
+    t.model.assetId();
   },
 });
+
 
 schema.extendType({
   type: 'Mutation',
   definition: (t) => {
-    t.crud.createOneTransaction({
-      async resolve(root, args, ctx, info, originalResolve) {
-        // TODO: Add buy/sell mechanic with another field, or with negative quantity number handling
+    t.field('makeTransaction', {
+      type: 'Transaction',
+      nullable: false,
+      args: {
+        data: schema.arg({
+          type: 'TransactionCreateInput',
+          required: true,
+        }),
+      },
+      async resolve(_root, args, ctx, _info) {
+        //TODO: Add buy/sell mechanic with another field, or with negative quantity number handling
 
         if (args.data.unitPrice < 0) {
           throw new Error('Price cannot be a negative value');
@@ -42,27 +53,60 @@ schema.extendType({
           throw new Error('assetQuantity must be a positive value. Use transactionType to specify a "sell" transaction if you want to decrease the total quantity owned of an asset.');
         }
 
-        const res = await originalResolve(root, args, ctx, info);
-        const asset = await ctx.db.asset.findOne({ where: { id: res.assetId as number } });
+        const asset = await ctx.db.asset.findOne({ where: { id: args.data.assetId } });
 
         if (asset) {
-          await ctx.db.asset.update({
-            where: { id: res.assetId as number },
-            data: { quantity: calculateUpdatedQuantity(args.data.transactionType, asset.quantity, asset.quantity) }
-          });
+          const updatedQuantity = calculateUpdatedQuantity('sell', asset.quantity, args.data.assetQuantity);
+
+          if (args.data.transactionType === 'sell' && updatedQuantity && updatedQuantity < 0) {
+            throw new Error(`Transaction failed. Total asset quantity cannot go below zero. Current amount of this asset you have available: ${asset.quantity}`);
+          } else {
+            const { assetId, assetQuantity, currency, transactionType, unitPrice, date, note } = args.data;
+
+            const transaction = await ctx.db.transaction.create({
+              data: {
+                asset: { connect: { id: assetId } },
+                assetQuantity,
+                currency,
+                transactionType,
+                unitPrice,
+                date,
+                note,
+              }
+            });
+
+            await ctx.db.asset.update({
+              where: { id: args.data.assetId },
+              data: { quantity: calculateUpdatedQuantity(args.data.transactionType, asset.quantity, args.data.assetQuantity) }
+            });
+
+            return transaction;
+          }
         } else {
           throw new Error('Problem updating asset quantity, asset not found');
         }
-        return res;
       },
     });
   }
 });
 
-function calculateUpdatedQuantity(transactionType: TransactionType, totalQuantity: number, quantityChange: number) {
+schema.inputObjectType({
+  name: 'TransactionCreateInput',
+  definition(t) {
+    t.int('assetId', { required: true });
+    t.field('transactionType', { type: 'TransactionType', required: true });
+    t.int('assetQuantity', { required: true });
+    t.string('currency', { required: true });
+    t.int('unitPrice', { required: true });
+    t.string('note');
+    t.date('date');
+  },
+});
+
+function calculateUpdatedQuantity(transactionType: TransactionType, currentQuantity: number, quantityChange: number) {
   if (transactionType === 'buy') {
-    return totalQuantity + quantityChange;
+    return currentQuantity + quantityChange;
   } else if (transactionType === 'sell') {
-    return totalQuantity - quantityChange;
+    return currentQuantity - quantityChange;
   }
 }

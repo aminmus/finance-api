@@ -38,11 +38,6 @@ input AssetCreateOneWithoutPublicAssetInput {
   create: AssetCreateWithoutPublicAssetInput
 }
 
-input AssetCreateOneWithoutTransactionInput {
-  connect: AssetWhereUniqueInput
-  create: AssetCreateWithoutTransactionInput
-}
-
 input AssetCreateWithoutPortfolioInput {
   createdAt: DateTime
   description: String
@@ -73,17 +68,6 @@ input AssetCreateWithoutPublicAssetInput {
   PrivateAsset: PrivateAssetCreateOneWithoutAssetInput
   quantity: Int
   transaction: TransactionCreateManyWithoutAssetInput
-  updatedAt: DateTime
-}
-
-input AssetCreateWithoutTransactionInput {
-  createdAt: DateTime
-  description: String
-  name: String!
-  portfolio: PortfolioCreateOneWithoutAssetsInput!
-  PrivateAsset: PrivateAssetCreateOneWithoutAssetInput
-  PublicAsset: PublicAssetCreateOneWithoutAssetInput
-  quantity: Int
   updatedAt: DateTime
 }
 
@@ -392,7 +376,6 @@ type Mutation {
   createOnePortfolio(data: PortfolioCreateInput!): Portfolio!
   createOnePrivateAsset(data: PrivateAssetCreateInput!): PrivateAsset!
   createOnePublicAsset(data: PublicAssetCreateInput!): PublicAsset!
-  createOneTransaction(data: TransactionCreateInput!): Transaction!
   createOneUser(data: UserCreateInput!): User!
   deleteOneAsset(where: AssetWhereUniqueInput!): Asset
   deleteOneHistoricalValue(where: HistoricalValueWhereUniqueInput!): HistoricalValue
@@ -401,6 +384,7 @@ type Mutation {
   deleteOnePublicAsset(where: PublicAssetWhereUniqueInput!): PublicAsset
   deleteOneUser(where: UserWhereUniqueInput!): User
   login(email: String!, password: String!): AuthPayload
+  makeTransaction(data: TransactionCreateInput!): Transaction!
   updateOneAsset(data: AssetUpdateInput!, where: AssetWhereUniqueInput!): Asset
   updateOneHistoricalValue(data: HistoricalValueUpdateInput!, where: HistoricalValueWhereUniqueInput!): HistoricalValue
   updateOnePortfolio(data: PortfolioUpdateInput!, where: PortfolioWhereUniqueInput!): Portfolio
@@ -663,6 +647,7 @@ input PrivateAssetWhereUniqueInput {
 Publicly traded asset. For assets that are traded in a known and supported public market.
 """
 type PublicAsset {
+  asset: Asset!
   id: Int!
   market: String
   symbol: String
@@ -750,28 +735,27 @@ input StringFilter {
 
 type Transaction {
   asset: Asset!
+  assetId: Int!
   assetQuantity: Int!
   createdAt: DateTime!
   currency: String!
   date: DateTime!
   id: Int!
   note: String
-  totalPrice: Int
+  totalPrice: Int!
   transactionType: TransactionType!
   unitPrice: Int!
   updatedAt: DateTime!
 }
 
 input TransactionCreateInput {
-  asset: AssetCreateOneWithoutTransactionInput!
+  assetId: Int!
   assetQuantity: Int!
-  createdAt: DateTime
   currency: String!
   date: DateTime
   note: String
   transactionType: TransactionType!
   unitPrice: Int!
-  updatedAt: DateTime
 }
 
 input TransactionCreateManyWithoutAssetInput {
