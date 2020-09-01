@@ -5,7 +5,7 @@ schema.objectType({
   description: 'Privately traded asset. For assets that are not traded on a supported public market.',
   definition(t) {
     t.model.id();
-    t.model.asset();
+    t.model.baseAsset();
     t.model.historicalValues();
   },
 });

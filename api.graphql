@@ -17,8 +17,8 @@ input AssetCreateInput {
   description: String
   name: String!
   portfolio: PortfolioCreateOneWithoutAssetsInput!
-  PrivateAsset: PrivateAssetCreateOneWithoutAssetInput
-  PublicAsset: PublicAssetCreateOneWithoutAssetInput
+  privateAsset: PrivateAssetCreateOneWithoutBaseAssetInput
+  publicAsset: PublicAssetCreateOneWithoutBaseAssetInput
   transaction: TransactionCreateManyWithoutAssetInput
   updatedAt: DateTime
 }
@@ -42,8 +42,8 @@ input AssetCreateWithoutPortfolioInput {
   createdAt: DateTime
   description: String
   name: String!
-  PrivateAsset: PrivateAssetCreateOneWithoutAssetInput
-  PublicAsset: PublicAssetCreateOneWithoutAssetInput
+  privateAsset: PrivateAssetCreateOneWithoutBaseAssetInput
+  publicAsset: PublicAssetCreateOneWithoutBaseAssetInput
   quantity: Int
   transaction: TransactionCreateManyWithoutAssetInput
   updatedAt: DateTime
@@ -54,7 +54,7 @@ input AssetCreateWithoutPrivateAssetInput {
   description: String
   name: String!
   portfolio: PortfolioCreateOneWithoutAssetsInput!
-  PublicAsset: PublicAssetCreateOneWithoutAssetInput
+  publicAsset: PublicAssetCreateOneWithoutBaseAssetInput
   quantity: Int
   transaction: TransactionCreateManyWithoutAssetInput
   updatedAt: DateTime
@@ -65,7 +65,7 @@ input AssetCreateWithoutPublicAssetInput {
   description: String
   name: String!
   portfolio: PortfolioCreateOneWithoutAssetsInput!
-  PrivateAsset: PrivateAssetCreateOneWithoutAssetInput
+  privateAsset: PrivateAssetCreateOneWithoutBaseAssetInput
   quantity: Int
   transaction: TransactionCreateManyWithoutAssetInput
   updatedAt: DateTime
@@ -96,8 +96,8 @@ input AssetUpdateInput {
   description: String
   name: String
   portfolio: PortfolioUpdateOneRequiredWithoutAssetsInput
-  PrivateAsset: PrivateAssetUpdateOneRequiredWithoutAssetInput
-  PublicAsset: PublicAssetUpdateOneRequiredWithoutAssetInput
+  privateAsset: PrivateAssetUpdateOneRequiredWithoutBaseAssetInput
+  publicAsset: PublicAssetUpdateOneRequiredWithoutBaseAssetInput
   quantity: Int
   transaction: TransactionUpdateManyWithoutAssetInput
   updatedAt: DateTime
@@ -146,8 +146,8 @@ input AssetUpdateWithoutPortfolioDataInput {
   createdAt: DateTime
   description: String
   name: String
-  PrivateAsset: PrivateAssetUpdateOneRequiredWithoutAssetInput
-  PublicAsset: PublicAssetUpdateOneRequiredWithoutAssetInput
+  privateAsset: PrivateAssetUpdateOneRequiredWithoutBaseAssetInput
+  publicAsset: PublicAssetUpdateOneRequiredWithoutBaseAssetInput
   quantity: Int
   transaction: TransactionUpdateManyWithoutAssetInput
   updatedAt: DateTime
@@ -158,7 +158,7 @@ input AssetUpdateWithoutPrivateAssetDataInput {
   description: String
   name: String
   portfolio: PortfolioUpdateOneRequiredWithoutAssetsInput
-  PublicAsset: PublicAssetUpdateOneRequiredWithoutAssetInput
+  publicAsset: PublicAssetUpdateOneRequiredWithoutBaseAssetInput
   quantity: Int
   transaction: TransactionUpdateManyWithoutAssetInput
   updatedAt: DateTime
@@ -169,7 +169,7 @@ input AssetUpdateWithoutPublicAssetDataInput {
   description: String
   name: String
   portfolio: PortfolioUpdateOneRequiredWithoutAssetsInput
-  PrivateAsset: PrivateAssetUpdateOneRequiredWithoutAssetInput
+  privateAsset: PrivateAssetUpdateOneRequiredWithoutBaseAssetInput
   quantity: Int
   transaction: TransactionUpdateManyWithoutAssetInput
   updatedAt: DateTime
@@ -206,8 +206,8 @@ input AssetWhereInput {
   OR: [AssetWhereInput!]
   portfolio: PortfolioWhereInput
   portfolioId: IntFilter
-  PrivateAsset: PrivateAssetWhereInput
-  PublicAsset: PublicAssetWhereInput
+  privateAsset: PrivateAssetWhereInput
+  publicAsset: PublicAssetWhereInput
   quantity: IntFilter
   transaction: TransactionFilter
   updatedAt: DateTimeFilter
@@ -413,8 +413,8 @@ type Portfolio {
   description: String
   id: Int!
   name: String!
+  owner: User!
   updatedAt: DateTime!
-  User: User!
 }
 
 input PortfolioCreateInput {
@@ -422,13 +422,13 @@ input PortfolioCreateInput {
   createdAt: DateTime
   description: String
   name: String!
+  owner: UserCreateOneWithoutPortfoliosInput!
   updatedAt: DateTime
-  User: UserCreateOneWithoutPortfoliosInput!
 }
 
-input PortfolioCreateManyWithoutUserInput {
+input PortfolioCreateManyWithoutOwnerInput {
   connect: [PortfolioWhereUniqueInput!]
-  create: [PortfolioCreateWithoutUserInput!]
+  create: [PortfolioCreateWithoutOwnerInput!]
 }
 
 input PortfolioCreateOneWithoutAssetsInput {
@@ -440,11 +440,11 @@ input PortfolioCreateWithoutAssetsInput {
   createdAt: DateTime
   description: String
   name: String!
+  owner: UserCreateOneWithoutPortfoliosInput!
   updatedAt: DateTime
-  User: UserCreateOneWithoutPortfoliosInput!
 }
 
-input PortfolioCreateWithoutUserInput {
+input PortfolioCreateWithoutOwnerInput {
   assets: AssetCreateManyWithoutPortfolioInput
   createdAt: DateTime
   description: String
@@ -476,8 +476,8 @@ input PortfolioUpdateInput {
   createdAt: DateTime
   description: String
   name: String
+  owner: UserUpdateOneRequiredWithoutPortfoliosInput
   updatedAt: DateTime
-  User: UserUpdateOneRequiredWithoutPortfoliosInput
 }
 
 input PortfolioUpdateManyDataInput {
@@ -487,16 +487,16 @@ input PortfolioUpdateManyDataInput {
   updatedAt: DateTime
 }
 
-input PortfolioUpdateManyWithoutUserInput {
+input PortfolioUpdateManyWithoutOwnerInput {
   connect: [PortfolioWhereUniqueInput!]
-  create: [PortfolioCreateWithoutUserInput!]
+  create: [PortfolioCreateWithoutOwnerInput!]
   delete: [PortfolioWhereUniqueInput!]
   deleteMany: [PortfolioScalarWhereInput!]
   disconnect: [PortfolioWhereUniqueInput!]
   set: [PortfolioWhereUniqueInput!]
-  update: [PortfolioUpdateWithWhereUniqueWithoutUserInput!]
+  update: [PortfolioUpdateWithWhereUniqueWithoutOwnerInput!]
   updateMany: [PortfolioUpdateManyWithWhereNestedInput!]
-  upsert: [PortfolioUpsertWithWhereUniqueWithoutUserInput!]
+  upsert: [PortfolioUpsertWithWhereUniqueWithoutOwnerInput!]
 }
 
 input PortfolioUpdateManyWithWhereNestedInput {
@@ -515,11 +515,11 @@ input PortfolioUpdateWithoutAssetsDataInput {
   createdAt: DateTime
   description: String
   name: String
+  owner: UserUpdateOneRequiredWithoutPortfoliosInput
   updatedAt: DateTime
-  User: UserUpdateOneRequiredWithoutPortfoliosInput
 }
 
-input PortfolioUpdateWithoutUserDataInput {
+input PortfolioUpdateWithoutOwnerDataInput {
   assets: AssetUpdateManyWithoutPortfolioInput
   createdAt: DateTime
   description: String
@@ -527,8 +527,8 @@ input PortfolioUpdateWithoutUserDataInput {
   updatedAt: DateTime
 }
 
-input PortfolioUpdateWithWhereUniqueWithoutUserInput {
-  data: PortfolioUpdateWithoutUserDataInput!
+input PortfolioUpdateWithWhereUniqueWithoutOwnerInput {
+  data: PortfolioUpdateWithoutOwnerDataInput!
   where: PortfolioWhereUniqueInput!
 }
 
@@ -537,9 +537,9 @@ input PortfolioUpsertWithoutAssetsInput {
   update: PortfolioUpdateWithoutAssetsDataInput!
 }
 
-input PortfolioUpsertWithWhereUniqueWithoutUserInput {
-  create: PortfolioCreateWithoutUserInput!
-  update: PortfolioUpdateWithoutUserDataInput!
+input PortfolioUpsertWithWhereUniqueWithoutOwnerInput {
+  create: PortfolioCreateWithoutOwnerInput!
+  update: PortfolioUpdateWithoutOwnerDataInput!
   where: PortfolioWhereUniqueInput!
 }
 
@@ -552,8 +552,8 @@ input PortfolioWhereInput {
   name: StringFilter
   NOT: [PortfolioWhereInput!]
   OR: [PortfolioWhereInput!]
+  owner: UserWhereInput
   updatedAt: DateTimeFilter
-  User: UserWhereInput
   userId: IntFilter
 }
 
@@ -565,19 +565,19 @@ input PortfolioWhereUniqueInput {
 Privately traded asset. For assets that are not traded on a supported public market.
 """
 type PrivateAsset {
-  asset: Asset!
+  baseAsset: Asset!
   historicalValues(after: HistoricalValueWhereUniqueInput, before: HistoricalValueWhereUniqueInput, first: Int, last: Int): [HistoricalValue!]!
   id: Int!
 }
 
 input PrivateAssetCreateInput {
-  asset: AssetCreateOneWithoutPrivateAssetInput!
+  baseAsset: AssetCreateOneWithoutPrivateAssetInput!
   historicalValues: HistoricalValueCreateManyWithoutAssetInput
 }
 
-input PrivateAssetCreateOneWithoutAssetInput {
+input PrivateAssetCreateOneWithoutBaseAssetInput {
   connect: PrivateAssetWhereUniqueInput
-  create: PrivateAssetCreateWithoutAssetInput
+  create: PrivateAssetCreateWithoutBaseAssetInput
 }
 
 input PrivateAssetCreateOneWithoutHistoricalValuesInput {
@@ -585,24 +585,24 @@ input PrivateAssetCreateOneWithoutHistoricalValuesInput {
   create: PrivateAssetCreateWithoutHistoricalValuesInput
 }
 
-input PrivateAssetCreateWithoutAssetInput {
+input PrivateAssetCreateWithoutBaseAssetInput {
   historicalValues: HistoricalValueCreateManyWithoutAssetInput
 }
 
 input PrivateAssetCreateWithoutHistoricalValuesInput {
-  asset: AssetCreateOneWithoutPrivateAssetInput!
+  baseAsset: AssetCreateOneWithoutPrivateAssetInput!
 }
 
 input PrivateAssetUpdateInput {
-  asset: AssetUpdateOneRequiredWithoutPrivateAssetInput
+  baseAsset: AssetUpdateOneRequiredWithoutPrivateAssetInput
   historicalValues: HistoricalValueUpdateManyWithoutAssetInput
 }
 
-input PrivateAssetUpdateOneRequiredWithoutAssetInput {
+input PrivateAssetUpdateOneRequiredWithoutBaseAssetInput {
   connect: PrivateAssetWhereUniqueInput
-  create: PrivateAssetCreateWithoutAssetInput
-  update: PrivateAssetUpdateWithoutAssetDataInput
-  upsert: PrivateAssetUpsertWithoutAssetInput
+  create: PrivateAssetCreateWithoutBaseAssetInput
+  update: PrivateAssetUpdateWithoutBaseAssetDataInput
+  upsert: PrivateAssetUpsertWithoutBaseAssetInput
 }
 
 input PrivateAssetUpdateOneRequiredWithoutHistoricalValuesInput {
@@ -612,17 +612,17 @@ input PrivateAssetUpdateOneRequiredWithoutHistoricalValuesInput {
   upsert: PrivateAssetUpsertWithoutHistoricalValuesInput
 }
 
-input PrivateAssetUpdateWithoutAssetDataInput {
+input PrivateAssetUpdateWithoutBaseAssetDataInput {
   historicalValues: HistoricalValueUpdateManyWithoutAssetInput
 }
 
 input PrivateAssetUpdateWithoutHistoricalValuesDataInput {
-  asset: AssetUpdateOneRequiredWithoutPrivateAssetInput
+  baseAsset: AssetUpdateOneRequiredWithoutPrivateAssetInput
 }
 
-input PrivateAssetUpsertWithoutAssetInput {
-  create: PrivateAssetCreateWithoutAssetInput!
-  update: PrivateAssetUpdateWithoutAssetDataInput!
+input PrivateAssetUpsertWithoutBaseAssetInput {
+  create: PrivateAssetCreateWithoutBaseAssetInput!
+  update: PrivateAssetUpdateWithoutBaseAssetDataInput!
 }
 
 input PrivateAssetUpsertWithoutHistoricalValuesInput {
@@ -632,7 +632,7 @@ input PrivateAssetUpsertWithoutHistoricalValuesInput {
 
 input PrivateAssetWhereInput {
   AND: [PrivateAssetWhereInput!]
-  asset: AssetWhereInput
+  baseAsset: AssetWhereInput
   historicalValues: HistoricalValueFilter
   id: IntFilter
   NOT: [PrivateAssetWhereInput!]
@@ -647,54 +647,54 @@ input PrivateAssetWhereUniqueInput {
 Publicly traded asset. For assets that are traded in a known and supported public market.
 """
 type PublicAsset {
-  asset: Asset!
+  baseAsset: Asset!
   id: Int!
   market: String
   symbol: String
 }
 
 input PublicAssetCreateInput {
-  asset: AssetCreateOneWithoutPublicAssetInput!
+  baseAsset: AssetCreateOneWithoutPublicAssetInput!
   market: String
   symbol: String
 }
 
-input PublicAssetCreateOneWithoutAssetInput {
+input PublicAssetCreateOneWithoutBaseAssetInput {
   connect: PublicAssetWhereUniqueInput
-  create: PublicAssetCreateWithoutAssetInput
+  create: PublicAssetCreateWithoutBaseAssetInput
 }
 
-input PublicAssetCreateWithoutAssetInput {
+input PublicAssetCreateWithoutBaseAssetInput {
   market: String
   symbol: String
 }
 
 input PublicAssetUpdateInput {
-  asset: AssetUpdateOneRequiredWithoutPublicAssetInput
+  baseAsset: AssetUpdateOneRequiredWithoutPublicAssetInput
   market: String
   symbol: String
 }
 
-input PublicAssetUpdateOneRequiredWithoutAssetInput {
+input PublicAssetUpdateOneRequiredWithoutBaseAssetInput {
   connect: PublicAssetWhereUniqueInput
-  create: PublicAssetCreateWithoutAssetInput
-  update: PublicAssetUpdateWithoutAssetDataInput
-  upsert: PublicAssetUpsertWithoutAssetInput
+  create: PublicAssetCreateWithoutBaseAssetInput
+  update: PublicAssetUpdateWithoutBaseAssetDataInput
+  upsert: PublicAssetUpsertWithoutBaseAssetInput
 }
 
-input PublicAssetUpdateWithoutAssetDataInput {
+input PublicAssetUpdateWithoutBaseAssetDataInput {
   market: String
   symbol: String
 }
 
-input PublicAssetUpsertWithoutAssetInput {
-  create: PublicAssetCreateWithoutAssetInput!
-  update: PublicAssetUpdateWithoutAssetDataInput!
+input PublicAssetUpsertWithoutBaseAssetInput {
+  create: PublicAssetCreateWithoutBaseAssetInput!
+  update: PublicAssetUpdateWithoutBaseAssetDataInput!
 }
 
 input PublicAssetWhereInput {
   AND: [PublicAssetWhereInput!]
-  asset: AssetWhereInput
+  baseAsset: AssetWhereInput
   id: IntFilter
   market: NullableStringFilter
   NOT: [PublicAssetWhereInput!]
@@ -885,7 +885,7 @@ input UserCreateInput {
   email: String!
   name: String!
   password: String!
-  portfolios: PortfolioCreateManyWithoutUserInput
+  portfolios: PortfolioCreateManyWithoutOwnerInput
   updatedAt: DateTime
 }
 
@@ -907,7 +907,7 @@ input UserUpdateInput {
   email: String
   name: String
   password: String
-  portfolios: PortfolioUpdateManyWithoutUserInput
+  portfolios: PortfolioUpdateManyWithoutOwnerInput
   updatedAt: DateTime
 }
 

@@ -1,0 +1,182 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Asset",
+      "field": "privateAsset",
+      "type": "PrivateAsset",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Asset",
+      "field": "publicAsset",
+      "type": "PublicAsset",
+      "arity": "Required"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Asset",
+      "field": "PrivateAsset"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Asset",
+      "field": "PublicAsset"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Portfolio",
+      "field": "owner",
+      "type": "User",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Portfolio",
+          "field": "owner"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Portfolio",
+          "field": "owner"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[userId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Portfolio",
+          "field": "owner"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Portfolio",
+      "field": "User"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PublicAsset",
+      "field": "baseAsset",
+      "type": "Asset",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "PublicAsset",
+          "field": "baseAsset"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PublicAsset",
+          "field": "baseAsset"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PublicAsset",
+          "field": "baseAsset"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "PublicAsset",
+      "field": "asset"
+    },
+    {
+      "tag": "CreateField",
+      "model": "PrivateAsset",
+      "field": "baseAsset",
+      "type": "Asset",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "PrivateAsset",
+          "field": "baseAsset"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PrivateAsset",
+          "field": "baseAsset"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "PrivateAsset",
+          "field": "baseAsset"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "PrivateAsset",
+      "field": "asset"
+    }
+  ]
+}

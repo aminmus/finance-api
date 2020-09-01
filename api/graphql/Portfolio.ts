@@ -9,7 +9,7 @@ schema.objectType({
     t.model.name();
     t.model.description();
     t.model.assets();
-    t.model.User();
+    t.model.owner();
   },
 });
 
