@@ -18,3 +18,7 @@
 20200829222359-privately-and-publicly-traded-assets
 20200830161713-rename-asset-types
 20200901140241-change-field-names
+20200901192837-asset-types-optional-for-base
+20200909181042-enable-preview-feature-transactions
+20200909181444-correct-transaction-feature-config
+20200909183050-rename-transaction-to-transaction-record

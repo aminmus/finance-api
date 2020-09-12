@@ -4,13 +4,13 @@ import { TransactionType } from '@prisma/client'
 schema.objectType({
   name: 'Transaction',
   definition(t) {
-    t.model.id();
-    t.model.createdAt();
-    t.model.updatedAt();
-    t.model.date();
-    t.model.note();
-    t.model.currency();
-    t.model.unitPrice();
+    t.model('TransactionRecord').id();
+    t.model('TransactionRecord').createdAt();
+    t.model('TransactionRecord').updatedAt();
+    t.model('TransactionRecord').date();
+    t.model('TransactionRecord').note();
+    t.model('TransactionRecord').currency();
+    t.model('TransactionRecord').unitPrice();
     t.int('totalPrice', {
       /**
          * WARNING!
@@ -23,10 +23,10 @@ schema.objectType({
       resolve: (root, _args, _ctx, _info) => root.unitPrice * root.assetQuantity,
       nullable: false,
     })
-    t.model.transactionType();
-    t.model.assetQuantity();
-    t.model.asset();
-    t.model.assetId();
+    t.model('TransactionRecord').transactionType();
+    t.model('TransactionRecord').assetQuantity();
+    t.model('TransactionRecord').asset();
+    t.model('TransactionRecord').assetId();
   },
 });
 
@@ -63,7 +63,7 @@ schema.extendType({
           } else {
             const { assetId, assetQuantity, currency, transactionType, unitPrice, date, note } = args.data;
 
-            const transaction = await ctx.db.transaction.create({
+            const transaction = await ctx.db.transactionRecord.create({
               data: {
                 asset: { connect: { id: assetId } },
                 assetQuantity,
