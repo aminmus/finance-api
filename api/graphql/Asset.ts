@@ -13,10 +13,10 @@ schema.objectType({
   },
 });
 
-schema.extendType({
-  type: 'Query',
-  definition(t) {
-    t.crud.asset();
-    t.crud.assets();
-  },
-});
+// schema.extendType({
+//   type: 'Query',
+//   definition(t) {
+//     t.crud.asset();
+//     t.crud.assets();
+//   },
+// });

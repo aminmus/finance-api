@@ -12,13 +12,13 @@ schema.objectType({
   },
 });
 
-schema.extendType({
-  type: 'Query',
-  definition(t) {
-    t.crud.users();
-    t.crud.user();
-  },
-});
+// schema.extendType({
+//   type: 'Query',
+//   definition(t) {
+//     t.crud.users();
+//     t.crud.user();
+//   },
+// });
 
 schema.extendType({
   type: 'Mutation',
