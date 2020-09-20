@@ -650,16 +650,12 @@ input PublicAssetWhereUniqueInput {
 }
 
 type Query {
-  asset(where: AssetWhereUniqueInput!): Asset
-  assets(after: AssetWhereUniqueInput, before: AssetWhereUniqueInput, first: Int, last: Int): [Asset!]!
   portfolio(where: PortfolioWhereUniqueInput!): Portfolio
   portfolios(after: PortfolioWhereUniqueInput, before: PortfolioWhereUniqueInput, first: Int, last: Int): [Portfolio!]!
   privateAsset(where: PrivateAssetWhereUniqueInput!): PrivateAsset
   privateAssets(after: PrivateAssetWhereUniqueInput, before: PrivateAssetWhereUniqueInput, first: Int, last: Int): [PrivateAsset!]!
   publicAsset(where: PublicAssetWhereUniqueInput!): PublicAsset
   publicAssets(after: PublicAssetWhereUniqueInput, before: PublicAssetWhereUniqueInput, first: Int, last: Int): [PublicAsset!]!
-  user(where: UserWhereUniqueInput!): User
-  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
 }
 
 input StringFieldUpdateOperationsInput {
