@@ -1,4 +1,4 @@
-import { schema } from "nexus"
+import { schema } from 'nexus';
 
 schema.objectType({
   name: 'HistoricalValue',
@@ -7,7 +7,7 @@ schema.objectType({
     t.model.createdAt();
     t.model.updatedAt();
     t.model.date();
-    t.model.asset();
+    t.model.assetId();
     t.model.unitPrice();
   },
 });

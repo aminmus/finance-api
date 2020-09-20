@@ -1,4 +1,4 @@
-import { schema } from "nexus"
+import { schema } from 'nexus';
 
 schema.objectType({
   name: 'Asset',

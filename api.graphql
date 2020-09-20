@@ -198,7 +198,7 @@ input DateTimeFilter {
 }
 
 type HistoricalValue {
-  asset: PrivateAsset!
+  assetId: Int!
   createdAt: DateTime!
   date: DateTime!
   id: Int!
@@ -695,7 +695,6 @@ input StringNullableFilter {
 }
 
 type Transaction {
-  asset: Asset!
   assetId: Int!
   assetQuantity: Int!
   createdAt: DateTime!

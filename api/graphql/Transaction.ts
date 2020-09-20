@@ -1,5 +1,5 @@
-import { schema } from "nexus";
-import { TransactionType } from '@prisma/client'
+import { schema } from 'nexus';
+import { TransactionType } from '@prisma/client';
 
 schema.objectType({
   name: 'Transaction',
@@ -13,23 +13,22 @@ schema.objectType({
     t.model('TransactionRecord').unitPrice();
     t.int('totalPrice', {
       /**
-         * WARNING!
-         * This only works reliably with integer values.
-         * Reliable results depend on inputs being integers and 
-         * for the prisma schema to use integers.
-         * 
-         * TODO: Use a reliable way to work with currency and prices 
-         */
-      resolve: (root, _args, _ctx, _info) => root.unitPrice * root.assetQuantity,
+       * WARNING!
+       * This only works reliably with integer values.
+       * Reliable results depend on inputs being integers and
+       * for the prisma schema to use integers.
+       *
+       * TODO: Use a reliable way to work with currency and prices
+       */
+      resolve: (root, _args, _ctx, _info) =>
+        root.unitPrice * root.assetQuantity,
       nullable: false,
-    })
+    });
     t.model('TransactionRecord').transactionType();
     t.model('TransactionRecord').assetQuantity();
-    t.model('TransactionRecord').asset();
     t.model('TransactionRecord').assetId();
   },
 });
-
 
 schema.extendType({
   type: 'Mutation',
@@ -50,18 +49,40 @@ schema.extendType({
           throw new Error('Price cannot be a negative value');
         }
         if (args.data.assetQuantity < 0) {
-          throw new Error('assetQuantity must be a positive value. Use transactionType to specify a "sell" transaction if you want to decrease the total quantity owned of an asset.');
+          throw new Error(
+            'assetQuantity must be a positive value. Use transactionType to specify a "sell" transaction if you want to decrease the total quantity owned of an asset.',
+          );
         }
 
-        const asset = await ctx.db.asset.findOne({ where: { id: args.data.assetId } });
+        const asset = await ctx.db.asset.findOne({
+          where: { id: args.data.assetId },
+        });
 
         if (asset) {
-          const updatedQuantity = calculateUpdatedQuantity('sell', asset.quantity, args.data.assetQuantity);
+          const updatedQuantity = calculateUpdatedQuantity(
+            'sell',
+            asset.quantity,
+            args.data.assetQuantity,
+          );
 
-          if (args.data.transactionType === 'sell' && updatedQuantity && updatedQuantity < 0) {
-            throw new Error(`Transaction failed. Total asset quantity cannot go below zero. Current amount of this asset you have available: ${asset.quantity}`);
+          if (
+            args.data.transactionType === 'sell' &&
+            updatedQuantity &&
+            updatedQuantity < 0
+          ) {
+            throw new Error(
+              `Transaction failed. Total asset quantity cannot go below zero. Current amount of this asset you have available: ${asset.quantity}`,
+            );
           } else {
-            const { assetId, assetQuantity, currency, transactionType, unitPrice, date, note } = args.data;
+            const {
+              assetId,
+              assetQuantity,
+              currency,
+              transactionType,
+              unitPrice,
+              date,
+              note,
+            } = args.data;
 
             const transaction = await ctx.db.transactionRecord.create({
               data: {
@@ -72,12 +93,18 @@ schema.extendType({
                 unitPrice,
                 date,
                 note,
-              }
+              },
             });
 
             await ctx.db.asset.update({
               where: { id: args.data.assetId },
-              data: { quantity: calculateUpdatedQuantity(args.data.transactionType, asset.quantity, args.data.assetQuantity) }
+              data: {
+                quantity: calculateUpdatedQuantity(
+                  args.data.transactionType,
+                  asset.quantity,
+                  args.data.assetQuantity,
+                ),
+              },
             });
 
             return transaction;
@@ -87,7 +114,7 @@ schema.extendType({
         }
       },
     });
-  }
+  },
 });
 
 schema.inputObjectType({
@@ -103,7 +130,11 @@ schema.inputObjectType({
   },
 });
 
-function calculateUpdatedQuantity(transactionType: TransactionType, currentQuantity: number, quantityChange: number) {
+function calculateUpdatedQuantity(
+  transactionType: TransactionType,
+  currentQuantity: number,
+  quantityChange: number,
+) {
   if (transactionType === 'buy') {
     return currentQuantity + quantityChange;
   } else if (transactionType === 'sell') {
