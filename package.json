@@ -27,6 +27,7 @@
         "dotenv": "^8.2.0",
         "jsonwebtoken": "^8.5.1",
         "nexus": "^0.26.1",
-        "nexus-plugin-prisma": "^0.18.2"
+        "nexus-plugin-prisma": "^0.18.2",
+        "nexus-plugin-shield": "^0.2.0"
     }
 }
