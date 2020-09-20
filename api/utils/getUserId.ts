@@ -6,7 +6,7 @@ import { IUserToken } from '../types'
  * Get a decoded user token from JWT if one is given in the Authorization header
  *
  */
-function getUserToken(context: NexusContext): IUserToken | false {
+function getUserId(context: NexusContext): IUserToken['userId'] | false {
   const Authorization = context.req.headers.authorization;
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '');
@@ -15,9 +15,9 @@ function getUserToken(context: NexusContext): IUserToken | false {
     // Will throw error if token is not valid
     const decodedToken = verify(token, process.env.JWT_KEY as string) as IUserToken;
 
-    return decodedToken;
+    return decodedToken.userId;
   }
   return false;
 }
 
-export default getUserToken;
+export default getUserId;

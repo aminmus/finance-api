@@ -1,6 +1,6 @@
-import { shield } from 'nexus-plugin-shield';
+import { shield, chain } from 'nexus-plugin-shield';
 
-import { isAuthenticated } from './rules';
+import { isAuthenticated, isPortfolioOwner } from './rules';
 
 const permissions = shield({
   rules: {
@@ -22,13 +22,13 @@ const permissions = shield({
       // is authenticated and is owner
       updateOnePrivateAsset: isAuthenticated,
       updateOnePublicAsset: isAuthenticated,
-      updateOnePortfolio: isAuthenticated,
+      updateOnePortfolio: chain(isAuthenticated, isPortfolioOwner),
       updateOneHistoricalValue: isAuthenticated,
       updateOneUser: isAuthenticated,
 
       deleteOnePrivateAsset: isAuthenticated,
       deleteOnePublicAsset: isAuthenticated,
-      deleteOnePortfolio: isAuthenticated,
+      deleteOnePortfolio: chain(isAuthenticated, isPortfolioOwner),
       deleteOneHistoricalValue: isAuthenticated,
 
       makeTransaction: isAuthenticated,
