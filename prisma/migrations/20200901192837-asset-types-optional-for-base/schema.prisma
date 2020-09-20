@@ -1,11 +1,10 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator prisma_client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["transactionApi"]
+  provider = "prisma-client-js"
 }
 
 model User {
@@ -27,7 +26,7 @@ model Asset {
   quantity     Int           @default(0)
   portfolio    Portfolio     @relation(fields: [portfolioId], references: [id])
   portfolioId  Int
-  transactions  TransactionRecord[]
+  transaction  Transaction[]
   privateAsset PrivateAsset?
   publicAsset  PublicAsset?
 }
@@ -66,7 +65,7 @@ model Portfolio {
   userId      Int
 }
 
-model TransactionRecord {
+model Transaction {
   id              Int             @id @default(autoincrement())
   updatedAt       DateTime        @updatedAt @default(now())
   createdAt       DateTime        @default(now())

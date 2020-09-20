@@ -7,7 +7,7 @@ schema.objectType({
     t.model.id();
     t.model.email();
     t.model.name();
-    t.model.createdAt(),
+    t.model.createdAt();
     t.model.updatedAt();
   },
 });
@@ -35,15 +35,15 @@ schema.extendType({
     });
     t.crud.updateOneUser({
       async resolve(root, args, ctx, info, originalResolve) {
-        const processedArgs = { ...args };
-        if (args.data.password) {
+        let processedArgs = { ...args };
+        if (args.data.password && args.data.password.set) {
           // Encrypt password before updating user
-          const encryptedPassword = await hashPassword(args.data.password);
-          processedArgs.data.password = encryptedPassword;
+          const encryptedPassword = await hashPassword(args.data.password.set);
+          processedArgs.data.password = { set: encryptedPassword };
         }
         const res = await originalResolve(root, processedArgs, ctx, info);
         return res;
-      }
+      },
     });
   },
 });

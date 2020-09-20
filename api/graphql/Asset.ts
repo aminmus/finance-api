@@ -1,4 +1,4 @@
-import { schema } from "nexus"
+import { schema } from 'nexus';
 
 schema.objectType({
   name: 'Asset',
@@ -18,18 +18,5 @@ schema.extendType({
   definition(t) {
     t.crud.asset();
     t.crud.assets();
-  },
-});
-
-schema.extendType({
-  type: 'Mutation',
-  definition(t) {
-    t.crud.createOneAsset({
-      computedInputs: {
-        quantity: () => undefined,
-      },
-    });
-    t.crud.deleteOneAsset();
-    t.crud.updateOneAsset();
   },
 });

@@ -17,7 +17,6 @@
         "trailingComma": "all"
     },
     "devDependencies": {
-        "@prisma/cli": "^2.6.0",
         "@types/bcrypt": "^3.0.0",
         "@types/jsonwebtoken": "^8.5.0",
         "prettier": "^2.0.5"
@@ -28,6 +27,6 @@
         "dotenv": "^8.2.0",
         "jsonwebtoken": "^8.5.1",
         "nexus": "^0.26.1",
-        "nexus-plugin-prisma": "^0.17.0"
+        "nexus-plugin-prisma": "^0.18.2"
     }
 }
