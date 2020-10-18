@@ -8,6 +8,7 @@
     "strict": true,
     "rootDir": "api",
     "noEmit": true,
+    "skipLibCheck": true,
     "plugins": [
       {
         "name": "nexus/typescript-language-service"
