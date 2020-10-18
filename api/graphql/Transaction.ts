@@ -1,7 +1,7 @@
-import { schema } from 'nexus';
+import { objectType, extendType, inputObjectType } from '@nexus/schema';
 import { TransactionType } from '@prisma/client';
 
-schema.objectType({
+export const Transaction = objectType({
   name: 'Transaction',
   definition(t) {
     t.model('TransactionRecord').id();
@@ -30,7 +30,7 @@ schema.objectType({
   },
 });
 
-schema.extendType({
+export const Mutation = extendType({
   type: 'Mutation',
   definition: (t) => {
     t.field('makeTransaction', {
@@ -117,7 +117,7 @@ schema.extendType({
   },
 });
 
-schema.inputObjectType({
+export const TransactionCreateInput = inputObjectType({
   name: 'TransactionCreateInput',
   definition(t) {
     t.int('assetId', { required: true });

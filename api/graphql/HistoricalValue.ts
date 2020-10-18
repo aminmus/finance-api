@@ -1,6 +1,6 @@
-import { schema } from 'nexus';
+import { objectType, extendType } from '@nexus/schema';
 
-schema.objectType({
+export const HistoricalValue = objectType({
   name: 'HistoricalValue',
   definition(t) {
     t.model.id();
@@ -12,7 +12,7 @@ schema.objectType({
   },
 });
 
-schema.extendType({
+export const Mutation = extendType({
   type: 'Mutation',
   definition(t) {
     t.crud.createOneHistoricalValue();

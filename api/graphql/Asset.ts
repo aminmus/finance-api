@@ -1,6 +1,6 @@
-import { schema } from 'nexus';
+import { objectType } from '@nexus/schema';
 
-schema.objectType({
+export const Asset = objectType({
   name: 'Asset',
   definition(t) {
     t.model.id();

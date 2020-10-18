@@ -8,6 +8,7 @@
         "format": "npx prettier --write './**/*.{ts,md}'",
         "dev": "ts-node-dev --transpile-only ./your/main/module",
         "dev:typecheck": "tsc --noEmit --watch",
+        "nexus:reflect": "ts-node --transpile-only src/schema",
         "build": "nexus build",
         "start": "node .nexus/build/api",
         "docker": "docker-compose up -d && docker-compose logs -f"

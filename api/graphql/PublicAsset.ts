@@ -1,6 +1,6 @@
-import { schema } from 'nexus';
+import { objectType, extendType } from '@nexus/schema';
 
-schema.objectType({
+export const PublicAsset = objectType({
   name: 'PublicAsset',
   description:
     'Publicly traded asset. For assets that are traded in a known and supported public market.',
@@ -23,7 +23,7 @@ schema.objectType({
   },
 });
 
-schema.extendType({
+export const Query = extendType({
   type: 'Query',
   definition(t) {
     t.crud.publicAsset();
@@ -31,7 +31,7 @@ schema.extendType({
   },
 });
 
-schema.extendType({
+export const Mutation = extendType({
   type: 'Mutation',
   definition(t) {
     t.crud.createOnePublicAsset();
