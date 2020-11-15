@@ -1,9 +1,8 @@
-import { shield, chain } from 'nexus-plugin-shield';
+import { shield, chain } from 'graphql-shield';
 
 import { isAuthenticated, isPortfolioOwner } from './rules';
 
 const permissions = shield({
-  rules: {
     Query: {
       portfolio: isAuthenticated,
       portfolios: isAuthenticated,
@@ -33,7 +32,6 @@ const permissions = shield({
 
       makeTransaction: isAuthenticated,
     },
-  },
 });
 
 export default permissions;

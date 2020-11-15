@@ -1,7 +1,7 @@
-import { schema } from "nexus"
+import { objectType, extendType } from "@nexus/schema"
 import bcrypt from "bcrypt";
 
-schema.objectType({
+export const User = objectType({
   name: 'User',
   definition(t) {
     t.model.id();
@@ -20,7 +20,7 @@ schema.objectType({
 //   },
 // });
 
-schema.extendType({
+export const UserMutation = extendType({
   type: 'Mutation',
   definition(t) {
     t.crud.deleteOneUser();

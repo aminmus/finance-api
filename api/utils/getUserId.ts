@@ -1,12 +1,13 @@
 import { verify } from 'jsonwebtoken';
+import { Context } from '../types/context';
 
-import { IUserToken } from '../types'
+import { IUserToken } from '../types/types'
 
 /**
  * Get a decoded user token from JWT if one is given in the Authorization header
  *
  */
-function getUserId(context: NexusContext): IUserToken['userId'] | false {
+function getUserId(context: Context): IUserToken['userId'] | false {
   const Authorization = context.req.headers.authorization;
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '');

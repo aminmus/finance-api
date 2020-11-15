@@ -23,7 +23,7 @@ export const PublicAsset = objectType({
   },
 });
 
-export const Query = extendType({
+export const PublicAssetQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.publicAsset();
@@ -31,7 +31,7 @@ export const Query = extendType({
   },
 });
 
-export const Mutation = extendType({
+export const PublicAssetMutation = extendType({
   type: 'Mutation',
   definition(t) {
     t.crud.createOnePublicAsset();

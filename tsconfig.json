@@ -16,12 +16,14 @@
     ],
     "typeRoots": [
       "node_modules/@types",
-      "types"
+      "types",
+      "api"
     ],
     "esModuleInterop": true
   },
   "include": [
     "types.d.ts",
-    "api"
+    "api", 
+    "nexus-typegen.ts"
   ]
 }

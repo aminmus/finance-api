@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+/* import { PrismaClient } from '@prisma/client'
 
 const db = new PrismaClient()
 
@@ -28,4 +28,4 @@ async function main() {
   console.log('Seeded: %j', results)
 
   db.$disconnect()
-}
+} */

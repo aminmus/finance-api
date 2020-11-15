@@ -1,6 +1,6 @@
-import { schema } from "nexus";
+import { objectType, extendType } from "@nexus/schema";
 
-schema.objectType({
+export const Portfolio = objectType({
   name: 'Portfolio',
   definition(t) {
     t.model.id();
@@ -13,7 +13,7 @@ schema.objectType({
   },
 });
 
-schema.extendType({
+export const PortfolioQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.portfolio();
@@ -21,7 +21,7 @@ schema.extendType({
   },
 });
 
-schema.extendType({
+export const PortfolioMutation = extendType({
   type: 'Mutation',
   definition(t) {
     t.crud.createOnePortfolio();

@@ -1,11 +1,25 @@
-import { use } from 'nexus'
-import { prisma } from 'nexus-plugin-prisma'
+import { ApolloServer } from 'apollo-server-express'
+import { PrismaClient } from "@prisma/client";
+import createExpress from 'express';
 import dotenv from 'dotenv';
-
-import permissions from './authorization/permissions';
-
 dotenv.config()
 
-// Nexus plugins
-use(prisma({ features: { crud: true } }));
-use(permissions);
+import { schema } from './schema';
+import permissions from './authorization/permissions';
+
+
+
+const apollo = new ApolloServer({
+  schema,
+  context: {
+    db: new PrismaClient(),
+  }
+});
+
+const express = createExpress();
+
+apollo.applyMiddleware({ app: express });
+
+express.listen(process.env.API_PORT, () => {
+  console.log(`🚀 GraphQL service ready at http://localhost:${process.env.API_PORT}/graphql`);
+});

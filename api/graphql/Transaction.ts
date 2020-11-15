@@ -1,4 +1,4 @@
-import { objectType, extendType, inputObjectType } from '@nexus/schema';
+import { objectType, extendType, inputObjectType, arg } from '@nexus/schema';
 import { TransactionType } from '@prisma/client';
 
 export const Transaction = objectType({
@@ -30,14 +30,14 @@ export const Transaction = objectType({
   },
 });
 
-export const Mutation = extendType({
+export const TransactionMutation = extendType({
   type: 'Mutation',
   definition: (t) => {
     t.field('makeTransaction', {
       type: 'Transaction',
       nullable: false,
       args: {
-        data: schema.arg({
+        data: arg({
           type: 'TransactionCreateInput',
           required: true,
         }),
@@ -126,7 +126,7 @@ export const TransactionCreateInput = inputObjectType({
     t.string('currency', { required: true });
     t.int('unitPrice', { required: true });
     t.string('note');
-    t.date('date');
+    // t.date('date');
   },
 });
 

@@ -1,8 +1,8 @@
-import { schema } from "nexus"
+import { objectType, extendType, arg } from "@nexus/schema";
 import { compare } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const AuthPayload = schema.objectType({
+export const AuthPayload = objectType({
   name: 'AuthPayload',
   definition(t) {
     t.string('token', { nullable: false });
@@ -10,17 +10,17 @@ const AuthPayload = schema.objectType({
   },
 });
 
-schema.extendType({
+export const AuthPayloadMutation = extendType({
   type: "Mutation",
   definition(t) {
     t.field('login', {
       type: 'AuthPayload',
       args: {
-        email: schema.arg({
+        email: arg({
           type: "String",
           required: true,
         }),
-        password: schema.arg({
+        password: arg({
           type: "String",
           required: true,
         }),

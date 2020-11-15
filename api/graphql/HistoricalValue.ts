@@ -12,7 +12,7 @@ export const HistoricalValue = objectType({
   },
 });
 
-export const Mutation = extendType({
+export const HistoricalValueMutation = extendType({
   type: 'Mutation',
   definition(t) {
     t.crud.createOneHistoricalValue();
