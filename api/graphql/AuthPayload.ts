@@ -1,12 +1,12 @@
-import { objectType, extendType, arg } from "nexus";
+import { objectType, extendType, stringArg, nonNull } from "nexus";
 import { compare } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 export const AuthPayload = objectType({
   name: 'AuthPayload',
   definition(t) {
-    t.string('token', { nullable: false });
-    t.field('user', { type: 'User', nullable: false });
+    t.nonNull.string('token');
+    t.nonNull.field('user', { type: 'User' });
   },
 });
 
@@ -16,14 +16,8 @@ export const AuthPayloadMutation = extendType({
     t.field('login', {
       type: 'AuthPayload',
       args: {
-        email: arg({
-          type: "String",
-          required: true,
-        }),
-        password: arg({
-          type: "String",
-          required: true,
-        }),
+        email: nonNull(stringArg()),
+        password: nonNull(stringArg()),
       },
       async resolve(_root, args, ctx, _info) {
         const user = await ctx.db.user.findUnique({ where: { email: args.email } });

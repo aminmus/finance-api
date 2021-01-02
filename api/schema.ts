@@ -1,4 +1,4 @@
-import { declarativeWrappingPlugin, makeSchema } from 'nexus';
+import { makeSchema } from 'nexus';
 import { join } from 'path';
 import { nexusPrisma } from 'nexus-plugin-prisma';
 import { DateTimeResolver } from 'graphql-scalars';
@@ -12,7 +12,6 @@ export const schema =
     makeSchema({
       types,
       plugins: [
-        declarativeWrappingPlugin(),
         nexusPrisma({
           experimentalCRUD: true,
           scalars: {
