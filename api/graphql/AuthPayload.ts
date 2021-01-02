@@ -20,7 +20,7 @@ export const AuthPayloadMutation = extendType({
         password: nonNull(stringArg()),
       },
       async resolve(_root, args, ctx, _info) {
-        const user = await ctx.db.user.findUnique({ where: { email: args.email } });
+        const user = await ctx.prisma.user.findUnique({ where: { email: args.email } });
         if (user) {
           const passwordIsValid = await compare(args.password, user.password);
           if (passwordIsValid) {

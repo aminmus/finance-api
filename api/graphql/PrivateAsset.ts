@@ -47,31 +47,31 @@ export const PrivateAssetMutation = extendType({
       async resolve(_root, args, ctx, _info) {
         if (args.where.id) {
 
-          const historicalValues = await ctx.db.historicalValue.findMany({
+          const historicalValues = await ctx.prisma.historicalValue.findMany({
             where: { assetId: args.where.id },
           });
 
-          const deletedHistoricalValues = ctx.db.historicalValue.deleteMany({
+          const deletedHistoricalValues = ctx.prisma.historicalValue.deleteMany({
             where: { assetId: args.where.id },
           });
 
-          const deletedAssetTransactions = ctx.db.transactionRecord.deleteMany({
+          const deletedAssetTransactions = ctx.prisma.transactionRecord.deleteMany({
             where: { assetId: args.where.id },
           });
 
-          const deletedPrivateAsset = ctx.db.privateAsset.delete({
+          const deletedPrivateAsset = ctx.prisma.privateAsset.delete({
             where: { id: args.where.id },
             include: {
               baseAsset: { include: { portfolio: true, transactions: true } },
             },
           });
 
-          const deletedBaseAsset = ctx.db.asset.delete({
+          const deletedBaseAsset = ctx.prisma.asset.delete({
             where: { id: args.where.id },
           });
 
 
-          const dbTransactionResponse = await ctx.db.$transaction([
+          const dbTransactionResponse = await ctx.prisma.$transaction([
             deletedHistoricalValues,
             deletedAssetTransactions,
             deletedPrivateAsset,
@@ -79,7 +79,7 @@ export const PrivateAssetMutation = extendType({
           ]);
 
 
-          const result = { ...dbTransactionResponse[2], historicalValues };
+          const result = { ...prismaTransactionResponse[2], historicalValues };
 
 
           return result;

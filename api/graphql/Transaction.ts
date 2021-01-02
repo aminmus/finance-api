@@ -51,7 +51,7 @@ export const TransactionMutation = extendType({
           );
         }
 
-        const asset = await ctx.db.asset.findUnique({
+        const asset = await ctx.prisma.asset.findUnique({
           where: { id: args.data.assetId },
         });
 
@@ -81,7 +81,7 @@ export const TransactionMutation = extendType({
               note,
             } = args.data;
 
-            const transaction = await ctx.db.transactionRecord.create({
+            const transaction = await ctx.prisma.transactionRecord.create({
               data: {
                 asset: { connect: { id: assetId } },
                 assetQuantity,
@@ -93,7 +93,7 @@ export const TransactionMutation = extendType({
               },
             });
 
-            await ctx.db.asset.update({
+            await ctx.prisma.asset.update({
               where: { id: args.data.assetId },
               data: {
                 quantity: calculateUpdatedQuantity(

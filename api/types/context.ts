@@ -3,5 +3,5 @@ import { PrismaClient } from '@prisma/client'
 
 export type Context = {
   req: Request,
-  db: PrismaClient,
+  prisma: PrismaClient,
 }; 

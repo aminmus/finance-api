@@ -39,22 +39,22 @@ export const PublicAssetMutation = extendType({
       async resolve(_root, args, ctx, _info) {
         if (args.where.id) {
           // 1. delete public asset
-          const deletePublicAsset = ctx.db.publicAsset.delete({
+          const deletePublicAsset = ctx.prisma.publicAsset.delete({
             where: { id: args.where.id },
             include: {
               baseAsset: { include: { portfolio: true, transactions: true } },
             },
           });
           // 2. delete asset transactions
-          const deleteAssetTransactions = ctx.db.transactionRecord.deleteMany({
+          const deleteAssetTransactions = ctx.prisma.transactionRecord.deleteMany({
             where: { assetId: args.where.id },
           });
           // 3. delete asset
-          const deletedBaseAsset = ctx.db.asset.delete({
+          const deletedBaseAsset = ctx.prisma.asset.delete({
             where: { id: args.where.id },
           });
 
-          const dbTransactionResponse = await ctx.db.$transaction([
+          const dbTransactionResponse = await ctx.prisma.$transaction([
             deletePublicAsset,
             deleteAssetTransactions,
             deletedBaseAsset,

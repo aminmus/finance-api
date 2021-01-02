@@ -35,5 +35,5 @@ export const schema =
         }]
       }
     }),
-    permissions
+    permissions,
   );

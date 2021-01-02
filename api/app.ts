@@ -1,25 +1,23 @@
+import express from 'express';
 import { ApolloServer } from 'apollo-server-express'
 import { PrismaClient } from "@prisma/client";
-import createExpress from 'express';
 import dotenv from 'dotenv';
 dotenv.config()
 
 import { schema } from './schema';
-import permissions from './authorization/permissions';
 
-
+const app = express();
 
 const apollo = new ApolloServer({
   schema,
-  context: {
-    db: new PrismaClient(),
-  }
+  context: (req) => ({
+    prisma: new PrismaClient(),
+    req: req.req,
+  })
 });
 
-const express = createExpress();
+apollo.applyMiddleware({ app });
 
-apollo.applyMiddleware({ app: express });
-
-express.listen(process.env.API_PORT, () => {
+app.listen(process.env.API_PORT, () => {
   console.log(`🚀 GraphQL service ready at http://localhost:${process.env.API_PORT}/graphql`);
 });
