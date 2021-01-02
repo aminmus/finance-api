@@ -122,7 +122,7 @@ export const TransactionCreateInput = inputObjectType({
     t.nonNull.int('assetQuantity');
     t.nonNull.string('currency');
     t.nonNull.int('unitPrice');
-    t.nonNull.string('note');
+    t.string('note');
     // t.date('date');
   },
 });
