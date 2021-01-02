@@ -35,7 +35,7 @@ export const TransactionMutation = extendType({
     t.nonNull.field('makeTransaction', {
       type: 'Transaction',
       args: {
-        data: nonNull(stringArg({
+        data: nonNull(arg({
           type: 'TransactionCreateInput'
         })),
       },
