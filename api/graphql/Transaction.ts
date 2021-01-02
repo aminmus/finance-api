@@ -1,4 +1,4 @@
-import { objectType, extendType, inputObjectType, arg } from '@nexus/schema';
+import { objectType, extendType, inputObjectType, arg } from 'nexus';
 import { TransactionType } from '@prisma/client';
 
 export const Transaction = objectType({
@@ -54,7 +54,7 @@ export const TransactionMutation = extendType({
           );
         }
 
-        const asset = await ctx.db.asset.findOne({
+        const asset = await ctx.db.asset.findUnique({
           where: { id: args.data.assetId },
         });
 

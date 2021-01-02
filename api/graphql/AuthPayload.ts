@@ -1,4 +1,4 @@
-import { objectType, extendType, arg } from "@nexus/schema";
+import { objectType, extendType, arg } from "nexus";
 import { compare } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -26,7 +26,7 @@ export const AuthPayloadMutation = extendType({
         }),
       },
       async resolve(_root, args, ctx, _info) {
-        const user = await ctx.db.user.findOne({ where: { email: args.email } });
+        const user = await ctx.db.user.findUnique({ where: { email: args.email } });
         if (user) {
           const passwordIsValid = await compare(args.password, user.password);
           if (passwordIsValid) {
