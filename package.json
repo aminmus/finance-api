@@ -11,7 +11,9 @@
         "nexus:reflect": "ts-node --transpile-only api/schema.ts",
         "build": "nexus build",
         "start": "node .nexus/build/api",
-        "docker": "docker-compose up -d && docker-compose logs -f"
+        "docker": "docker-compose up -d && docker-compose logs -f",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix"
     },
     "prettier": {
         "semi": true,
