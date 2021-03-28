@@ -1,7 +1,7 @@
 import { verify } from 'jsonwebtoken';
 import { Context } from '../types/context';
 
-import { IUserToken } from '../types/types'
+import { IUserToken } from '../types/types';
 
 /**
  * Get a decoded user token from JWT if one is given in the Authorization header

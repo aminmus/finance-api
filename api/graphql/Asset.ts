@@ -1,5 +1,6 @@
 import { objectType } from 'nexus';
 
+// eslint-disable-next-line import/prefer-default-export
 export const Asset = objectType({
   name: 'Asset',
   definition(t) {

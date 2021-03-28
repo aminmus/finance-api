@@ -1,4 +1,6 @@
-import { objectType, extendType, inputObjectType, arg, nonNull, stringArg } from 'nexus';
+import {
+  objectType, extendType, inputObjectType, arg, nonNull,
+} from 'nexus';
 import { TransactionType } from '@prisma/client';
 
 export const Transaction = objectType({
@@ -20,14 +22,26 @@ export const Transaction = objectType({
        *
        * TODO: Use a reliable way to work with currency and prices
        */
-      resolve: (root, _args, _ctx, _info) =>
-        root.unitPrice * root.assetQuantity,
+      resolve: (root, _args, _ctx, _info) => root.unitPrice * root.assetQuantity,
     });
     t.model('TransactionRecord').transactionType();
     t.model('TransactionRecord').assetQuantity();
     t.model('TransactionRecord').assetId();
   },
 });
+
+function calculateUpdatedQuantity(
+  transactionType: TransactionType,
+  currentQuantity: number,
+  quantityChange: number,
+) {
+  if (transactionType === 'buy') {
+    return currentQuantity + quantityChange;
+  } if (transactionType === 'sell') {
+    return currentQuantity - quantityChange;
+  }
+  return undefined;
+}
 
 export const TransactionMutation = extendType({
   type: 'Mutation',
@@ -36,11 +50,11 @@ export const TransactionMutation = extendType({
       type: 'Transaction',
       args: {
         data: nonNull(arg({
-          type: 'TransactionCreateInput'
+          type: 'TransactionCreateInput',
         })),
       },
       async resolve(_root, args, ctx, _info) {
-        //TODO: Add buy/sell mechanic with another field, or with negative quantity number handling
+        // TODO: Add buy/sell mechanic with another field, or with negative quantity number handling
 
         if (args.data.unitPrice < 0) {
           throw new Error('Price cannot be a negative value');
@@ -63,9 +77,9 @@ export const TransactionMutation = extendType({
           );
 
           if (
-            args.data.transactionType === 'sell' &&
-            updatedQuantity &&
-            updatedQuantity < 0
+            args.data.transactionType === 'sell'
+            && updatedQuantity
+            && updatedQuantity < 0
           ) {
             throw new Error(
               `Transaction failed. Total asset quantity cannot go below zero. Current amount of this asset you have available: ${asset.quantity}`,
@@ -126,15 +140,3 @@ export const TransactionCreateInput = inputObjectType({
     // t.date('date');
   },
 });
-
-function calculateUpdatedQuantity(
-  transactionType: TransactionType,
-  currentQuantity: number,
-  quantityChange: number,
-) {
-  if (transactionType === 'buy') {
-    return currentQuantity + quantityChange;
-  } else if (transactionType === 'sell') {
-    return currentQuantity - quantityChange;
-  }
-}

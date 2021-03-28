@@ -1,4 +1,6 @@
-import { objectType, extendType, stringArg, nonNull } from "nexus";
+import {
+  objectType, extendType, stringArg, nonNull,
+} from 'nexus';
 import { compare } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -11,7 +13,7 @@ export const AuthPayload = objectType({
 });
 
 export const AuthPayloadMutation = extendType({
-  type: "Mutation",
+  type: 'Mutation',
   definition(t) {
     t.field('login', {
       type: 'AuthPayload',
@@ -27,14 +29,13 @@ export const AuthPayloadMutation = extendType({
             return {
               user,
               token: jwt.sign({ userId: user.id }, process.env.JWT_KEY as string, { expiresIn: '24h' }),
-            }
-          } else {
-            throw new Error('Incorrect password');
+            };
           }
+          throw new Error('Incorrect password');
         } else {
           throw new Error('User not found');
         }
-      }
+      },
     });
   },
 });

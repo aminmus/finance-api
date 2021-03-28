@@ -1,5 +1,5 @@
-import { objectType, extendType } from "nexus"
-import bcrypt from "bcrypt";
+import { objectType, extendType } from 'nexus';
+import bcrypt from 'bcrypt';
 
 export const User = objectType({
   name: 'User',
@@ -20,6 +20,8 @@ export const User = objectType({
 //   },
 // });
 
+function hashPassword(password: string) { return bcrypt.hash(password, 10); }
+
 export const UserMutation = extendType({
   type: 'Mutation',
   definition(t) {
@@ -31,11 +33,11 @@ export const UserMutation = extendType({
         const processedArgs = { data: { ...args.data, password: encryptedPassword } };
         const res = await originalResolve(root, processedArgs, ctx, info);
         return res;
-      }
+      },
     });
     t.crud.updateOneUser({
       async resolve(root, args, ctx, info, originalResolve) {
-        let processedArgs = { ...args };
+        const processedArgs = { ...args };
         if (args.data.password && args.data.password.set) {
           // Encrypt password before updating user
           const encryptedPassword = await hashPassword(args.data.password.set);
@@ -47,5 +49,3 @@ export const UserMutation = extendType({
     });
   },
 });
-
-const hashPassword = (password: string) => bcrypt.hash(password, 10);

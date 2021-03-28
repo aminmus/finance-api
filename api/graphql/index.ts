@@ -1,4 +1,3 @@
-
 export * from './Asset';
 export * from './AuthPayload';
 export * from './HistoricalValue';

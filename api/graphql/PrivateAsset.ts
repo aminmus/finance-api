@@ -12,10 +12,9 @@ export const PrivateAsset = objectType({
         if (baseAsset) {
           // if baseAsset exists in db (like during a "get" query)
           return baseAsset;
-        } else {
-          // get baseAsset from the mutation resolver instead, (works regardless of TS error)
-          return root.baseAsset;
         }
+        // get baseAsset from the mutation resolver instead, (works regardless of TS error)
+        return root.baseAsset;
       },
     });
     t.model.historicalValues({
@@ -23,9 +22,8 @@ export const PrivateAsset = objectType({
         const historicalValues = await originalResolve(root, args, ctx, info);
         if (historicalValues) {
           return historicalValues;
-        } else {
-          return root.historicalValues;
         }
+        return root.historicalValues;
       },
     });
   },
@@ -46,7 +44,6 @@ export const PrivateAssetMutation = extendType({
     t.crud.deleteOnePrivateAsset({
       async resolve(_root, args, ctx, _info) {
         if (args.where.id) {
-
           const historicalValues = await ctx.prisma.historicalValue.findMany({
             where: { assetId: args.where.id },
           });
@@ -70,7 +67,6 @@ export const PrivateAssetMutation = extendType({
             where: { id: args.where.id },
           });
 
-
           const dbTransactionResponse = await ctx.prisma.$transaction([
             deletedHistoricalValues,
             deletedAssetTransactions,
@@ -78,14 +74,11 @@ export const PrivateAssetMutation = extendType({
             deletedBaseAsset,
           ]);
 
-
-          const result = { ...prismaTransactionResponse[2], historicalValues };
-
+          const result = { ...dbTransactionResponse[2], historicalValues };
 
           return result;
-        } else {
-          throw new Error('An error occurred, no id was given.');
         }
+        throw new Error('An error occurred, no id was given.');
       },
     });
     t.crud.updateOnePrivateAsset();

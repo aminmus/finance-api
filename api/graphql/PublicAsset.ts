@@ -14,10 +14,9 @@ export const PublicAsset = objectType({
         if (baseAsset) {
           // if baseAsset exists in db (like during a "get" query)
           return baseAsset;
-        } else {
-          // get baseAsset from the mutation resolver instead, (works regardless of TS error)
-          return root.baseAsset;
         }
+        // get baseAsset from the mutation resolver instead, (works regardless of TS error)
+        return root.baseAsset;
       },
     });
   },
@@ -61,9 +60,8 @@ export const PublicAssetMutation = extendType({
           ]);
 
           return dbTransactionResponse[0];
-        } else {
-          throw new Error('An error occurred, no id was given.');
         }
+        throw new Error('An error occurred, no id was given.');
       },
     });
     t.crud.updateOnePublicAsset();
