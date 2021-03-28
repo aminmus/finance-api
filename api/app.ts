@@ -10,9 +10,9 @@ const app = express();
 
 const apollo = new ApolloServer({
   schema,
-  context: (req) => ({
+  context: ({ req }) => ({
     prisma: new PrismaClient(),
-    req: req.req,
+    req,
   })
 });
 
