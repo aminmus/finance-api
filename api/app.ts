@@ -1,10 +1,11 @@
 import express from 'express';
-import { ApolloServer } from 'apollo-server-express'
-import { PrismaClient } from "@prisma/client";
+import { ApolloServer } from 'apollo-server-express';
+import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
-dotenv.config()
 
-import { schema } from './schema';
+import schema from './schema';
+
+dotenv.config();
 
 const app = express();
 
@@ -13,7 +14,7 @@ const apollo = new ApolloServer({
   context: ({ req }) => ({
     prisma: new PrismaClient(),
     req,
-  })
+  }),
 });
 
 apollo.applyMiddleware({ app });

@@ -12,29 +12,47 @@ type Asset {
   updatedAt: DateTime!
 }
 
-input AssetCreateManyWithoutPortfolioInput {
+input AssetCreateNestedManyWithoutPortfolioInput {
   connect: [AssetWhereUniqueInput!]
+  connectOrCreate: [AssetCreateOrConnectWithoutPortfolioInput!]
   create: [AssetCreateWithoutPortfolioInput!]
 }
 
-input AssetCreateOneWithoutPrivateAssetInput {
+input AssetCreateNestedOneWithoutPrivateAssetInput {
   connect: AssetWhereUniqueInput
+  connectOrCreate: AssetCreateOrConnectWithoutPrivateAssetInput
   create: AssetCreateWithoutPrivateAssetInput
 }
 
-input AssetCreateOneWithoutPublicAssetInput {
+input AssetCreateNestedOneWithoutPublicAssetInput {
   connect: AssetWhereUniqueInput
+  connectOrCreate: AssetCreateOrConnectWithoutPublicAssetInput
   create: AssetCreateWithoutPublicAssetInput
+}
+
+input AssetCreateOrConnectWithoutPortfolioInput {
+  create: AssetCreateWithoutPortfolioInput!
+  where: AssetWhereUniqueInput!
+}
+
+input AssetCreateOrConnectWithoutPrivateAssetInput {
+  create: AssetCreateWithoutPrivateAssetInput!
+  where: AssetWhereUniqueInput!
+}
+
+input AssetCreateOrConnectWithoutPublicAssetInput {
+  create: AssetCreateWithoutPublicAssetInput!
+  where: AssetWhereUniqueInput!
 }
 
 input AssetCreateWithoutPortfolioInput {
   createdAt: DateTime
   description: String
   name: String!
-  privateAsset: PrivateAssetCreateOneWithoutBaseAssetInput
-  publicAsset: PublicAssetCreateOneWithoutBaseAssetInput
+  privateAsset: PrivateAssetCreateNestedOneWithoutBaseAssetInput
+  publicAsset: PublicAssetCreateNestedOneWithoutBaseAssetInput
   quantity: Int
-  transactions: TransactionRecordCreateManyWithoutAssetInput
+  transactions: TransactionRecordCreateNestedManyWithoutAssetInput
   updatedAt: DateTime
 }
 
@@ -42,10 +60,10 @@ input AssetCreateWithoutPrivateAssetInput {
   createdAt: DateTime
   description: String
   name: String!
-  portfolio: PortfolioCreateOneWithoutAssetsInput!
-  publicAsset: PublicAssetCreateOneWithoutBaseAssetInput
+  portfolio: PortfolioCreateNestedOneWithoutAssetsInput!
+  publicAsset: PublicAssetCreateNestedOneWithoutBaseAssetInput
   quantity: Int
-  transactions: TransactionRecordCreateManyWithoutAssetInput
+  transactions: TransactionRecordCreateNestedManyWithoutAssetInput
   updatedAt: DateTime
 }
 
@@ -53,27 +71,27 @@ input AssetCreateWithoutPublicAssetInput {
   createdAt: DateTime
   description: String
   name: String!
-  portfolio: PortfolioCreateOneWithoutAssetsInput!
-  privateAsset: PrivateAssetCreateOneWithoutBaseAssetInput
+  portfolio: PortfolioCreateNestedOneWithoutAssetsInput!
+  privateAsset: PrivateAssetCreateNestedOneWithoutBaseAssetInput
   quantity: Int
-  transactions: TransactionRecordCreateManyWithoutAssetInput
+  transactions: TransactionRecordCreateNestedManyWithoutAssetInput
   updatedAt: DateTime
 }
 
 input AssetScalarWhereInput {
   AND: [AssetScalarWhereInput!]
+  NOT: [AssetScalarWhereInput!]
+  OR: [AssetScalarWhereInput!]
   createdAt: DateTimeFilter
   description: StringNullableFilter
   id: IntFilter
   name: StringFilter
-  NOT: [AssetScalarWhereInput!]
-  OR: [AssetScalarWhereInput!]
   portfolioId: IntFilter
   quantity: IntFilter
   updatedAt: DateTimeFilter
 }
 
-input AssetUpdateManyDataInput {
+input AssetUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
@@ -81,89 +99,92 @@ input AssetUpdateManyDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
+input AssetUpdateManyWithWhereWithoutPortfolioInput {
+  data: AssetUpdateManyMutationInput!
+  where: AssetScalarWhereInput!
+}
+
 input AssetUpdateManyWithoutPortfolioInput {
   connect: [AssetWhereUniqueInput!]
+  connectOrCreate: [AssetCreateOrConnectWithoutPortfolioInput!]
   create: [AssetCreateWithoutPortfolioInput!]
   delete: [AssetWhereUniqueInput!]
   deleteMany: [AssetScalarWhereInput!]
   disconnect: [AssetWhereUniqueInput!]
   set: [AssetWhereUniqueInput!]
   update: [AssetUpdateWithWhereUniqueWithoutPortfolioInput!]
-  updateMany: [AssetUpdateManyWithWhereNestedInput!]
+  updateMany: [AssetUpdateManyWithWhereWithoutPortfolioInput!]
   upsert: [AssetUpsertWithWhereUniqueWithoutPortfolioInput!]
-}
-
-input AssetUpdateManyWithWhereNestedInput {
-  data: AssetUpdateManyDataInput!
-  where: AssetScalarWhereInput!
 }
 
 input AssetUpdateOneRequiredWithoutPrivateAssetInput {
   connect: AssetWhereUniqueInput
+  connectOrCreate: AssetCreateOrConnectWithoutPrivateAssetInput
   create: AssetCreateWithoutPrivateAssetInput
-  update: AssetUpdateWithoutPrivateAssetDataInput
+  update: AssetUpdateWithoutPrivateAssetInput
   upsert: AssetUpsertWithoutPrivateAssetInput
 }
 
 input AssetUpdateOneRequiredWithoutPublicAssetInput {
   connect: AssetWhereUniqueInput
+  connectOrCreate: AssetCreateOrConnectWithoutPublicAssetInput
   create: AssetCreateWithoutPublicAssetInput
-  update: AssetUpdateWithoutPublicAssetDataInput
+  update: AssetUpdateWithoutPublicAssetInput
   upsert: AssetUpsertWithoutPublicAssetInput
 }
 
-input AssetUpdateWithoutPortfolioDataInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  privateAsset: PrivateAssetUpdateOneWithoutBaseAssetInput
-  publicAsset: PublicAssetUpdateOneWithoutBaseAssetInput
-  quantity: IntFieldUpdateOperationsInput
-  transactions: TransactionRecordUpdateManyWithoutAssetInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input AssetUpdateWithoutPrivateAssetDataInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  portfolio: PortfolioUpdateOneRequiredWithoutAssetsInput
-  publicAsset: PublicAssetUpdateOneWithoutBaseAssetInput
-  quantity: IntFieldUpdateOperationsInput
-  transactions: TransactionRecordUpdateManyWithoutAssetInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input AssetUpdateWithoutPublicAssetDataInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: NullableStringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  portfolio: PortfolioUpdateOneRequiredWithoutAssetsInput
-  privateAsset: PrivateAssetUpdateOneWithoutBaseAssetInput
-  quantity: IntFieldUpdateOperationsInput
-  transactions: TransactionRecordUpdateManyWithoutAssetInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
 input AssetUpdateWithWhereUniqueWithoutPortfolioInput {
-  data: AssetUpdateWithoutPortfolioDataInput!
+  data: AssetUpdateWithoutPortfolioInput!
+  where: AssetWhereUniqueInput!
+}
+
+input AssetUpdateWithoutPortfolioInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  privateAsset: PrivateAssetUpdateOneWithoutBaseAssetInput
+  publicAsset: PublicAssetUpdateOneWithoutBaseAssetInput
+  quantity: IntFieldUpdateOperationsInput
+  transactions: TransactionRecordUpdateManyWithoutAssetInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input AssetUpdateWithoutPrivateAssetInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  portfolio: PortfolioUpdateOneRequiredWithoutAssetsInput
+  publicAsset: PublicAssetUpdateOneWithoutBaseAssetInput
+  quantity: IntFieldUpdateOperationsInput
+  transactions: TransactionRecordUpdateManyWithoutAssetInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input AssetUpdateWithoutPublicAssetInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  portfolio: PortfolioUpdateOneRequiredWithoutAssetsInput
+  privateAsset: PrivateAssetUpdateOneWithoutBaseAssetInput
+  quantity: IntFieldUpdateOperationsInput
+  transactions: TransactionRecordUpdateManyWithoutAssetInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input AssetUpsertWithWhereUniqueWithoutPortfolioInput {
+  create: AssetCreateWithoutPortfolioInput!
+  update: AssetUpdateWithoutPortfolioInput!
   where: AssetWhereUniqueInput!
 }
 
 input AssetUpsertWithoutPrivateAssetInput {
   create: AssetCreateWithoutPrivateAssetInput!
-  update: AssetUpdateWithoutPrivateAssetDataInput!
+  update: AssetUpdateWithoutPrivateAssetInput!
 }
 
 input AssetUpsertWithoutPublicAssetInput {
   create: AssetCreateWithoutPublicAssetInput!
-  update: AssetUpdateWithoutPublicAssetDataInput!
-}
-
-input AssetUpsertWithWhereUniqueWithoutPortfolioInput {
-  create: AssetCreateWithoutPortfolioInput!
-  update: AssetUpdateWithoutPortfolioDataInput!
-  where: AssetWhereUniqueInput!
+  update: AssetUpdateWithoutPublicAssetInput!
 }
 
 input AssetWhereUniqueInput {
@@ -216,16 +237,22 @@ type HistoricalValue {
 }
 
 input HistoricalValueCreateInput {
-  asset: PrivateAssetCreateOneWithoutHistoricalValuesInput!
+  asset: PrivateAssetCreateNestedOneWithoutHistoricalValuesInput!
   createdAt: DateTime
   date: DateTime
   unitPrice: Int!
   updatedAt: DateTime
 }
 
-input HistoricalValueCreateManyWithoutAssetInput {
+input HistoricalValueCreateNestedManyWithoutAssetInput {
   connect: [HistoricalValueWhereUniqueInput!]
+  connectOrCreate: [HistoricalValueCreateOrConnectWithoutAssetInput!]
   create: [HistoricalValueCreateWithoutAssetInput!]
+}
+
+input HistoricalValueCreateOrConnectWithoutAssetInput {
+  create: HistoricalValueCreateWithoutAssetInput!
+  where: HistoricalValueWhereUniqueInput!
 }
 
 input HistoricalValueCreateWithoutAssetInput {
@@ -237,12 +264,12 @@ input HistoricalValueCreateWithoutAssetInput {
 
 input HistoricalValueScalarWhereInput {
   AND: [HistoricalValueScalarWhereInput!]
+  NOT: [HistoricalValueScalarWhereInput!]
+  OR: [HistoricalValueScalarWhereInput!]
   assetId: IntFilter
   createdAt: DateTimeFilter
   date: DateTimeFilter
   id: IntFilter
-  NOT: [HistoricalValueScalarWhereInput!]
-  OR: [HistoricalValueScalarWhereInput!]
   unitPrice: IntFilter
   updatedAt: DateTimeFilter
 }
@@ -255,45 +282,46 @@ input HistoricalValueUpdateInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input HistoricalValueUpdateManyDataInput {
+input HistoricalValueUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   date: DateTimeFieldUpdateOperationsInput
   unitPrice: IntFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
+input HistoricalValueUpdateManyWithWhereWithoutAssetInput {
+  data: HistoricalValueUpdateManyMutationInput!
+  where: HistoricalValueScalarWhereInput!
+}
+
 input HistoricalValueUpdateManyWithoutAssetInput {
   connect: [HistoricalValueWhereUniqueInput!]
+  connectOrCreate: [HistoricalValueCreateOrConnectWithoutAssetInput!]
   create: [HistoricalValueCreateWithoutAssetInput!]
   delete: [HistoricalValueWhereUniqueInput!]
   deleteMany: [HistoricalValueScalarWhereInput!]
   disconnect: [HistoricalValueWhereUniqueInput!]
   set: [HistoricalValueWhereUniqueInput!]
   update: [HistoricalValueUpdateWithWhereUniqueWithoutAssetInput!]
-  updateMany: [HistoricalValueUpdateManyWithWhereNestedInput!]
+  updateMany: [HistoricalValueUpdateManyWithWhereWithoutAssetInput!]
   upsert: [HistoricalValueUpsertWithWhereUniqueWithoutAssetInput!]
 }
 
-input HistoricalValueUpdateManyWithWhereNestedInput {
-  data: HistoricalValueUpdateManyDataInput!
-  where: HistoricalValueScalarWhereInput!
+input HistoricalValueUpdateWithWhereUniqueWithoutAssetInput {
+  data: HistoricalValueUpdateWithoutAssetInput!
+  where: HistoricalValueWhereUniqueInput!
 }
 
-input HistoricalValueUpdateWithoutAssetDataInput {
+input HistoricalValueUpdateWithoutAssetInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   date: DateTimeFieldUpdateOperationsInput
   unitPrice: IntFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input HistoricalValueUpdateWithWhereUniqueWithoutAssetInput {
-  data: HistoricalValueUpdateWithoutAssetDataInput!
-  where: HistoricalValueWhereUniqueInput!
-}
-
 input HistoricalValueUpsertWithWhereUniqueWithoutAssetInput {
   create: HistoricalValueCreateWithoutAssetInput!
-  update: HistoricalValueUpdateWithoutAssetDataInput!
+  update: HistoricalValueUpdateWithoutAssetInput!
   where: HistoricalValueWhereUniqueInput!
 }
 
@@ -412,34 +440,46 @@ type Portfolio {
 }
 
 input PortfolioCreateInput {
-  assets: AssetCreateManyWithoutPortfolioInput
+  assets: AssetCreateNestedManyWithoutPortfolioInput
   createdAt: DateTime
   description: String
   name: String!
-  owner: UserCreateOneWithoutPortfoliosInput!
+  owner: UserCreateNestedOneWithoutPortfoliosInput!
   updatedAt: DateTime
 }
 
-input PortfolioCreateManyWithoutOwnerInput {
+input PortfolioCreateNestedManyWithoutOwnerInput {
   connect: [PortfolioWhereUniqueInput!]
+  connectOrCreate: [PortfolioCreateOrConnectWithoutOwnerInput!]
   create: [PortfolioCreateWithoutOwnerInput!]
 }
 
-input PortfolioCreateOneWithoutAssetsInput {
+input PortfolioCreateNestedOneWithoutAssetsInput {
   connect: PortfolioWhereUniqueInput
+  connectOrCreate: PortfolioCreateOrConnectWithoutAssetsInput
   create: PortfolioCreateWithoutAssetsInput
+}
+
+input PortfolioCreateOrConnectWithoutAssetsInput {
+  create: PortfolioCreateWithoutAssetsInput!
+  where: PortfolioWhereUniqueInput!
+}
+
+input PortfolioCreateOrConnectWithoutOwnerInput {
+  create: PortfolioCreateWithoutOwnerInput!
+  where: PortfolioWhereUniqueInput!
 }
 
 input PortfolioCreateWithoutAssetsInput {
   createdAt: DateTime
   description: String
   name: String!
-  owner: UserCreateOneWithoutPortfoliosInput!
+  owner: UserCreateNestedOneWithoutPortfoliosInput!
   updatedAt: DateTime
 }
 
 input PortfolioCreateWithoutOwnerInput {
-  assets: AssetCreateManyWithoutPortfolioInput
+  assets: AssetCreateNestedManyWithoutPortfolioInput
   createdAt: DateTime
   description: String
   name: String!
@@ -448,12 +488,12 @@ input PortfolioCreateWithoutOwnerInput {
 
 input PortfolioScalarWhereInput {
   AND: [PortfolioScalarWhereInput!]
+  NOT: [PortfolioScalarWhereInput!]
+  OR: [PortfolioScalarWhereInput!]
   createdAt: DateTimeFilter
   description: StringNullableFilter
   id: IntFilter
   name: StringFilter
-  NOT: [PortfolioScalarWhereInput!]
-  OR: [PortfolioScalarWhereInput!]
   updatedAt: DateTimeFilter
   userId: IntFilter
 }
@@ -467,38 +507,45 @@ input PortfolioUpdateInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input PortfolioUpdateManyDataInput {
+input PortfolioUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
+input PortfolioUpdateManyWithWhereWithoutOwnerInput {
+  data: PortfolioUpdateManyMutationInput!
+  where: PortfolioScalarWhereInput!
+}
+
 input PortfolioUpdateManyWithoutOwnerInput {
   connect: [PortfolioWhereUniqueInput!]
+  connectOrCreate: [PortfolioCreateOrConnectWithoutOwnerInput!]
   create: [PortfolioCreateWithoutOwnerInput!]
   delete: [PortfolioWhereUniqueInput!]
   deleteMany: [PortfolioScalarWhereInput!]
   disconnect: [PortfolioWhereUniqueInput!]
   set: [PortfolioWhereUniqueInput!]
   update: [PortfolioUpdateWithWhereUniqueWithoutOwnerInput!]
-  updateMany: [PortfolioUpdateManyWithWhereNestedInput!]
+  updateMany: [PortfolioUpdateManyWithWhereWithoutOwnerInput!]
   upsert: [PortfolioUpsertWithWhereUniqueWithoutOwnerInput!]
-}
-
-input PortfolioUpdateManyWithWhereNestedInput {
-  data: PortfolioUpdateManyDataInput!
-  where: PortfolioScalarWhereInput!
 }
 
 input PortfolioUpdateOneRequiredWithoutAssetsInput {
   connect: PortfolioWhereUniqueInput
+  connectOrCreate: PortfolioCreateOrConnectWithoutAssetsInput
   create: PortfolioCreateWithoutAssetsInput
-  update: PortfolioUpdateWithoutAssetsDataInput
+  update: PortfolioUpdateWithoutAssetsInput
   upsert: PortfolioUpsertWithoutAssetsInput
 }
 
-input PortfolioUpdateWithoutAssetsDataInput {
+input PortfolioUpdateWithWhereUniqueWithoutOwnerInput {
+  data: PortfolioUpdateWithoutOwnerInput!
+  where: PortfolioWhereUniqueInput!
+}
+
+input PortfolioUpdateWithoutAssetsInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
@@ -506,7 +553,7 @@ input PortfolioUpdateWithoutAssetsDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input PortfolioUpdateWithoutOwnerDataInput {
+input PortfolioUpdateWithoutOwnerInput {
   assets: AssetUpdateManyWithoutPortfolioInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
@@ -514,20 +561,15 @@ input PortfolioUpdateWithoutOwnerDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input PortfolioUpdateWithWhereUniqueWithoutOwnerInput {
-  data: PortfolioUpdateWithoutOwnerDataInput!
+input PortfolioUpsertWithWhereUniqueWithoutOwnerInput {
+  create: PortfolioCreateWithoutOwnerInput!
+  update: PortfolioUpdateWithoutOwnerInput!
   where: PortfolioWhereUniqueInput!
 }
 
 input PortfolioUpsertWithoutAssetsInput {
   create: PortfolioCreateWithoutAssetsInput!
-  update: PortfolioUpdateWithoutAssetsDataInput!
-}
-
-input PortfolioUpsertWithWhereUniqueWithoutOwnerInput {
-  create: PortfolioCreateWithoutOwnerInput!
-  update: PortfolioUpdateWithoutOwnerDataInput!
-  where: PortfolioWhereUniqueInput!
+  update: PortfolioUpdateWithoutAssetsInput!
 }
 
 input PortfolioWhereUniqueInput {
@@ -544,26 +586,38 @@ type PrivateAsset {
 }
 
 input PrivateAssetCreateInput {
-  baseAsset: AssetCreateOneWithoutPrivateAssetInput!
-  historicalValues: HistoricalValueCreateManyWithoutAssetInput
+  baseAsset: AssetCreateNestedOneWithoutPrivateAssetInput!
+  historicalValues: HistoricalValueCreateNestedManyWithoutAssetInput
 }
 
-input PrivateAssetCreateOneWithoutBaseAssetInput {
+input PrivateAssetCreateNestedOneWithoutBaseAssetInput {
   connect: PrivateAssetWhereUniqueInput
+  connectOrCreate: PrivateAssetCreateOrConnectWithoutBaseAssetInput
   create: PrivateAssetCreateWithoutBaseAssetInput
 }
 
-input PrivateAssetCreateOneWithoutHistoricalValuesInput {
+input PrivateAssetCreateNestedOneWithoutHistoricalValuesInput {
   connect: PrivateAssetWhereUniqueInput
+  connectOrCreate: PrivateAssetCreateOrConnectWithoutHistoricalValuesInput
   create: PrivateAssetCreateWithoutHistoricalValuesInput
 }
 
+input PrivateAssetCreateOrConnectWithoutBaseAssetInput {
+  create: PrivateAssetCreateWithoutBaseAssetInput!
+  where: PrivateAssetWhereUniqueInput!
+}
+
+input PrivateAssetCreateOrConnectWithoutHistoricalValuesInput {
+  create: PrivateAssetCreateWithoutHistoricalValuesInput!
+  where: PrivateAssetWhereUniqueInput!
+}
+
 input PrivateAssetCreateWithoutBaseAssetInput {
-  historicalValues: HistoricalValueCreateManyWithoutAssetInput
+  historicalValues: HistoricalValueCreateNestedManyWithoutAssetInput
 }
 
 input PrivateAssetCreateWithoutHistoricalValuesInput {
-  baseAsset: AssetCreateOneWithoutPrivateAssetInput!
+  baseAsset: AssetCreateNestedOneWithoutPrivateAssetInput!
 }
 
 input PrivateAssetUpdateInput {
@@ -573,36 +627,38 @@ input PrivateAssetUpdateInput {
 
 input PrivateAssetUpdateOneRequiredWithoutHistoricalValuesInput {
   connect: PrivateAssetWhereUniqueInput
+  connectOrCreate: PrivateAssetCreateOrConnectWithoutHistoricalValuesInput
   create: PrivateAssetCreateWithoutHistoricalValuesInput
-  update: PrivateAssetUpdateWithoutHistoricalValuesDataInput
+  update: PrivateAssetUpdateWithoutHistoricalValuesInput
   upsert: PrivateAssetUpsertWithoutHistoricalValuesInput
 }
 
 input PrivateAssetUpdateOneWithoutBaseAssetInput {
   connect: PrivateAssetWhereUniqueInput
+  connectOrCreate: PrivateAssetCreateOrConnectWithoutBaseAssetInput
   create: PrivateAssetCreateWithoutBaseAssetInput
   delete: Boolean
   disconnect: Boolean
-  update: PrivateAssetUpdateWithoutBaseAssetDataInput
+  update: PrivateAssetUpdateWithoutBaseAssetInput
   upsert: PrivateAssetUpsertWithoutBaseAssetInput
 }
 
-input PrivateAssetUpdateWithoutBaseAssetDataInput {
+input PrivateAssetUpdateWithoutBaseAssetInput {
   historicalValues: HistoricalValueUpdateManyWithoutAssetInput
 }
 
-input PrivateAssetUpdateWithoutHistoricalValuesDataInput {
+input PrivateAssetUpdateWithoutHistoricalValuesInput {
   baseAsset: AssetUpdateOneRequiredWithoutPrivateAssetInput
 }
 
 input PrivateAssetUpsertWithoutBaseAssetInput {
   create: PrivateAssetCreateWithoutBaseAssetInput!
-  update: PrivateAssetUpdateWithoutBaseAssetDataInput!
+  update: PrivateAssetUpdateWithoutBaseAssetInput!
 }
 
 input PrivateAssetUpsertWithoutHistoricalValuesInput {
   create: PrivateAssetCreateWithoutHistoricalValuesInput!
-  update: PrivateAssetUpdateWithoutHistoricalValuesDataInput!
+  update: PrivateAssetUpdateWithoutHistoricalValuesInput!
 }
 
 input PrivateAssetWhereUniqueInput {
@@ -620,14 +676,20 @@ type PublicAsset {
 }
 
 input PublicAssetCreateInput {
-  baseAsset: AssetCreateOneWithoutPublicAssetInput!
+  baseAsset: AssetCreateNestedOneWithoutPublicAssetInput!
   market: String
   symbol: String
 }
 
-input PublicAssetCreateOneWithoutBaseAssetInput {
+input PublicAssetCreateNestedOneWithoutBaseAssetInput {
   connect: PublicAssetWhereUniqueInput
+  connectOrCreate: PublicAssetCreateOrConnectWithoutBaseAssetInput
   create: PublicAssetCreateWithoutBaseAssetInput
+}
+
+input PublicAssetCreateOrConnectWithoutBaseAssetInput {
+  create: PublicAssetCreateWithoutBaseAssetInput!
+  where: PublicAssetWhereUniqueInput!
 }
 
 input PublicAssetCreateWithoutBaseAssetInput {
@@ -643,21 +705,22 @@ input PublicAssetUpdateInput {
 
 input PublicAssetUpdateOneWithoutBaseAssetInput {
   connect: PublicAssetWhereUniqueInput
+  connectOrCreate: PublicAssetCreateOrConnectWithoutBaseAssetInput
   create: PublicAssetCreateWithoutBaseAssetInput
   delete: Boolean
   disconnect: Boolean
-  update: PublicAssetUpdateWithoutBaseAssetDataInput
+  update: PublicAssetUpdateWithoutBaseAssetInput
   upsert: PublicAssetUpsertWithoutBaseAssetInput
 }
 
-input PublicAssetUpdateWithoutBaseAssetDataInput {
+input PublicAssetUpdateWithoutBaseAssetInput {
   market: NullableStringFieldUpdateOperationsInput
   symbol: NullableStringFieldUpdateOperationsInput
 }
 
 input PublicAssetUpsertWithoutBaseAssetInput {
   create: PublicAssetCreateWithoutBaseAssetInput!
-  update: PublicAssetUpdateWithoutBaseAssetDataInput!
+  update: PublicAssetUpdateWithoutBaseAssetInput!
 }
 
 input PublicAssetWhereUniqueInput {
@@ -735,9 +798,15 @@ input TransactionCreateInput {
   unitPrice: Int!
 }
 
-input TransactionRecordCreateManyWithoutAssetInput {
+input TransactionRecordCreateNestedManyWithoutAssetInput {
   connect: [TransactionRecordWhereUniqueInput!]
+  connectOrCreate: [TransactionRecordCreateOrConnectWithoutAssetInput!]
   create: [TransactionRecordCreateWithoutAssetInput!]
+}
+
+input TransactionRecordCreateOrConnectWithoutAssetInput {
+  create: TransactionRecordCreateWithoutAssetInput!
+  where: TransactionRecordWhereUniqueInput!
 }
 
 input TransactionRecordCreateWithoutAssetInput {
@@ -753,21 +822,21 @@ input TransactionRecordCreateWithoutAssetInput {
 
 input TransactionRecordScalarWhereInput {
   AND: [TransactionRecordScalarWhereInput!]
+  NOT: [TransactionRecordScalarWhereInput!]
+  OR: [TransactionRecordScalarWhereInput!]
   assetId: IntFilter
   assetQuantity: IntFilter
   createdAt: DateTimeFilter
   currency: StringFilter
   date: DateTimeFilter
   id: IntFilter
-  NOT: [TransactionRecordScalarWhereInput!]
   note: StringNullableFilter
-  OR: [TransactionRecordScalarWhereInput!]
   transactionType: EnumTransactionTypeFilter
   unitPrice: IntFilter
   updatedAt: DateTimeFilter
 }
 
-input TransactionRecordUpdateManyDataInput {
+input TransactionRecordUpdateManyMutationInput {
   assetQuantity: IntFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   currency: StringFieldUpdateOperationsInput
@@ -778,24 +847,30 @@ input TransactionRecordUpdateManyDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
+input TransactionRecordUpdateManyWithWhereWithoutAssetInput {
+  data: TransactionRecordUpdateManyMutationInput!
+  where: TransactionRecordScalarWhereInput!
+}
+
 input TransactionRecordUpdateManyWithoutAssetInput {
   connect: [TransactionRecordWhereUniqueInput!]
+  connectOrCreate: [TransactionRecordCreateOrConnectWithoutAssetInput!]
   create: [TransactionRecordCreateWithoutAssetInput!]
   delete: [TransactionRecordWhereUniqueInput!]
   deleteMany: [TransactionRecordScalarWhereInput!]
   disconnect: [TransactionRecordWhereUniqueInput!]
   set: [TransactionRecordWhereUniqueInput!]
   update: [TransactionRecordUpdateWithWhereUniqueWithoutAssetInput!]
-  updateMany: [TransactionRecordUpdateManyWithWhereNestedInput!]
+  updateMany: [TransactionRecordUpdateManyWithWhereWithoutAssetInput!]
   upsert: [TransactionRecordUpsertWithWhereUniqueWithoutAssetInput!]
 }
 
-input TransactionRecordUpdateManyWithWhereNestedInput {
-  data: TransactionRecordUpdateManyDataInput!
-  where: TransactionRecordScalarWhereInput!
+input TransactionRecordUpdateWithWhereUniqueWithoutAssetInput {
+  data: TransactionRecordUpdateWithoutAssetInput!
+  where: TransactionRecordWhereUniqueInput!
 }
 
-input TransactionRecordUpdateWithoutAssetDataInput {
+input TransactionRecordUpdateWithoutAssetInput {
   assetQuantity: IntFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   currency: StringFieldUpdateOperationsInput
@@ -806,14 +881,9 @@ input TransactionRecordUpdateWithoutAssetDataInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input TransactionRecordUpdateWithWhereUniqueWithoutAssetInput {
-  data: TransactionRecordUpdateWithoutAssetDataInput!
-  where: TransactionRecordWhereUniqueInput!
-}
-
 input TransactionRecordUpsertWithWhereUniqueWithoutAssetInput {
   create: TransactionRecordCreateWithoutAssetInput!
-  update: TransactionRecordUpdateWithoutAssetDataInput!
+  update: TransactionRecordUpdateWithoutAssetInput!
   where: TransactionRecordWhereUniqueInput!
 }
 
@@ -839,13 +909,19 @@ input UserCreateInput {
   email: String!
   name: String!
   password: String!
-  portfolios: PortfolioCreateManyWithoutOwnerInput
+  portfolios: PortfolioCreateNestedManyWithoutOwnerInput
   updatedAt: DateTime
 }
 
-input UserCreateOneWithoutPortfoliosInput {
+input UserCreateNestedOneWithoutPortfoliosInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutPortfoliosInput
   create: UserCreateWithoutPortfoliosInput
+}
+
+input UserCreateOrConnectWithoutPortfoliosInput {
+  create: UserCreateWithoutPortfoliosInput!
+  where: UserWhereUniqueInput!
 }
 
 input UserCreateWithoutPortfoliosInput {
@@ -867,12 +943,13 @@ input UserUpdateInput {
 
 input UserUpdateOneRequiredWithoutPortfoliosInput {
   connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutPortfoliosInput
   create: UserCreateWithoutPortfoliosInput
-  update: UserUpdateWithoutPortfoliosDataInput
+  update: UserUpdateWithoutPortfoliosInput
   upsert: UserUpsertWithoutPortfoliosInput
 }
 
-input UserUpdateWithoutPortfoliosDataInput {
+input UserUpdateWithoutPortfoliosInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
@@ -882,7 +959,7 @@ input UserUpdateWithoutPortfoliosDataInput {
 
 input UserUpsertWithoutPortfoliosInput {
   create: UserCreateWithoutPortfoliosInput!
-  update: UserUpdateWithoutPortfoliosDataInput!
+  update: UserUpdateWithoutPortfoliosInput!
 }
 
 input UserWhereUniqueInput {

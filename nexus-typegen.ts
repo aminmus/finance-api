@@ -3,8 +3,8 @@
  * Do not make changes to this file directly
  */
 
-import * as ContextModule from "./api/types/context"
 
+import { Context as ContextModule } from "./api/types/context"
 
 
 declare global {
@@ -19,99 +19,117 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  AssetCreateManyWithoutPortfolioInput: { // input type
+  AssetCreateNestedManyWithoutPortfolioInput: { // input type
     connect?: NexusGenInputs['AssetWhereUniqueInput'][] | null; // [AssetWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['AssetCreateOrConnectWithoutPortfolioInput'][] | null; // [AssetCreateOrConnectWithoutPortfolioInput!]
     create?: NexusGenInputs['AssetCreateWithoutPortfolioInput'][] | null; // [AssetCreateWithoutPortfolioInput!]
   }
-  AssetCreateOneWithoutPrivateAssetInput: { // input type
+  AssetCreateNestedOneWithoutPrivateAssetInput: { // input type
     connect?: NexusGenInputs['AssetWhereUniqueInput'] | null; // AssetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['AssetCreateOrConnectWithoutPrivateAssetInput'] | null; // AssetCreateOrConnectWithoutPrivateAssetInput
     create?: NexusGenInputs['AssetCreateWithoutPrivateAssetInput'] | null; // AssetCreateWithoutPrivateAssetInput
   }
-  AssetCreateOneWithoutPublicAssetInput: { // input type
+  AssetCreateNestedOneWithoutPublicAssetInput: { // input type
     connect?: NexusGenInputs['AssetWhereUniqueInput'] | null; // AssetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['AssetCreateOrConnectWithoutPublicAssetInput'] | null; // AssetCreateOrConnectWithoutPublicAssetInput
     create?: NexusGenInputs['AssetCreateWithoutPublicAssetInput'] | null; // AssetCreateWithoutPublicAssetInput
+  }
+  AssetCreateOrConnectWithoutPortfolioInput: { // input type
+    create: NexusGenInputs['AssetCreateWithoutPortfolioInput']; // AssetCreateWithoutPortfolioInput!
+    where: NexusGenInputs['AssetWhereUniqueInput']; // AssetWhereUniqueInput!
+  }
+  AssetCreateOrConnectWithoutPrivateAssetInput: { // input type
+    create: NexusGenInputs['AssetCreateWithoutPrivateAssetInput']; // AssetCreateWithoutPrivateAssetInput!
+    where: NexusGenInputs['AssetWhereUniqueInput']; // AssetWhereUniqueInput!
+  }
+  AssetCreateOrConnectWithoutPublicAssetInput: { // input type
+    create: NexusGenInputs['AssetCreateWithoutPublicAssetInput']; // AssetCreateWithoutPublicAssetInput!
+    where: NexusGenInputs['AssetWhereUniqueInput']; // AssetWhereUniqueInput!
   }
   AssetCreateWithoutPortfolioInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     name: string; // String!
-    privateAsset?: NexusGenInputs['PrivateAssetCreateOneWithoutBaseAssetInput'] | null; // PrivateAssetCreateOneWithoutBaseAssetInput
-    publicAsset?: NexusGenInputs['PublicAssetCreateOneWithoutBaseAssetInput'] | null; // PublicAssetCreateOneWithoutBaseAssetInput
+    privateAsset?: NexusGenInputs['PrivateAssetCreateNestedOneWithoutBaseAssetInput'] | null; // PrivateAssetCreateNestedOneWithoutBaseAssetInput
+    publicAsset?: NexusGenInputs['PublicAssetCreateNestedOneWithoutBaseAssetInput'] | null; // PublicAssetCreateNestedOneWithoutBaseAssetInput
     quantity?: number | null; // Int
-    transactions?: NexusGenInputs['TransactionRecordCreateManyWithoutAssetInput'] | null; // TransactionRecordCreateManyWithoutAssetInput
+    transactions?: NexusGenInputs['TransactionRecordCreateNestedManyWithoutAssetInput'] | null; // TransactionRecordCreateNestedManyWithoutAssetInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   AssetCreateWithoutPrivateAssetInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     name: string; // String!
-    portfolio: NexusGenInputs['PortfolioCreateOneWithoutAssetsInput']; // PortfolioCreateOneWithoutAssetsInput!
-    publicAsset?: NexusGenInputs['PublicAssetCreateOneWithoutBaseAssetInput'] | null; // PublicAssetCreateOneWithoutBaseAssetInput
+    portfolio: NexusGenInputs['PortfolioCreateNestedOneWithoutAssetsInput']; // PortfolioCreateNestedOneWithoutAssetsInput!
+    publicAsset?: NexusGenInputs['PublicAssetCreateNestedOneWithoutBaseAssetInput'] | null; // PublicAssetCreateNestedOneWithoutBaseAssetInput
     quantity?: number | null; // Int
-    transactions?: NexusGenInputs['TransactionRecordCreateManyWithoutAssetInput'] | null; // TransactionRecordCreateManyWithoutAssetInput
+    transactions?: NexusGenInputs['TransactionRecordCreateNestedManyWithoutAssetInput'] | null; // TransactionRecordCreateNestedManyWithoutAssetInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   AssetCreateWithoutPublicAssetInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     name: string; // String!
-    portfolio: NexusGenInputs['PortfolioCreateOneWithoutAssetsInput']; // PortfolioCreateOneWithoutAssetsInput!
-    privateAsset?: NexusGenInputs['PrivateAssetCreateOneWithoutBaseAssetInput'] | null; // PrivateAssetCreateOneWithoutBaseAssetInput
+    portfolio: NexusGenInputs['PortfolioCreateNestedOneWithoutAssetsInput']; // PortfolioCreateNestedOneWithoutAssetsInput!
+    privateAsset?: NexusGenInputs['PrivateAssetCreateNestedOneWithoutBaseAssetInput'] | null; // PrivateAssetCreateNestedOneWithoutBaseAssetInput
     quantity?: number | null; // Int
-    transactions?: NexusGenInputs['TransactionRecordCreateManyWithoutAssetInput'] | null; // TransactionRecordCreateManyWithoutAssetInput
+    transactions?: NexusGenInputs['TransactionRecordCreateNestedManyWithoutAssetInput'] | null; // TransactionRecordCreateNestedManyWithoutAssetInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   AssetScalarWhereInput: { // input type
     AND?: NexusGenInputs['AssetScalarWhereInput'][] | null; // [AssetScalarWhereInput!]
+    NOT?: NexusGenInputs['AssetScalarWhereInput'][] | null; // [AssetScalarWhereInput!]
+    OR?: NexusGenInputs['AssetScalarWhereInput'][] | null; // [AssetScalarWhereInput!]
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    NOT?: NexusGenInputs['AssetScalarWhereInput'][] | null; // [AssetScalarWhereInput!]
-    OR?: NexusGenInputs['AssetScalarWhereInput'][] | null; // [AssetScalarWhereInput!]
     portfolioId?: NexusGenInputs['IntFilter'] | null; // IntFilter
     quantity?: NexusGenInputs['IntFilter'] | null; // IntFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
-  AssetUpdateManyDataInput: { // input type
+  AssetUpdateManyMutationInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     quantity?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
-  AssetUpdateManyWithWhereNestedInput: { // input type
-    data: NexusGenInputs['AssetUpdateManyDataInput']; // AssetUpdateManyDataInput!
+  AssetUpdateManyWithWhereWithoutPortfolioInput: { // input type
+    data: NexusGenInputs['AssetUpdateManyMutationInput']; // AssetUpdateManyMutationInput!
     where: NexusGenInputs['AssetScalarWhereInput']; // AssetScalarWhereInput!
   }
   AssetUpdateManyWithoutPortfolioInput: { // input type
     connect?: NexusGenInputs['AssetWhereUniqueInput'][] | null; // [AssetWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['AssetCreateOrConnectWithoutPortfolioInput'][] | null; // [AssetCreateOrConnectWithoutPortfolioInput!]
     create?: NexusGenInputs['AssetCreateWithoutPortfolioInput'][] | null; // [AssetCreateWithoutPortfolioInput!]
     delete?: NexusGenInputs['AssetWhereUniqueInput'][] | null; // [AssetWhereUniqueInput!]
     deleteMany?: NexusGenInputs['AssetScalarWhereInput'][] | null; // [AssetScalarWhereInput!]
     disconnect?: NexusGenInputs['AssetWhereUniqueInput'][] | null; // [AssetWhereUniqueInput!]
     set?: NexusGenInputs['AssetWhereUniqueInput'][] | null; // [AssetWhereUniqueInput!]
     update?: NexusGenInputs['AssetUpdateWithWhereUniqueWithoutPortfolioInput'][] | null; // [AssetUpdateWithWhereUniqueWithoutPortfolioInput!]
-    updateMany?: NexusGenInputs['AssetUpdateManyWithWhereNestedInput'][] | null; // [AssetUpdateManyWithWhereNestedInput!]
+    updateMany?: NexusGenInputs['AssetUpdateManyWithWhereWithoutPortfolioInput'][] | null; // [AssetUpdateManyWithWhereWithoutPortfolioInput!]
     upsert?: NexusGenInputs['AssetUpsertWithWhereUniqueWithoutPortfolioInput'][] | null; // [AssetUpsertWithWhereUniqueWithoutPortfolioInput!]
   }
   AssetUpdateOneRequiredWithoutPrivateAssetInput: { // input type
     connect?: NexusGenInputs['AssetWhereUniqueInput'] | null; // AssetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['AssetCreateOrConnectWithoutPrivateAssetInput'] | null; // AssetCreateOrConnectWithoutPrivateAssetInput
     create?: NexusGenInputs['AssetCreateWithoutPrivateAssetInput'] | null; // AssetCreateWithoutPrivateAssetInput
-    update?: NexusGenInputs['AssetUpdateWithoutPrivateAssetDataInput'] | null; // AssetUpdateWithoutPrivateAssetDataInput
+    update?: NexusGenInputs['AssetUpdateWithoutPrivateAssetInput'] | null; // AssetUpdateWithoutPrivateAssetInput
     upsert?: NexusGenInputs['AssetUpsertWithoutPrivateAssetInput'] | null; // AssetUpsertWithoutPrivateAssetInput
   }
   AssetUpdateOneRequiredWithoutPublicAssetInput: { // input type
     connect?: NexusGenInputs['AssetWhereUniqueInput'] | null; // AssetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['AssetCreateOrConnectWithoutPublicAssetInput'] | null; // AssetCreateOrConnectWithoutPublicAssetInput
     create?: NexusGenInputs['AssetCreateWithoutPublicAssetInput'] | null; // AssetCreateWithoutPublicAssetInput
-    update?: NexusGenInputs['AssetUpdateWithoutPublicAssetDataInput'] | null; // AssetUpdateWithoutPublicAssetDataInput
+    update?: NexusGenInputs['AssetUpdateWithoutPublicAssetInput'] | null; // AssetUpdateWithoutPublicAssetInput
     upsert?: NexusGenInputs['AssetUpsertWithoutPublicAssetInput'] | null; // AssetUpsertWithoutPublicAssetInput
   }
   AssetUpdateWithWhereUniqueWithoutPortfolioInput: { // input type
-    data: NexusGenInputs['AssetUpdateWithoutPortfolioDataInput']; // AssetUpdateWithoutPortfolioDataInput!
+    data: NexusGenInputs['AssetUpdateWithoutPortfolioInput']; // AssetUpdateWithoutPortfolioInput!
     where: NexusGenInputs['AssetWhereUniqueInput']; // AssetWhereUniqueInput!
   }
-  AssetUpdateWithoutPortfolioDataInput: { // input type
+  AssetUpdateWithoutPortfolioInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -121,7 +139,7 @@ export interface NexusGenInputs {
     transactions?: NexusGenInputs['TransactionRecordUpdateManyWithoutAssetInput'] | null; // TransactionRecordUpdateManyWithoutAssetInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
-  AssetUpdateWithoutPrivateAssetDataInput: { // input type
+  AssetUpdateWithoutPrivateAssetInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -131,7 +149,7 @@ export interface NexusGenInputs {
     transactions?: NexusGenInputs['TransactionRecordUpdateManyWithoutAssetInput'] | null; // TransactionRecordUpdateManyWithoutAssetInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
-  AssetUpdateWithoutPublicAssetDataInput: { // input type
+  AssetUpdateWithoutPublicAssetInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -143,16 +161,16 @@ export interface NexusGenInputs {
   }
   AssetUpsertWithWhereUniqueWithoutPortfolioInput: { // input type
     create: NexusGenInputs['AssetCreateWithoutPortfolioInput']; // AssetCreateWithoutPortfolioInput!
-    update: NexusGenInputs['AssetUpdateWithoutPortfolioDataInput']; // AssetUpdateWithoutPortfolioDataInput!
+    update: NexusGenInputs['AssetUpdateWithoutPortfolioInput']; // AssetUpdateWithoutPortfolioInput!
     where: NexusGenInputs['AssetWhereUniqueInput']; // AssetWhereUniqueInput!
   }
   AssetUpsertWithoutPrivateAssetInput: { // input type
     create: NexusGenInputs['AssetCreateWithoutPrivateAssetInput']; // AssetCreateWithoutPrivateAssetInput!
-    update: NexusGenInputs['AssetUpdateWithoutPrivateAssetDataInput']; // AssetUpdateWithoutPrivateAssetDataInput!
+    update: NexusGenInputs['AssetUpdateWithoutPrivateAssetInput']; // AssetUpdateWithoutPrivateAssetInput!
   }
   AssetUpsertWithoutPublicAssetInput: { // input type
     create: NexusGenInputs['AssetCreateWithoutPublicAssetInput']; // AssetCreateWithoutPublicAssetInput!
-    update: NexusGenInputs['AssetUpdateWithoutPublicAssetDataInput']; // AssetUpdateWithoutPublicAssetDataInput!
+    update: NexusGenInputs['AssetUpdateWithoutPublicAssetInput']; // AssetUpdateWithoutPublicAssetInput!
   }
   AssetWhereUniqueInput: { // input type
     id?: number | null; // Int
@@ -180,15 +198,20 @@ export interface NexusGenInputs {
     notIn?: NexusGenEnums['TransactionType'][] | null; // [TransactionType!]
   }
   HistoricalValueCreateInput: { // input type
-    asset: NexusGenInputs['PrivateAssetCreateOneWithoutHistoricalValuesInput']; // PrivateAssetCreateOneWithoutHistoricalValuesInput!
+    asset: NexusGenInputs['PrivateAssetCreateNestedOneWithoutHistoricalValuesInput']; // PrivateAssetCreateNestedOneWithoutHistoricalValuesInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     date?: NexusGenScalars['DateTime'] | null; // DateTime
     unitPrice: number; // Int!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
-  HistoricalValueCreateManyWithoutAssetInput: { // input type
+  HistoricalValueCreateNestedManyWithoutAssetInput: { // input type
     connect?: NexusGenInputs['HistoricalValueWhereUniqueInput'][] | null; // [HistoricalValueWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['HistoricalValueCreateOrConnectWithoutAssetInput'][] | null; // [HistoricalValueCreateOrConnectWithoutAssetInput!]
     create?: NexusGenInputs['HistoricalValueCreateWithoutAssetInput'][] | null; // [HistoricalValueCreateWithoutAssetInput!]
+  }
+  HistoricalValueCreateOrConnectWithoutAssetInput: { // input type
+    create: NexusGenInputs['HistoricalValueCreateWithoutAssetInput']; // HistoricalValueCreateWithoutAssetInput!
+    where: NexusGenInputs['HistoricalValueWhereUniqueInput']; // HistoricalValueWhereUniqueInput!
   }
   HistoricalValueCreateWithoutAssetInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -198,12 +221,12 @@ export interface NexusGenInputs {
   }
   HistoricalValueScalarWhereInput: { // input type
     AND?: NexusGenInputs['HistoricalValueScalarWhereInput'][] | null; // [HistoricalValueScalarWhereInput!]
+    NOT?: NexusGenInputs['HistoricalValueScalarWhereInput'][] | null; // [HistoricalValueScalarWhereInput!]
+    OR?: NexusGenInputs['HistoricalValueScalarWhereInput'][] | null; // [HistoricalValueScalarWhereInput!]
     assetId?: NexusGenInputs['IntFilter'] | null; // IntFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     date?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    NOT?: NexusGenInputs['HistoricalValueScalarWhereInput'][] | null; // [HistoricalValueScalarWhereInput!]
-    OR?: NexusGenInputs['HistoricalValueScalarWhereInput'][] | null; // [HistoricalValueScalarWhereInput!]
     unitPrice?: NexusGenInputs['IntFilter'] | null; // IntFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
@@ -214,32 +237,33 @@ export interface NexusGenInputs {
     unitPrice?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
-  HistoricalValueUpdateManyDataInput: { // input type
+  HistoricalValueUpdateManyMutationInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     unitPrice?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
-  HistoricalValueUpdateManyWithWhereNestedInput: { // input type
-    data: NexusGenInputs['HistoricalValueUpdateManyDataInput']; // HistoricalValueUpdateManyDataInput!
+  HistoricalValueUpdateManyWithWhereWithoutAssetInput: { // input type
+    data: NexusGenInputs['HistoricalValueUpdateManyMutationInput']; // HistoricalValueUpdateManyMutationInput!
     where: NexusGenInputs['HistoricalValueScalarWhereInput']; // HistoricalValueScalarWhereInput!
   }
   HistoricalValueUpdateManyWithoutAssetInput: { // input type
     connect?: NexusGenInputs['HistoricalValueWhereUniqueInput'][] | null; // [HistoricalValueWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['HistoricalValueCreateOrConnectWithoutAssetInput'][] | null; // [HistoricalValueCreateOrConnectWithoutAssetInput!]
     create?: NexusGenInputs['HistoricalValueCreateWithoutAssetInput'][] | null; // [HistoricalValueCreateWithoutAssetInput!]
     delete?: NexusGenInputs['HistoricalValueWhereUniqueInput'][] | null; // [HistoricalValueWhereUniqueInput!]
     deleteMany?: NexusGenInputs['HistoricalValueScalarWhereInput'][] | null; // [HistoricalValueScalarWhereInput!]
     disconnect?: NexusGenInputs['HistoricalValueWhereUniqueInput'][] | null; // [HistoricalValueWhereUniqueInput!]
     set?: NexusGenInputs['HistoricalValueWhereUniqueInput'][] | null; // [HistoricalValueWhereUniqueInput!]
     update?: NexusGenInputs['HistoricalValueUpdateWithWhereUniqueWithoutAssetInput'][] | null; // [HistoricalValueUpdateWithWhereUniqueWithoutAssetInput!]
-    updateMany?: NexusGenInputs['HistoricalValueUpdateManyWithWhereNestedInput'][] | null; // [HistoricalValueUpdateManyWithWhereNestedInput!]
+    updateMany?: NexusGenInputs['HistoricalValueUpdateManyWithWhereWithoutAssetInput'][] | null; // [HistoricalValueUpdateManyWithWhereWithoutAssetInput!]
     upsert?: NexusGenInputs['HistoricalValueUpsertWithWhereUniqueWithoutAssetInput'][] | null; // [HistoricalValueUpsertWithWhereUniqueWithoutAssetInput!]
   }
   HistoricalValueUpdateWithWhereUniqueWithoutAssetInput: { // input type
-    data: NexusGenInputs['HistoricalValueUpdateWithoutAssetDataInput']; // HistoricalValueUpdateWithoutAssetDataInput!
+    data: NexusGenInputs['HistoricalValueUpdateWithoutAssetInput']; // HistoricalValueUpdateWithoutAssetInput!
     where: NexusGenInputs['HistoricalValueWhereUniqueInput']; // HistoricalValueWhereUniqueInput!
   }
-  HistoricalValueUpdateWithoutAssetDataInput: { // input type
+  HistoricalValueUpdateWithoutAssetInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     unitPrice?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
@@ -247,7 +271,7 @@ export interface NexusGenInputs {
   }
   HistoricalValueUpsertWithWhereUniqueWithoutAssetInput: { // input type
     create: NexusGenInputs['HistoricalValueCreateWithoutAssetInput']; // HistoricalValueCreateWithoutAssetInput!
-    update: NexusGenInputs['HistoricalValueUpdateWithoutAssetDataInput']; // HistoricalValueUpdateWithoutAssetDataInput!
+    update: NexusGenInputs['HistoricalValueUpdateWithoutAssetInput']; // HistoricalValueUpdateWithoutAssetInput!
     where: NexusGenInputs['HistoricalValueWhereUniqueInput']; // HistoricalValueWhereUniqueInput!
   }
   HistoricalValueWhereUniqueInput: { // input type
@@ -326,30 +350,40 @@ export interface NexusGenInputs {
     set?: string | null; // String
   }
   PortfolioCreateInput: { // input type
-    assets?: NexusGenInputs['AssetCreateManyWithoutPortfolioInput'] | null; // AssetCreateManyWithoutPortfolioInput
+    assets?: NexusGenInputs['AssetCreateNestedManyWithoutPortfolioInput'] | null; // AssetCreateNestedManyWithoutPortfolioInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     name: string; // String!
-    owner: NexusGenInputs['UserCreateOneWithoutPortfoliosInput']; // UserCreateOneWithoutPortfoliosInput!
+    owner: NexusGenInputs['UserCreateNestedOneWithoutPortfoliosInput']; // UserCreateNestedOneWithoutPortfoliosInput!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
-  PortfolioCreateManyWithoutOwnerInput: { // input type
+  PortfolioCreateNestedManyWithoutOwnerInput: { // input type
     connect?: NexusGenInputs['PortfolioWhereUniqueInput'][] | null; // [PortfolioWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['PortfolioCreateOrConnectWithoutOwnerInput'][] | null; // [PortfolioCreateOrConnectWithoutOwnerInput!]
     create?: NexusGenInputs['PortfolioCreateWithoutOwnerInput'][] | null; // [PortfolioCreateWithoutOwnerInput!]
   }
-  PortfolioCreateOneWithoutAssetsInput: { // input type
+  PortfolioCreateNestedOneWithoutAssetsInput: { // input type
     connect?: NexusGenInputs['PortfolioWhereUniqueInput'] | null; // PortfolioWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['PortfolioCreateOrConnectWithoutAssetsInput'] | null; // PortfolioCreateOrConnectWithoutAssetsInput
     create?: NexusGenInputs['PortfolioCreateWithoutAssetsInput'] | null; // PortfolioCreateWithoutAssetsInput
+  }
+  PortfolioCreateOrConnectWithoutAssetsInput: { // input type
+    create: NexusGenInputs['PortfolioCreateWithoutAssetsInput']; // PortfolioCreateWithoutAssetsInput!
+    where: NexusGenInputs['PortfolioWhereUniqueInput']; // PortfolioWhereUniqueInput!
+  }
+  PortfolioCreateOrConnectWithoutOwnerInput: { // input type
+    create: NexusGenInputs['PortfolioCreateWithoutOwnerInput']; // PortfolioCreateWithoutOwnerInput!
+    where: NexusGenInputs['PortfolioWhereUniqueInput']; // PortfolioWhereUniqueInput!
   }
   PortfolioCreateWithoutAssetsInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     name: string; // String!
-    owner: NexusGenInputs['UserCreateOneWithoutPortfoliosInput']; // UserCreateOneWithoutPortfoliosInput!
+    owner: NexusGenInputs['UserCreateNestedOneWithoutPortfoliosInput']; // UserCreateNestedOneWithoutPortfoliosInput!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   PortfolioCreateWithoutOwnerInput: { // input type
-    assets?: NexusGenInputs['AssetCreateManyWithoutPortfolioInput'] | null; // AssetCreateManyWithoutPortfolioInput
+    assets?: NexusGenInputs['AssetCreateNestedManyWithoutPortfolioInput'] | null; // AssetCreateNestedManyWithoutPortfolioInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     name: string; // String!
@@ -357,12 +391,12 @@ export interface NexusGenInputs {
   }
   PortfolioScalarWhereInput: { // input type
     AND?: NexusGenInputs['PortfolioScalarWhereInput'][] | null; // [PortfolioScalarWhereInput!]
+    NOT?: NexusGenInputs['PortfolioScalarWhereInput'][] | null; // [PortfolioScalarWhereInput!]
+    OR?: NexusGenInputs['PortfolioScalarWhereInput'][] | null; // [PortfolioScalarWhereInput!]
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    NOT?: NexusGenInputs['PortfolioScalarWhereInput'][] | null; // [PortfolioScalarWhereInput!]
-    OR?: NexusGenInputs['PortfolioScalarWhereInput'][] | null; // [PortfolioScalarWhereInput!]
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     userId?: NexusGenInputs['IntFilter'] | null; // IntFilter
   }
@@ -374,45 +408,47 @@ export interface NexusGenInputs {
     owner?: NexusGenInputs['UserUpdateOneRequiredWithoutPortfoliosInput'] | null; // UserUpdateOneRequiredWithoutPortfoliosInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
-  PortfolioUpdateManyDataInput: { // input type
+  PortfolioUpdateManyMutationInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
-  PortfolioUpdateManyWithWhereNestedInput: { // input type
-    data: NexusGenInputs['PortfolioUpdateManyDataInput']; // PortfolioUpdateManyDataInput!
+  PortfolioUpdateManyWithWhereWithoutOwnerInput: { // input type
+    data: NexusGenInputs['PortfolioUpdateManyMutationInput']; // PortfolioUpdateManyMutationInput!
     where: NexusGenInputs['PortfolioScalarWhereInput']; // PortfolioScalarWhereInput!
   }
   PortfolioUpdateManyWithoutOwnerInput: { // input type
     connect?: NexusGenInputs['PortfolioWhereUniqueInput'][] | null; // [PortfolioWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['PortfolioCreateOrConnectWithoutOwnerInput'][] | null; // [PortfolioCreateOrConnectWithoutOwnerInput!]
     create?: NexusGenInputs['PortfolioCreateWithoutOwnerInput'][] | null; // [PortfolioCreateWithoutOwnerInput!]
     delete?: NexusGenInputs['PortfolioWhereUniqueInput'][] | null; // [PortfolioWhereUniqueInput!]
     deleteMany?: NexusGenInputs['PortfolioScalarWhereInput'][] | null; // [PortfolioScalarWhereInput!]
     disconnect?: NexusGenInputs['PortfolioWhereUniqueInput'][] | null; // [PortfolioWhereUniqueInput!]
     set?: NexusGenInputs['PortfolioWhereUniqueInput'][] | null; // [PortfolioWhereUniqueInput!]
     update?: NexusGenInputs['PortfolioUpdateWithWhereUniqueWithoutOwnerInput'][] | null; // [PortfolioUpdateWithWhereUniqueWithoutOwnerInput!]
-    updateMany?: NexusGenInputs['PortfolioUpdateManyWithWhereNestedInput'][] | null; // [PortfolioUpdateManyWithWhereNestedInput!]
+    updateMany?: NexusGenInputs['PortfolioUpdateManyWithWhereWithoutOwnerInput'][] | null; // [PortfolioUpdateManyWithWhereWithoutOwnerInput!]
     upsert?: NexusGenInputs['PortfolioUpsertWithWhereUniqueWithoutOwnerInput'][] | null; // [PortfolioUpsertWithWhereUniqueWithoutOwnerInput!]
   }
   PortfolioUpdateOneRequiredWithoutAssetsInput: { // input type
     connect?: NexusGenInputs['PortfolioWhereUniqueInput'] | null; // PortfolioWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['PortfolioCreateOrConnectWithoutAssetsInput'] | null; // PortfolioCreateOrConnectWithoutAssetsInput
     create?: NexusGenInputs['PortfolioCreateWithoutAssetsInput'] | null; // PortfolioCreateWithoutAssetsInput
-    update?: NexusGenInputs['PortfolioUpdateWithoutAssetsDataInput'] | null; // PortfolioUpdateWithoutAssetsDataInput
+    update?: NexusGenInputs['PortfolioUpdateWithoutAssetsInput'] | null; // PortfolioUpdateWithoutAssetsInput
     upsert?: NexusGenInputs['PortfolioUpsertWithoutAssetsInput'] | null; // PortfolioUpsertWithoutAssetsInput
   }
   PortfolioUpdateWithWhereUniqueWithoutOwnerInput: { // input type
-    data: NexusGenInputs['PortfolioUpdateWithoutOwnerDataInput']; // PortfolioUpdateWithoutOwnerDataInput!
+    data: NexusGenInputs['PortfolioUpdateWithoutOwnerInput']; // PortfolioUpdateWithoutOwnerInput!
     where: NexusGenInputs['PortfolioWhereUniqueInput']; // PortfolioWhereUniqueInput!
   }
-  PortfolioUpdateWithoutAssetsDataInput: { // input type
+  PortfolioUpdateWithoutAssetsInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     owner?: NexusGenInputs['UserUpdateOneRequiredWithoutPortfoliosInput'] | null; // UserUpdateOneRequiredWithoutPortfoliosInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
-  PortfolioUpdateWithoutOwnerDataInput: { // input type
+  PortfolioUpdateWithoutOwnerInput: { // input type
     assets?: NexusGenInputs['AssetUpdateManyWithoutPortfolioInput'] | null; // AssetUpdateManyWithoutPortfolioInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
@@ -421,33 +457,43 @@ export interface NexusGenInputs {
   }
   PortfolioUpsertWithWhereUniqueWithoutOwnerInput: { // input type
     create: NexusGenInputs['PortfolioCreateWithoutOwnerInput']; // PortfolioCreateWithoutOwnerInput!
-    update: NexusGenInputs['PortfolioUpdateWithoutOwnerDataInput']; // PortfolioUpdateWithoutOwnerDataInput!
+    update: NexusGenInputs['PortfolioUpdateWithoutOwnerInput']; // PortfolioUpdateWithoutOwnerInput!
     where: NexusGenInputs['PortfolioWhereUniqueInput']; // PortfolioWhereUniqueInput!
   }
   PortfolioUpsertWithoutAssetsInput: { // input type
     create: NexusGenInputs['PortfolioCreateWithoutAssetsInput']; // PortfolioCreateWithoutAssetsInput!
-    update: NexusGenInputs['PortfolioUpdateWithoutAssetsDataInput']; // PortfolioUpdateWithoutAssetsDataInput!
+    update: NexusGenInputs['PortfolioUpdateWithoutAssetsInput']; // PortfolioUpdateWithoutAssetsInput!
   }
   PortfolioWhereUniqueInput: { // input type
     id?: number | null; // Int
   }
   PrivateAssetCreateInput: { // input type
-    baseAsset: NexusGenInputs['AssetCreateOneWithoutPrivateAssetInput']; // AssetCreateOneWithoutPrivateAssetInput!
-    historicalValues?: NexusGenInputs['HistoricalValueCreateManyWithoutAssetInput'] | null; // HistoricalValueCreateManyWithoutAssetInput
+    baseAsset: NexusGenInputs['AssetCreateNestedOneWithoutPrivateAssetInput']; // AssetCreateNestedOneWithoutPrivateAssetInput!
+    historicalValues?: NexusGenInputs['HistoricalValueCreateNestedManyWithoutAssetInput'] | null; // HistoricalValueCreateNestedManyWithoutAssetInput
   }
-  PrivateAssetCreateOneWithoutBaseAssetInput: { // input type
+  PrivateAssetCreateNestedOneWithoutBaseAssetInput: { // input type
     connect?: NexusGenInputs['PrivateAssetWhereUniqueInput'] | null; // PrivateAssetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['PrivateAssetCreateOrConnectWithoutBaseAssetInput'] | null; // PrivateAssetCreateOrConnectWithoutBaseAssetInput
     create?: NexusGenInputs['PrivateAssetCreateWithoutBaseAssetInput'] | null; // PrivateAssetCreateWithoutBaseAssetInput
   }
-  PrivateAssetCreateOneWithoutHistoricalValuesInput: { // input type
+  PrivateAssetCreateNestedOneWithoutHistoricalValuesInput: { // input type
     connect?: NexusGenInputs['PrivateAssetWhereUniqueInput'] | null; // PrivateAssetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['PrivateAssetCreateOrConnectWithoutHistoricalValuesInput'] | null; // PrivateAssetCreateOrConnectWithoutHistoricalValuesInput
     create?: NexusGenInputs['PrivateAssetCreateWithoutHistoricalValuesInput'] | null; // PrivateAssetCreateWithoutHistoricalValuesInput
   }
+  PrivateAssetCreateOrConnectWithoutBaseAssetInput: { // input type
+    create: NexusGenInputs['PrivateAssetCreateWithoutBaseAssetInput']; // PrivateAssetCreateWithoutBaseAssetInput!
+    where: NexusGenInputs['PrivateAssetWhereUniqueInput']; // PrivateAssetWhereUniqueInput!
+  }
+  PrivateAssetCreateOrConnectWithoutHistoricalValuesInput: { // input type
+    create: NexusGenInputs['PrivateAssetCreateWithoutHistoricalValuesInput']; // PrivateAssetCreateWithoutHistoricalValuesInput!
+    where: NexusGenInputs['PrivateAssetWhereUniqueInput']; // PrivateAssetWhereUniqueInput!
+  }
   PrivateAssetCreateWithoutBaseAssetInput: { // input type
-    historicalValues?: NexusGenInputs['HistoricalValueCreateManyWithoutAssetInput'] | null; // HistoricalValueCreateManyWithoutAssetInput
+    historicalValues?: NexusGenInputs['HistoricalValueCreateNestedManyWithoutAssetInput'] | null; // HistoricalValueCreateNestedManyWithoutAssetInput
   }
   PrivateAssetCreateWithoutHistoricalValuesInput: { // input type
-    baseAsset: NexusGenInputs['AssetCreateOneWithoutPrivateAssetInput']; // AssetCreateOneWithoutPrivateAssetInput!
+    baseAsset: NexusGenInputs['AssetCreateNestedOneWithoutPrivateAssetInput']; // AssetCreateNestedOneWithoutPrivateAssetInput!
   }
   PrivateAssetUpdateInput: { // input type
     baseAsset?: NexusGenInputs['AssetUpdateOneRequiredWithoutPrivateAssetInput'] | null; // AssetUpdateOneRequiredWithoutPrivateAssetInput
@@ -455,43 +501,50 @@ export interface NexusGenInputs {
   }
   PrivateAssetUpdateOneRequiredWithoutHistoricalValuesInput: { // input type
     connect?: NexusGenInputs['PrivateAssetWhereUniqueInput'] | null; // PrivateAssetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['PrivateAssetCreateOrConnectWithoutHistoricalValuesInput'] | null; // PrivateAssetCreateOrConnectWithoutHistoricalValuesInput
     create?: NexusGenInputs['PrivateAssetCreateWithoutHistoricalValuesInput'] | null; // PrivateAssetCreateWithoutHistoricalValuesInput
-    update?: NexusGenInputs['PrivateAssetUpdateWithoutHistoricalValuesDataInput'] | null; // PrivateAssetUpdateWithoutHistoricalValuesDataInput
+    update?: NexusGenInputs['PrivateAssetUpdateWithoutHistoricalValuesInput'] | null; // PrivateAssetUpdateWithoutHistoricalValuesInput
     upsert?: NexusGenInputs['PrivateAssetUpsertWithoutHistoricalValuesInput'] | null; // PrivateAssetUpsertWithoutHistoricalValuesInput
   }
   PrivateAssetUpdateOneWithoutBaseAssetInput: { // input type
     connect?: NexusGenInputs['PrivateAssetWhereUniqueInput'] | null; // PrivateAssetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['PrivateAssetCreateOrConnectWithoutBaseAssetInput'] | null; // PrivateAssetCreateOrConnectWithoutBaseAssetInput
     create?: NexusGenInputs['PrivateAssetCreateWithoutBaseAssetInput'] | null; // PrivateAssetCreateWithoutBaseAssetInput
     delete?: boolean | null; // Boolean
     disconnect?: boolean | null; // Boolean
-    update?: NexusGenInputs['PrivateAssetUpdateWithoutBaseAssetDataInput'] | null; // PrivateAssetUpdateWithoutBaseAssetDataInput
+    update?: NexusGenInputs['PrivateAssetUpdateWithoutBaseAssetInput'] | null; // PrivateAssetUpdateWithoutBaseAssetInput
     upsert?: NexusGenInputs['PrivateAssetUpsertWithoutBaseAssetInput'] | null; // PrivateAssetUpsertWithoutBaseAssetInput
   }
-  PrivateAssetUpdateWithoutBaseAssetDataInput: { // input type
+  PrivateAssetUpdateWithoutBaseAssetInput: { // input type
     historicalValues?: NexusGenInputs['HistoricalValueUpdateManyWithoutAssetInput'] | null; // HistoricalValueUpdateManyWithoutAssetInput
   }
-  PrivateAssetUpdateWithoutHistoricalValuesDataInput: { // input type
+  PrivateAssetUpdateWithoutHistoricalValuesInput: { // input type
     baseAsset?: NexusGenInputs['AssetUpdateOneRequiredWithoutPrivateAssetInput'] | null; // AssetUpdateOneRequiredWithoutPrivateAssetInput
   }
   PrivateAssetUpsertWithoutBaseAssetInput: { // input type
     create: NexusGenInputs['PrivateAssetCreateWithoutBaseAssetInput']; // PrivateAssetCreateWithoutBaseAssetInput!
-    update: NexusGenInputs['PrivateAssetUpdateWithoutBaseAssetDataInput']; // PrivateAssetUpdateWithoutBaseAssetDataInput!
+    update: NexusGenInputs['PrivateAssetUpdateWithoutBaseAssetInput']; // PrivateAssetUpdateWithoutBaseAssetInput!
   }
   PrivateAssetUpsertWithoutHistoricalValuesInput: { // input type
     create: NexusGenInputs['PrivateAssetCreateWithoutHistoricalValuesInput']; // PrivateAssetCreateWithoutHistoricalValuesInput!
-    update: NexusGenInputs['PrivateAssetUpdateWithoutHistoricalValuesDataInput']; // PrivateAssetUpdateWithoutHistoricalValuesDataInput!
+    update: NexusGenInputs['PrivateAssetUpdateWithoutHistoricalValuesInput']; // PrivateAssetUpdateWithoutHistoricalValuesInput!
   }
   PrivateAssetWhereUniqueInput: { // input type
     id?: number | null; // Int
   }
   PublicAssetCreateInput: { // input type
-    baseAsset: NexusGenInputs['AssetCreateOneWithoutPublicAssetInput']; // AssetCreateOneWithoutPublicAssetInput!
+    baseAsset: NexusGenInputs['AssetCreateNestedOneWithoutPublicAssetInput']; // AssetCreateNestedOneWithoutPublicAssetInput!
     market?: string | null; // String
     symbol?: string | null; // String
   }
-  PublicAssetCreateOneWithoutBaseAssetInput: { // input type
+  PublicAssetCreateNestedOneWithoutBaseAssetInput: { // input type
     connect?: NexusGenInputs['PublicAssetWhereUniqueInput'] | null; // PublicAssetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['PublicAssetCreateOrConnectWithoutBaseAssetInput'] | null; // PublicAssetCreateOrConnectWithoutBaseAssetInput
     create?: NexusGenInputs['PublicAssetCreateWithoutBaseAssetInput'] | null; // PublicAssetCreateWithoutBaseAssetInput
+  }
+  PublicAssetCreateOrConnectWithoutBaseAssetInput: { // input type
+    create: NexusGenInputs['PublicAssetCreateWithoutBaseAssetInput']; // PublicAssetCreateWithoutBaseAssetInput!
+    where: NexusGenInputs['PublicAssetWhereUniqueInput']; // PublicAssetWhereUniqueInput!
   }
   PublicAssetCreateWithoutBaseAssetInput: { // input type
     market?: string | null; // String
@@ -504,19 +557,20 @@ export interface NexusGenInputs {
   }
   PublicAssetUpdateOneWithoutBaseAssetInput: { // input type
     connect?: NexusGenInputs['PublicAssetWhereUniqueInput'] | null; // PublicAssetWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['PublicAssetCreateOrConnectWithoutBaseAssetInput'] | null; // PublicAssetCreateOrConnectWithoutBaseAssetInput
     create?: NexusGenInputs['PublicAssetCreateWithoutBaseAssetInput'] | null; // PublicAssetCreateWithoutBaseAssetInput
     delete?: boolean | null; // Boolean
     disconnect?: boolean | null; // Boolean
-    update?: NexusGenInputs['PublicAssetUpdateWithoutBaseAssetDataInput'] | null; // PublicAssetUpdateWithoutBaseAssetDataInput
+    update?: NexusGenInputs['PublicAssetUpdateWithoutBaseAssetInput'] | null; // PublicAssetUpdateWithoutBaseAssetInput
     upsert?: NexusGenInputs['PublicAssetUpsertWithoutBaseAssetInput'] | null; // PublicAssetUpsertWithoutBaseAssetInput
   }
-  PublicAssetUpdateWithoutBaseAssetDataInput: { // input type
+  PublicAssetUpdateWithoutBaseAssetInput: { // input type
     market?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     symbol?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
   }
   PublicAssetUpsertWithoutBaseAssetInput: { // input type
     create: NexusGenInputs['PublicAssetCreateWithoutBaseAssetInput']; // PublicAssetCreateWithoutBaseAssetInput!
-    update: NexusGenInputs['PublicAssetUpdateWithoutBaseAssetDataInput']; // PublicAssetUpdateWithoutBaseAssetDataInput!
+    update: NexusGenInputs['PublicAssetUpdateWithoutBaseAssetInput']; // PublicAssetUpdateWithoutBaseAssetInput!
   }
   PublicAssetWhereUniqueInput: { // input type
     id?: number | null; // Int
@@ -560,9 +614,14 @@ export interface NexusGenInputs {
     transactionType: NexusGenEnums['TransactionType']; // TransactionType!
     unitPrice: number; // Int!
   }
-  TransactionRecordCreateManyWithoutAssetInput: { // input type
+  TransactionRecordCreateNestedManyWithoutAssetInput: { // input type
     connect?: NexusGenInputs['TransactionRecordWhereUniqueInput'][] | null; // [TransactionRecordWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['TransactionRecordCreateOrConnectWithoutAssetInput'][] | null; // [TransactionRecordCreateOrConnectWithoutAssetInput!]
     create?: NexusGenInputs['TransactionRecordCreateWithoutAssetInput'][] | null; // [TransactionRecordCreateWithoutAssetInput!]
+  }
+  TransactionRecordCreateOrConnectWithoutAssetInput: { // input type
+    create: NexusGenInputs['TransactionRecordCreateWithoutAssetInput']; // TransactionRecordCreateWithoutAssetInput!
+    where: NexusGenInputs['TransactionRecordWhereUniqueInput']; // TransactionRecordWhereUniqueInput!
   }
   TransactionRecordCreateWithoutAssetInput: { // input type
     assetQuantity: number; // Int!
@@ -576,20 +635,20 @@ export interface NexusGenInputs {
   }
   TransactionRecordScalarWhereInput: { // input type
     AND?: NexusGenInputs['TransactionRecordScalarWhereInput'][] | null; // [TransactionRecordScalarWhereInput!]
+    NOT?: NexusGenInputs['TransactionRecordScalarWhereInput'][] | null; // [TransactionRecordScalarWhereInput!]
+    OR?: NexusGenInputs['TransactionRecordScalarWhereInput'][] | null; // [TransactionRecordScalarWhereInput!]
     assetId?: NexusGenInputs['IntFilter'] | null; // IntFilter
     assetQuantity?: NexusGenInputs['IntFilter'] | null; // IntFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     currency?: NexusGenInputs['StringFilter'] | null; // StringFilter
     date?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    NOT?: NexusGenInputs['TransactionRecordScalarWhereInput'][] | null; // [TransactionRecordScalarWhereInput!]
     note?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
-    OR?: NexusGenInputs['TransactionRecordScalarWhereInput'][] | null; // [TransactionRecordScalarWhereInput!]
     transactionType?: NexusGenInputs['EnumTransactionTypeFilter'] | null; // EnumTransactionTypeFilter
     unitPrice?: NexusGenInputs['IntFilter'] | null; // IntFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
-  TransactionRecordUpdateManyDataInput: { // input type
+  TransactionRecordUpdateManyMutationInput: { // input type
     assetQuantity?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     currency?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -599,26 +658,27 @@ export interface NexusGenInputs {
     unitPrice?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
-  TransactionRecordUpdateManyWithWhereNestedInput: { // input type
-    data: NexusGenInputs['TransactionRecordUpdateManyDataInput']; // TransactionRecordUpdateManyDataInput!
+  TransactionRecordUpdateManyWithWhereWithoutAssetInput: { // input type
+    data: NexusGenInputs['TransactionRecordUpdateManyMutationInput']; // TransactionRecordUpdateManyMutationInput!
     where: NexusGenInputs['TransactionRecordScalarWhereInput']; // TransactionRecordScalarWhereInput!
   }
   TransactionRecordUpdateManyWithoutAssetInput: { // input type
     connect?: NexusGenInputs['TransactionRecordWhereUniqueInput'][] | null; // [TransactionRecordWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['TransactionRecordCreateOrConnectWithoutAssetInput'][] | null; // [TransactionRecordCreateOrConnectWithoutAssetInput!]
     create?: NexusGenInputs['TransactionRecordCreateWithoutAssetInput'][] | null; // [TransactionRecordCreateWithoutAssetInput!]
     delete?: NexusGenInputs['TransactionRecordWhereUniqueInput'][] | null; // [TransactionRecordWhereUniqueInput!]
     deleteMany?: NexusGenInputs['TransactionRecordScalarWhereInput'][] | null; // [TransactionRecordScalarWhereInput!]
     disconnect?: NexusGenInputs['TransactionRecordWhereUniqueInput'][] | null; // [TransactionRecordWhereUniqueInput!]
     set?: NexusGenInputs['TransactionRecordWhereUniqueInput'][] | null; // [TransactionRecordWhereUniqueInput!]
     update?: NexusGenInputs['TransactionRecordUpdateWithWhereUniqueWithoutAssetInput'][] | null; // [TransactionRecordUpdateWithWhereUniqueWithoutAssetInput!]
-    updateMany?: NexusGenInputs['TransactionRecordUpdateManyWithWhereNestedInput'][] | null; // [TransactionRecordUpdateManyWithWhereNestedInput!]
+    updateMany?: NexusGenInputs['TransactionRecordUpdateManyWithWhereWithoutAssetInput'][] | null; // [TransactionRecordUpdateManyWithWhereWithoutAssetInput!]
     upsert?: NexusGenInputs['TransactionRecordUpsertWithWhereUniqueWithoutAssetInput'][] | null; // [TransactionRecordUpsertWithWhereUniqueWithoutAssetInput!]
   }
   TransactionRecordUpdateWithWhereUniqueWithoutAssetInput: { // input type
-    data: NexusGenInputs['TransactionRecordUpdateWithoutAssetDataInput']; // TransactionRecordUpdateWithoutAssetDataInput!
+    data: NexusGenInputs['TransactionRecordUpdateWithoutAssetInput']; // TransactionRecordUpdateWithoutAssetInput!
     where: NexusGenInputs['TransactionRecordWhereUniqueInput']; // TransactionRecordWhereUniqueInput!
   }
-  TransactionRecordUpdateWithoutAssetDataInput: { // input type
+  TransactionRecordUpdateWithoutAssetInput: { // input type
     assetQuantity?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     currency?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -630,7 +690,7 @@ export interface NexusGenInputs {
   }
   TransactionRecordUpsertWithWhereUniqueWithoutAssetInput: { // input type
     create: NexusGenInputs['TransactionRecordCreateWithoutAssetInput']; // TransactionRecordCreateWithoutAssetInput!
-    update: NexusGenInputs['TransactionRecordUpdateWithoutAssetDataInput']; // TransactionRecordUpdateWithoutAssetDataInput!
+    update: NexusGenInputs['TransactionRecordUpdateWithoutAssetInput']; // TransactionRecordUpdateWithoutAssetInput!
     where: NexusGenInputs['TransactionRecordWhereUniqueInput']; // TransactionRecordWhereUniqueInput!
   }
   TransactionRecordWhereUniqueInput: { // input type
@@ -641,12 +701,17 @@ export interface NexusGenInputs {
     email: string; // String!
     name: string; // String!
     password: string; // String!
-    portfolios?: NexusGenInputs['PortfolioCreateManyWithoutOwnerInput'] | null; // PortfolioCreateManyWithoutOwnerInput
+    portfolios?: NexusGenInputs['PortfolioCreateNestedManyWithoutOwnerInput'] | null; // PortfolioCreateNestedManyWithoutOwnerInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
-  UserCreateOneWithoutPortfoliosInput: { // input type
+  UserCreateNestedOneWithoutPortfoliosInput: { // input type
     connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutPortfoliosInput'] | null; // UserCreateOrConnectWithoutPortfoliosInput
     create?: NexusGenInputs['UserCreateWithoutPortfoliosInput'] | null; // UserCreateWithoutPortfoliosInput
+  }
+  UserCreateOrConnectWithoutPortfoliosInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutPortfoliosInput']; // UserCreateWithoutPortfoliosInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
   }
   UserCreateWithoutPortfoliosInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -665,11 +730,12 @@ export interface NexusGenInputs {
   }
   UserUpdateOneRequiredWithoutPortfoliosInput: { // input type
     connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutPortfoliosInput'] | null; // UserCreateOrConnectWithoutPortfoliosInput
     create?: NexusGenInputs['UserCreateWithoutPortfoliosInput'] | null; // UserCreateWithoutPortfoliosInput
-    update?: NexusGenInputs['UserUpdateWithoutPortfoliosDataInput'] | null; // UserUpdateWithoutPortfoliosDataInput
+    update?: NexusGenInputs['UserUpdateWithoutPortfoliosInput'] | null; // UserUpdateWithoutPortfoliosInput
     upsert?: NexusGenInputs['UserUpsertWithoutPortfoliosInput'] | null; // UserUpsertWithoutPortfoliosInput
   }
-  UserUpdateWithoutPortfoliosDataInput: { // input type
+  UserUpdateWithoutPortfoliosInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -678,7 +744,7 @@ export interface NexusGenInputs {
   }
   UserUpsertWithoutPortfoliosInput: { // input type
     create: NexusGenInputs['UserCreateWithoutPortfoliosInput']; // UserCreateWithoutPortfoliosInput!
-    update: NexusGenInputs['UserUpdateWithoutPortfoliosDataInput']; // UserUpdateWithoutPortfoliosDataInput!
+    update: NexusGenInputs['UserUpdateWithoutPortfoliosInput']; // UserUpdateWithoutPortfoliosInput!
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
@@ -700,7 +766,7 @@ export interface NexusGenScalars {
   DateTime: any
 }
 
-export interface NexusGenRootTypes {
+export interface NexusGenObjects {
   Asset: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description?: string | null; // String
@@ -760,120 +826,15 @@ export interface NexusGenRootTypes {
   }
 }
 
-export interface NexusGenAllTypes extends NexusGenRootTypes {
-  AssetCreateManyWithoutPortfolioInput: NexusGenInputs['AssetCreateManyWithoutPortfolioInput'];
-  AssetCreateOneWithoutPrivateAssetInput: NexusGenInputs['AssetCreateOneWithoutPrivateAssetInput'];
-  AssetCreateOneWithoutPublicAssetInput: NexusGenInputs['AssetCreateOneWithoutPublicAssetInput'];
-  AssetCreateWithoutPortfolioInput: NexusGenInputs['AssetCreateWithoutPortfolioInput'];
-  AssetCreateWithoutPrivateAssetInput: NexusGenInputs['AssetCreateWithoutPrivateAssetInput'];
-  AssetCreateWithoutPublicAssetInput: NexusGenInputs['AssetCreateWithoutPublicAssetInput'];
-  AssetScalarWhereInput: NexusGenInputs['AssetScalarWhereInput'];
-  AssetUpdateManyDataInput: NexusGenInputs['AssetUpdateManyDataInput'];
-  AssetUpdateManyWithWhereNestedInput: NexusGenInputs['AssetUpdateManyWithWhereNestedInput'];
-  AssetUpdateManyWithoutPortfolioInput: NexusGenInputs['AssetUpdateManyWithoutPortfolioInput'];
-  AssetUpdateOneRequiredWithoutPrivateAssetInput: NexusGenInputs['AssetUpdateOneRequiredWithoutPrivateAssetInput'];
-  AssetUpdateOneRequiredWithoutPublicAssetInput: NexusGenInputs['AssetUpdateOneRequiredWithoutPublicAssetInput'];
-  AssetUpdateWithWhereUniqueWithoutPortfolioInput: NexusGenInputs['AssetUpdateWithWhereUniqueWithoutPortfolioInput'];
-  AssetUpdateWithoutPortfolioDataInput: NexusGenInputs['AssetUpdateWithoutPortfolioDataInput'];
-  AssetUpdateWithoutPrivateAssetDataInput: NexusGenInputs['AssetUpdateWithoutPrivateAssetDataInput'];
-  AssetUpdateWithoutPublicAssetDataInput: NexusGenInputs['AssetUpdateWithoutPublicAssetDataInput'];
-  AssetUpsertWithWhereUniqueWithoutPortfolioInput: NexusGenInputs['AssetUpsertWithWhereUniqueWithoutPortfolioInput'];
-  AssetUpsertWithoutPrivateAssetInput: NexusGenInputs['AssetUpsertWithoutPrivateAssetInput'];
-  AssetUpsertWithoutPublicAssetInput: NexusGenInputs['AssetUpsertWithoutPublicAssetInput'];
-  AssetWhereUniqueInput: NexusGenInputs['AssetWhereUniqueInput'];
-  DateTimeFieldUpdateOperationsInput: NexusGenInputs['DateTimeFieldUpdateOperationsInput'];
-  DateTimeFilter: NexusGenInputs['DateTimeFilter'];
-  EnumTransactionTypeFieldUpdateOperationsInput: NexusGenInputs['EnumTransactionTypeFieldUpdateOperationsInput'];
-  EnumTransactionTypeFilter: NexusGenInputs['EnumTransactionTypeFilter'];
-  HistoricalValueCreateInput: NexusGenInputs['HistoricalValueCreateInput'];
-  HistoricalValueCreateManyWithoutAssetInput: NexusGenInputs['HistoricalValueCreateManyWithoutAssetInput'];
-  HistoricalValueCreateWithoutAssetInput: NexusGenInputs['HistoricalValueCreateWithoutAssetInput'];
-  HistoricalValueScalarWhereInput: NexusGenInputs['HistoricalValueScalarWhereInput'];
-  HistoricalValueUpdateInput: NexusGenInputs['HistoricalValueUpdateInput'];
-  HistoricalValueUpdateManyDataInput: NexusGenInputs['HistoricalValueUpdateManyDataInput'];
-  HistoricalValueUpdateManyWithWhereNestedInput: NexusGenInputs['HistoricalValueUpdateManyWithWhereNestedInput'];
-  HistoricalValueUpdateManyWithoutAssetInput: NexusGenInputs['HistoricalValueUpdateManyWithoutAssetInput'];
-  HistoricalValueUpdateWithWhereUniqueWithoutAssetInput: NexusGenInputs['HistoricalValueUpdateWithWhereUniqueWithoutAssetInput'];
-  HistoricalValueUpdateWithoutAssetDataInput: NexusGenInputs['HistoricalValueUpdateWithoutAssetDataInput'];
-  HistoricalValueUpsertWithWhereUniqueWithoutAssetInput: NexusGenInputs['HistoricalValueUpsertWithWhereUniqueWithoutAssetInput'];
-  HistoricalValueWhereUniqueInput: NexusGenInputs['HistoricalValueWhereUniqueInput'];
-  IntFieldUpdateOperationsInput: NexusGenInputs['IntFieldUpdateOperationsInput'];
-  IntFilter: NexusGenInputs['IntFilter'];
-  NestedDateTimeFilter: NexusGenInputs['NestedDateTimeFilter'];
-  NestedEnumTransactionTypeFilter: NexusGenInputs['NestedEnumTransactionTypeFilter'];
-  NestedIntFilter: NexusGenInputs['NestedIntFilter'];
-  NestedStringFilter: NexusGenInputs['NestedStringFilter'];
-  NestedStringNullableFilter: NexusGenInputs['NestedStringNullableFilter'];
-  NullableStringFieldUpdateOperationsInput: NexusGenInputs['NullableStringFieldUpdateOperationsInput'];
-  PortfolioCreateInput: NexusGenInputs['PortfolioCreateInput'];
-  PortfolioCreateManyWithoutOwnerInput: NexusGenInputs['PortfolioCreateManyWithoutOwnerInput'];
-  PortfolioCreateOneWithoutAssetsInput: NexusGenInputs['PortfolioCreateOneWithoutAssetsInput'];
-  PortfolioCreateWithoutAssetsInput: NexusGenInputs['PortfolioCreateWithoutAssetsInput'];
-  PortfolioCreateWithoutOwnerInput: NexusGenInputs['PortfolioCreateWithoutOwnerInput'];
-  PortfolioScalarWhereInput: NexusGenInputs['PortfolioScalarWhereInput'];
-  PortfolioUpdateInput: NexusGenInputs['PortfolioUpdateInput'];
-  PortfolioUpdateManyDataInput: NexusGenInputs['PortfolioUpdateManyDataInput'];
-  PortfolioUpdateManyWithWhereNestedInput: NexusGenInputs['PortfolioUpdateManyWithWhereNestedInput'];
-  PortfolioUpdateManyWithoutOwnerInput: NexusGenInputs['PortfolioUpdateManyWithoutOwnerInput'];
-  PortfolioUpdateOneRequiredWithoutAssetsInput: NexusGenInputs['PortfolioUpdateOneRequiredWithoutAssetsInput'];
-  PortfolioUpdateWithWhereUniqueWithoutOwnerInput: NexusGenInputs['PortfolioUpdateWithWhereUniqueWithoutOwnerInput'];
-  PortfolioUpdateWithoutAssetsDataInput: NexusGenInputs['PortfolioUpdateWithoutAssetsDataInput'];
-  PortfolioUpdateWithoutOwnerDataInput: NexusGenInputs['PortfolioUpdateWithoutOwnerDataInput'];
-  PortfolioUpsertWithWhereUniqueWithoutOwnerInput: NexusGenInputs['PortfolioUpsertWithWhereUniqueWithoutOwnerInput'];
-  PortfolioUpsertWithoutAssetsInput: NexusGenInputs['PortfolioUpsertWithoutAssetsInput'];
-  PortfolioWhereUniqueInput: NexusGenInputs['PortfolioWhereUniqueInput'];
-  PrivateAssetCreateInput: NexusGenInputs['PrivateAssetCreateInput'];
-  PrivateAssetCreateOneWithoutBaseAssetInput: NexusGenInputs['PrivateAssetCreateOneWithoutBaseAssetInput'];
-  PrivateAssetCreateOneWithoutHistoricalValuesInput: NexusGenInputs['PrivateAssetCreateOneWithoutHistoricalValuesInput'];
-  PrivateAssetCreateWithoutBaseAssetInput: NexusGenInputs['PrivateAssetCreateWithoutBaseAssetInput'];
-  PrivateAssetCreateWithoutHistoricalValuesInput: NexusGenInputs['PrivateAssetCreateWithoutHistoricalValuesInput'];
-  PrivateAssetUpdateInput: NexusGenInputs['PrivateAssetUpdateInput'];
-  PrivateAssetUpdateOneRequiredWithoutHistoricalValuesInput: NexusGenInputs['PrivateAssetUpdateOneRequiredWithoutHistoricalValuesInput'];
-  PrivateAssetUpdateOneWithoutBaseAssetInput: NexusGenInputs['PrivateAssetUpdateOneWithoutBaseAssetInput'];
-  PrivateAssetUpdateWithoutBaseAssetDataInput: NexusGenInputs['PrivateAssetUpdateWithoutBaseAssetDataInput'];
-  PrivateAssetUpdateWithoutHistoricalValuesDataInput: NexusGenInputs['PrivateAssetUpdateWithoutHistoricalValuesDataInput'];
-  PrivateAssetUpsertWithoutBaseAssetInput: NexusGenInputs['PrivateAssetUpsertWithoutBaseAssetInput'];
-  PrivateAssetUpsertWithoutHistoricalValuesInput: NexusGenInputs['PrivateAssetUpsertWithoutHistoricalValuesInput'];
-  PrivateAssetWhereUniqueInput: NexusGenInputs['PrivateAssetWhereUniqueInput'];
-  PublicAssetCreateInput: NexusGenInputs['PublicAssetCreateInput'];
-  PublicAssetCreateOneWithoutBaseAssetInput: NexusGenInputs['PublicAssetCreateOneWithoutBaseAssetInput'];
-  PublicAssetCreateWithoutBaseAssetInput: NexusGenInputs['PublicAssetCreateWithoutBaseAssetInput'];
-  PublicAssetUpdateInput: NexusGenInputs['PublicAssetUpdateInput'];
-  PublicAssetUpdateOneWithoutBaseAssetInput: NexusGenInputs['PublicAssetUpdateOneWithoutBaseAssetInput'];
-  PublicAssetUpdateWithoutBaseAssetDataInput: NexusGenInputs['PublicAssetUpdateWithoutBaseAssetDataInput'];
-  PublicAssetUpsertWithoutBaseAssetInput: NexusGenInputs['PublicAssetUpsertWithoutBaseAssetInput'];
-  PublicAssetWhereUniqueInput: NexusGenInputs['PublicAssetWhereUniqueInput'];
-  StringFieldUpdateOperationsInput: NexusGenInputs['StringFieldUpdateOperationsInput'];
-  StringFilter: NexusGenInputs['StringFilter'];
-  StringNullableFilter: NexusGenInputs['StringNullableFilter'];
-  TransactionCreateInput: NexusGenInputs['TransactionCreateInput'];
-  TransactionRecordCreateManyWithoutAssetInput: NexusGenInputs['TransactionRecordCreateManyWithoutAssetInput'];
-  TransactionRecordCreateWithoutAssetInput: NexusGenInputs['TransactionRecordCreateWithoutAssetInput'];
-  TransactionRecordScalarWhereInput: NexusGenInputs['TransactionRecordScalarWhereInput'];
-  TransactionRecordUpdateManyDataInput: NexusGenInputs['TransactionRecordUpdateManyDataInput'];
-  TransactionRecordUpdateManyWithWhereNestedInput: NexusGenInputs['TransactionRecordUpdateManyWithWhereNestedInput'];
-  TransactionRecordUpdateManyWithoutAssetInput: NexusGenInputs['TransactionRecordUpdateManyWithoutAssetInput'];
-  TransactionRecordUpdateWithWhereUniqueWithoutAssetInput: NexusGenInputs['TransactionRecordUpdateWithWhereUniqueWithoutAssetInput'];
-  TransactionRecordUpdateWithoutAssetDataInput: NexusGenInputs['TransactionRecordUpdateWithoutAssetDataInput'];
-  TransactionRecordUpsertWithWhereUniqueWithoutAssetInput: NexusGenInputs['TransactionRecordUpsertWithWhereUniqueWithoutAssetInput'];
-  TransactionRecordWhereUniqueInput: NexusGenInputs['TransactionRecordWhereUniqueInput'];
-  UserCreateInput: NexusGenInputs['UserCreateInput'];
-  UserCreateOneWithoutPortfoliosInput: NexusGenInputs['UserCreateOneWithoutPortfoliosInput'];
-  UserCreateWithoutPortfoliosInput: NexusGenInputs['UserCreateWithoutPortfoliosInput'];
-  UserUpdateInput: NexusGenInputs['UserUpdateInput'];
-  UserUpdateOneRequiredWithoutPortfoliosInput: NexusGenInputs['UserUpdateOneRequiredWithoutPortfoliosInput'];
-  UserUpdateWithoutPortfoliosDataInput: NexusGenInputs['UserUpdateWithoutPortfoliosDataInput'];
-  UserUpsertWithoutPortfoliosInput: NexusGenInputs['UserUpsertWithoutPortfoliosInput'];
-  UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
-  QueryMode: NexusGenEnums['QueryMode'];
-  TransactionType: NexusGenEnums['TransactionType'];
-  String: NexusGenScalars['String'];
-  Int: NexusGenScalars['Int'];
-  Float: NexusGenScalars['Float'];
-  Boolean: NexusGenScalars['Boolean'];
-  ID: NexusGenScalars['ID'];
-  DateTime: NexusGenScalars['DateTime'];
+export interface NexusGenInterfaces {
 }
+
+export interface NexusGenUnions {
+}
+
+export type NexusGenRootTypes = NexusGenObjects
+
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   Asset: { // field return type
@@ -1164,32 +1125,46 @@ export interface NexusGenArgTypes {
   }
 }
 
-export interface NexusGenAbstractResolveReturnTypes {
+export interface NexusGenAbstractTypeMembers {
 }
 
-export interface NexusGenInheritedFields {}
+export interface NexusGenTypeInterfaces {
+}
 
-export type NexusGenObjectNames = "Asset" | "AuthPayload" | "HistoricalValue" | "Mutation" | "Portfolio" | "PrivateAsset" | "PublicAsset" | "Query" | "Transaction" | "User";
+export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = "AssetCreateManyWithoutPortfolioInput" | "AssetCreateOneWithoutPrivateAssetInput" | "AssetCreateOneWithoutPublicAssetInput" | "AssetCreateWithoutPortfolioInput" | "AssetCreateWithoutPrivateAssetInput" | "AssetCreateWithoutPublicAssetInput" | "AssetScalarWhereInput" | "AssetUpdateManyDataInput" | "AssetUpdateManyWithWhereNestedInput" | "AssetUpdateManyWithoutPortfolioInput" | "AssetUpdateOneRequiredWithoutPrivateAssetInput" | "AssetUpdateOneRequiredWithoutPublicAssetInput" | "AssetUpdateWithWhereUniqueWithoutPortfolioInput" | "AssetUpdateWithoutPortfolioDataInput" | "AssetUpdateWithoutPrivateAssetDataInput" | "AssetUpdateWithoutPublicAssetDataInput" | "AssetUpsertWithWhereUniqueWithoutPortfolioInput" | "AssetUpsertWithoutPrivateAssetInput" | "AssetUpsertWithoutPublicAssetInput" | "AssetWhereUniqueInput" | "DateTimeFieldUpdateOperationsInput" | "DateTimeFilter" | "EnumTransactionTypeFieldUpdateOperationsInput" | "EnumTransactionTypeFilter" | "HistoricalValueCreateInput" | "HistoricalValueCreateManyWithoutAssetInput" | "HistoricalValueCreateWithoutAssetInput" | "HistoricalValueScalarWhereInput" | "HistoricalValueUpdateInput" | "HistoricalValueUpdateManyDataInput" | "HistoricalValueUpdateManyWithWhereNestedInput" | "HistoricalValueUpdateManyWithoutAssetInput" | "HistoricalValueUpdateWithWhereUniqueWithoutAssetInput" | "HistoricalValueUpdateWithoutAssetDataInput" | "HistoricalValueUpsertWithWhereUniqueWithoutAssetInput" | "HistoricalValueWhereUniqueInput" | "IntFieldUpdateOperationsInput" | "IntFilter" | "NestedDateTimeFilter" | "NestedEnumTransactionTypeFilter" | "NestedIntFilter" | "NestedStringFilter" | "NestedStringNullableFilter" | "NullableStringFieldUpdateOperationsInput" | "PortfolioCreateInput" | "PortfolioCreateManyWithoutOwnerInput" | "PortfolioCreateOneWithoutAssetsInput" | "PortfolioCreateWithoutAssetsInput" | "PortfolioCreateWithoutOwnerInput" | "PortfolioScalarWhereInput" | "PortfolioUpdateInput" | "PortfolioUpdateManyDataInput" | "PortfolioUpdateManyWithWhereNestedInput" | "PortfolioUpdateManyWithoutOwnerInput" | "PortfolioUpdateOneRequiredWithoutAssetsInput" | "PortfolioUpdateWithWhereUniqueWithoutOwnerInput" | "PortfolioUpdateWithoutAssetsDataInput" | "PortfolioUpdateWithoutOwnerDataInput" | "PortfolioUpsertWithWhereUniqueWithoutOwnerInput" | "PortfolioUpsertWithoutAssetsInput" | "PortfolioWhereUniqueInput" | "PrivateAssetCreateInput" | "PrivateAssetCreateOneWithoutBaseAssetInput" | "PrivateAssetCreateOneWithoutHistoricalValuesInput" | "PrivateAssetCreateWithoutBaseAssetInput" | "PrivateAssetCreateWithoutHistoricalValuesInput" | "PrivateAssetUpdateInput" | "PrivateAssetUpdateOneRequiredWithoutHistoricalValuesInput" | "PrivateAssetUpdateOneWithoutBaseAssetInput" | "PrivateAssetUpdateWithoutBaseAssetDataInput" | "PrivateAssetUpdateWithoutHistoricalValuesDataInput" | "PrivateAssetUpsertWithoutBaseAssetInput" | "PrivateAssetUpsertWithoutHistoricalValuesInput" | "PrivateAssetWhereUniqueInput" | "PublicAssetCreateInput" | "PublicAssetCreateOneWithoutBaseAssetInput" | "PublicAssetCreateWithoutBaseAssetInput" | "PublicAssetUpdateInput" | "PublicAssetUpdateOneWithoutBaseAssetInput" | "PublicAssetUpdateWithoutBaseAssetDataInput" | "PublicAssetUpsertWithoutBaseAssetInput" | "PublicAssetWhereUniqueInput" | "StringFieldUpdateOperationsInput" | "StringFilter" | "StringNullableFilter" | "TransactionCreateInput" | "TransactionRecordCreateManyWithoutAssetInput" | "TransactionRecordCreateWithoutAssetInput" | "TransactionRecordScalarWhereInput" | "TransactionRecordUpdateManyDataInput" | "TransactionRecordUpdateManyWithWhereNestedInput" | "TransactionRecordUpdateManyWithoutAssetInput" | "TransactionRecordUpdateWithWhereUniqueWithoutAssetInput" | "TransactionRecordUpdateWithoutAssetDataInput" | "TransactionRecordUpsertWithWhereUniqueWithoutAssetInput" | "TransactionRecordWhereUniqueInput" | "UserCreateInput" | "UserCreateOneWithoutPortfoliosInput" | "UserCreateWithoutPortfoliosInput" | "UserUpdateInput" | "UserUpdateOneRequiredWithoutPortfoliosInput" | "UserUpdateWithoutPortfoliosDataInput" | "UserUpsertWithoutPortfoliosInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = keyof NexusGenInputs;
 
-export type NexusGenEnumNames = "QueryMode" | "TransactionType";
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = keyof NexusGenScalars;
 
 export type NexusGenUnionNames = never;
 
+export type NexusGenObjectsUsingAbstractStrategyIsTypeOf = never;
+
+export type NexusGenAbstractsUsingStrategyResolveType = never;
+
+export type NexusGenFeaturesConfig = {
+  abstractTypeStrategies: {
+    isTypeOf: false
+    resolveType: true
+    __typename: false
+  }
+}
+
 export interface NexusGenTypes {
-  context: ContextModule.Context;
+  context: ContextModule;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
+  inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;
   argTypes: NexusGenArgTypes;
   fieldTypes: NexusGenFieldTypes;
   fieldTypeNames: NexusGenFieldTypeNames;
   allTypes: NexusGenAllTypes;
-  inheritedFields: NexusGenInheritedFields;
+  typeInterfaces: NexusGenTypeInterfaces;
   objectNames: NexusGenObjectNames;
   inputNames: NexusGenInputNames;
   enumNames: NexusGenEnumNames;
@@ -1200,7 +1175,10 @@ export interface NexusGenTypes {
   allOutputTypes: NexusGenTypes['objectNames'] | NexusGenTypes['enumNames'] | NexusGenTypes['unionNames'] | NexusGenTypes['interfaceNames'] | NexusGenTypes['scalarNames'];
   allNamedTypes: NexusGenTypes['allInputTypes'] | NexusGenTypes['allOutputTypes']
   abstractTypes: NexusGenTypes['interfaceNames'] | NexusGenTypes['unionNames'];
-  abstractResolveReturn: NexusGenAbstractResolveReturnTypes;
+  abstractTypeMembers: NexusGenAbstractTypeMembers;
+  objectsUsingAbstractStrategyIsTypeOf: NexusGenObjectsUsingAbstractStrategyIsTypeOf;
+  abstractsUsingStrategyResolveType: NexusGenAbstractsUsingStrategyResolveType;
+  features: NexusGenFeaturesConfig;
 }
 
 
@@ -1209,6 +1187,10 @@ declare global {
   }
   interface NexusGenPluginFieldConfig<TypeName extends string, FieldName extends string> {
   }
+  interface NexusGenPluginInputFieldConfig<TypeName extends string, FieldName extends string> {
+  }
   interface NexusGenPluginSchemaConfig {
+  }
+  interface NexusGenPluginArgConfig {
   }
 }
