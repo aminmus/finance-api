@@ -898,6 +898,7 @@ export interface NexusGenFieldTypes {
     symbol: string | null; // String
   }
   Query: { // field return type
+    myUser: NexusGenRootTypes['User'] | null; // User
     portfolio: NexusGenRootTypes['Portfolio'] | null; // Portfolio
     portfolios: NexusGenRootTypes['Portfolio'][]; // [Portfolio!]!
     privateAsset: NexusGenRootTypes['PrivateAsset'] | null; // PrivateAsset
@@ -989,6 +990,7 @@ export interface NexusGenFieldTypeNames {
     symbol: 'String'
   }
   Query: { // field return type name
+    myUser: 'User'
     portfolio: 'Portfolio'
     portfolios: 'Portfolio'
     privateAsset: 'PrivateAsset'

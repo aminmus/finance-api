@@ -728,6 +728,7 @@ input PublicAssetWhereUniqueInput {
 }
 
 type Query {
+  myUser: User
   portfolio(where: PortfolioWhereUniqueInput!): Portfolio
   portfolios(after: PortfolioWhereUniqueInput, before: PortfolioWhereUniqueInput, first: Int, last: Int): [Portfolio!]!
   privateAsset(where: PrivateAssetWhereUniqueInput!): PrivateAsset
