@@ -1,7 +1,8 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
+// import { PrismaClient } from '@prisma/client';
+import prismaClient from './prismaClient';
 
 import schema from './schema';
 
@@ -12,7 +13,7 @@ const app = express();
 const apollo = new ApolloServer({
   schema,
   context: ({ req }) => ({
-    prisma: new PrismaClient(),
+    prisma: prismaClient,
     req,
   }),
 });
