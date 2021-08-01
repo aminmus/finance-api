@@ -1,5 +1,6 @@
 import { objectType, extendType } from 'nexus';
 import bcrypt from 'bcrypt';
+import getUserId from '../utils/getUserId';
 
 export const User = objectType({
   name: 'User',
@@ -12,13 +13,42 @@ export const User = objectType({
   },
 });
 
-// schema.extendType({
+// extendType({
 //   type: 'Query',
 //   definition(t) {
 //     t.crud.users();
 //     t.crud.user();
 //   },
 // });
+
+export const myUser = extendType({
+  type: 'Query',
+  definition(t) {
+    t.field('myUser', {
+      type: 'User',
+      async resolve(root, args, ctx, _info) {
+        const userId = getUserId(ctx);
+
+        if (!userId) throw new Error('Did not receive a valid token');
+
+        const dbRes = await ctx.prisma.user.findUnique({
+          where: { id: userId },
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        });
+
+        if (!dbRes) throw new Error('No such user found');
+
+        return dbRes;
+      },
+    });
+  },
+});
 
 function hashPassword(password: string) { return bcrypt.hash(password, 10); }
 
