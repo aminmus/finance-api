@@ -5,3 +5,6 @@ nexus:plugin:nexusPluginPrisma
 4. Run `npx prisma generate` to generate the Prisma Client.
 5. Run `npx ts-node prisma/seed.ts` to seed your database.
 6. Run `npm run -s dev` to start working.
+
+
+OR if your db is empty you should probably just run `npx prisma migrate dev`
