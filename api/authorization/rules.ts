@@ -13,3 +13,12 @@ export const isPortfolioOwner = rule({ cache: 'contextual' })(async (_root, args
 
   return realOwner?.id === userId;
 });
+
+// export const isAssetOwner = rule({ cache: 'contextual' })(async (_root, args, ctx: Context, _info) => {
+//   const assetId = args.where.id;
+//   const userId = getUserId(ctx);
+
+//   const realOwner = await ctx.prisma.portfolio.findUnique({ where: { id: portfolioId } }).owner();
+
+//   return realOwner?.id === userId;
+// });
