@@ -7,6 +7,10 @@ generator prisma_client {
   provider        = "prisma-client-js"
 }
 
+generator nexusPrisma {
+   provider = "nexus-prisma"
+}
+
 model User {
   id         Int         @id @default(autoincrement())
   updatedAt  DateTime    @updatedAt @default(now())

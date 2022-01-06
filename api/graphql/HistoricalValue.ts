@@ -1,22 +1,23 @@
 import { objectType, extendType } from 'nexus';
+import { HistoricalValue } from 'nexus-prisma';
 
-export const HistoricalValue = objectType({
-  name: 'HistoricalValue',
+export const HistoricalValueObject = objectType({
+  name: HistoricalValue.$name,
   definition(t) {
-    t.model.id();
-    t.model.createdAt();
-    t.model.updatedAt();
-    t.model.date();
-    t.model.assetId();
-    t.model.unitPrice();
+    t.field(HistoricalValue.id);
+    t.field(HistoricalValue.createdAt);
+    t.field(HistoricalValue.updatedAt);
+    t.field(HistoricalValue.date);
+    t.field(HistoricalValue.assetId);
+    t.field(HistoricalValue.unitPrice);
   },
 });
 
 export const HistoricalValueMutation = extendType({
   type: 'Mutation',
   definition(t) {
-    t.crud.createOneHistoricalValue();
-    t.crud.updateOneHistoricalValue();
-    t.crud.deleteOneHistoricalValue();
+    // t.crud.createOneHistoricalValue();
+    // t.crud.updateOneHistoricalValue();
+    // t.crud.deleteOneHistoricalValue();
   },
 });
