@@ -50,6 +50,8 @@ model HistoricalValue {
   createdAt DateTime     @default(now())
   date      DateTime     @default(now())
   unitPrice Int
+  currency  String
+  description String?
   asset     PrivateAsset @relation(fields: [assetId], references: [id])
   assetId   Int
 }
