@@ -239,7 +239,9 @@ type HistoricalValue {
 input HistoricalValueCreateInput {
   asset: PrivateAssetCreateNestedOneWithoutHistoricalValuesInput!
   createdAt: DateTime
+  currency: String!
   date: DateTime
+  description: String
   unitPrice: Int!
   updatedAt: DateTime
 }
@@ -257,7 +259,9 @@ input HistoricalValueCreateOrConnectWithoutAssetInput {
 
 input HistoricalValueCreateWithoutAssetInput {
   createdAt: DateTime
+  currency: String!
   date: DateTime
+  description: String
   unitPrice: Int!
   updatedAt: DateTime
 }
@@ -268,7 +272,9 @@ input HistoricalValueScalarWhereInput {
   OR: [HistoricalValueScalarWhereInput!]
   assetId: IntFilter
   createdAt: DateTimeFilter
+  currency: StringFilter
   date: DateTimeFilter
+  description: StringNullableFilter
   id: IntFilter
   unitPrice: IntFilter
   updatedAt: DateTimeFilter
@@ -277,14 +283,18 @@ input HistoricalValueScalarWhereInput {
 input HistoricalValueUpdateInput {
   asset: PrivateAssetUpdateOneRequiredWithoutHistoricalValuesInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  currency: StringFieldUpdateOperationsInput
   date: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
   unitPrice: IntFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input HistoricalValueUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  currency: StringFieldUpdateOperationsInput
   date: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
   unitPrice: IntFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -314,7 +324,9 @@ input HistoricalValueUpdateWithWhereUniqueWithoutAssetInput {
 
 input HistoricalValueUpdateWithoutAssetInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  currency: StringFieldUpdateOperationsInput
   date: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
   unitPrice: IntFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }

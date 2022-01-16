@@ -200,7 +200,9 @@ export interface NexusGenInputs {
   HistoricalValueCreateInput: { // input type
     asset: NexusGenInputs['PrivateAssetCreateNestedOneWithoutHistoricalValuesInput']; // PrivateAssetCreateNestedOneWithoutHistoricalValuesInput!
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    currency: string; // String!
     date?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
     unitPrice: number; // Int!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -215,7 +217,9 @@ export interface NexusGenInputs {
   }
   HistoricalValueCreateWithoutAssetInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    currency: string; // String!
     date?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
     unitPrice: number; // Int!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -225,7 +229,9 @@ export interface NexusGenInputs {
     OR?: NexusGenInputs['HistoricalValueScalarWhereInput'][] | null; // [HistoricalValueScalarWhereInput!]
     assetId?: NexusGenInputs['IntFilter'] | null; // IntFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    currency?: NexusGenInputs['StringFilter'] | null; // StringFilter
     date?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    description?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
     unitPrice?: NexusGenInputs['IntFilter'] | null; // IntFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
@@ -233,13 +239,17 @@ export interface NexusGenInputs {
   HistoricalValueUpdateInput: { // input type
     asset?: NexusGenInputs['PrivateAssetUpdateOneRequiredWithoutHistoricalValuesInput'] | null; // PrivateAssetUpdateOneRequiredWithoutHistoricalValuesInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    currency?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     unitPrice?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   HistoricalValueUpdateManyMutationInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    currency?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     unitPrice?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
@@ -265,7 +275,9 @@ export interface NexusGenInputs {
   }
   HistoricalValueUpdateWithoutAssetInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    currency?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     date?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    description?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     unitPrice?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
