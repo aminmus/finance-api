@@ -1,6 +1,6 @@
 import { objectType, extendType } from 'nexus';
-import bcrypt from 'bcrypt';
 import getUserId from '../utils/getUserId';
+import { hashPassword } from '../utils/hashing';
 
 export const User = objectType({
   name: 'User',
@@ -49,8 +49,6 @@ export const myUser = extendType({
     });
   },
 });
-
-function hashPassword(password: string) { return bcrypt.hash(password, 10); }
 
 export const UserMutation = extendType({
   type: 'Mutation',
