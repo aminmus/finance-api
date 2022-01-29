@@ -110,6 +110,15 @@ async function seedUser(userData: Prisma.UserCreateInput) {
 async function seedPortfolio(portfolioData: Prisma.PortfolioCreateInput) {
   return prismaClient.portfolio.create({
     data: portfolioData,
+    include: {
+      assets: {
+        include: {
+          privateAsset: { include: { historicalValues: true } },
+          publicAsset: true,
+          transactions: true,
+        },
+      },
+    },
   });
 }
 
