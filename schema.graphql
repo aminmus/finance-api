@@ -442,12 +442,13 @@ input NullableStringFieldUpdateOperationsInput {
 }
 
 type Portfolio {
-  assets(after: AssetWhereUniqueInput, before: AssetWhereUniqueInput, first: Int, last: Int): [Asset!]!
   createdAt: DateTime!
   description: String
   id: Int!
   name: String!
   owner: User!
+  privateAssets: [PrivateAsset]
+  publicAssets: [PublicAsset]
   updatedAt: DateTime!
 }
 
@@ -740,9 +741,9 @@ input PublicAssetWhereUniqueInput {
 }
 
 type Query {
+  myPortfolios: [Portfolio]
   myUser: User
   portfolio(where: PortfolioWhereUniqueInput!): Portfolio
-  portfolios(after: PortfolioWhereUniqueInput, before: PortfolioWhereUniqueInput, first: Int, last: Int): [Portfolio!]!
   privateAsset(where: PrivateAssetWhereUniqueInput!): PrivateAsset
   privateAssets(after: PrivateAssetWhereUniqueInput, before: PrivateAssetWhereUniqueInput, first: Int, last: Int): [PrivateAsset!]!
   publicAsset(where: PublicAssetWhereUniqueInput!): PublicAsset
