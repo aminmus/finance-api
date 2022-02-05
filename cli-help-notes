@@ -1,8 +1,8 @@
 nexus:plugin:nexusPluginPrisma
 1. Please setup your PostgreSQL and fill in the connection uri in your `prisma/.env` file.
-2. Run `npx prisma migrate save --experimental` to create your first migration file.
+<!-- 2. Run `npx prisma migrate save --experimental` to create your first migration file.
 3. Run `npx prisma migrate up --experimental` to migrate your database.
-4. Run `npx prisma generate` to generate the Prisma Client.
+4. Run `npx prisma generate` to generate the Prisma Client. -->
 5. Run `npx ts-node prisma/seed.ts` to seed your database.
 6. Run `npm run -s dev` to start working.
 
