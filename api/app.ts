@@ -5,10 +5,13 @@ import dotenv from 'dotenv';
 import prismaClient from './prismaClient';
 
 import schema from './schema';
+import authenticateUser from './authenticationMiddleware';
 
 dotenv.config();
 
 const app = express();
+
+app.use(authenticateUser);
 
 const apollo = new ApolloServer({
   schema,
