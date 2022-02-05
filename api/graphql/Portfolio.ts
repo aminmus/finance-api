@@ -8,8 +8,27 @@ export const Portfolio = objectType({
     t.model.createdAt();
     t.model.name();
     t.model.description();
-    t.model.assets();
     t.model.owner();
+    t.list.field('privateAssets', {
+      type: 'PrivateAsset',
+      resolve: (root, args, ctx) => ctx.prisma.privateAsset.findMany({
+        where: { baseAsset: { portfolioId: { equals: root.id } } },
+        include: {
+          baseAsset: {
+            include: { transactions: true },
+          },
+        },
+      }),
+    });
+    t.list.field('publicAssets', {
+      type: 'PublicAsset',
+      resolve: (root, args, ctx) => ctx.prisma.publicAsset.findMany({
+        where: { baseAsset: { portfolioId: { equals: root.id } } },
+        include: {
+          baseAsset: true,
+        },
+      }),
+    });
   },
 });
 
