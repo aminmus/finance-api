@@ -6,7 +6,7 @@
       "esnext"
     ],
     "strict": true,
-    "rootDir": "api",
+    // "rootDir": ".",
     "noEmit": true,
     "skipLibCheck": true,
     "plugins": [
@@ -14,16 +14,22 @@
         "name": "nexus/typescript-language-service"
       }
     ],
-    "typeRoots": [
-      "node_modules/@types",
-      "types",
-      "api"
-    ],
+    // "typeRoots": [
+      // "./api/types",
+      // "./node_modules/@types",
+      // "api"
+    // ],
     "esModuleInterop": true
   },
-  "include": [
-    "types.d.ts",
-    "api", 
-    "nexus-typegen.ts"
+  "exclude": [
+    "prisma",
+    "node_modules",
   ]
+  // "include": [
+  //   "types.d.ts",
+  //   "api", 
+  //   "nexus-typegen.ts",
+  //   "prisma",
+  //   "seed.ts"
+  // ]
 }
