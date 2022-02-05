@@ -6,7 +6,7 @@
     "author": "Amin Mushehid (https://github.com/aminmus)",
     "scripts": {
         "format": "npx prettier --write './**/*.{ts,md}'",
-        "dev": "ts-node-dev --transpile-only ./api/app.ts",
+        "dev": "ts-node-dev --files --transpile-only ./api/app.ts",
         "dev:typecheck": "tsc --noEmit --watch",
         "nexus:reflect": "ts-node --transpile-only api/schema.ts",
         "build": "nexus build",
