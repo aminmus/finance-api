@@ -890,12 +890,13 @@ export interface NexusGenFieldTypes {
     updateOneUser: NexusGenRootTypes['User'] | null; // User
   }
   Portfolio: { // field return type
-    assets: NexusGenRootTypes['Asset'][]; // [Asset!]!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
     id: number; // Int!
     name: string; // String!
     owner: NexusGenRootTypes['User']; // User!
+    privateAssets: Array<NexusGenRootTypes['PrivateAsset'] | null> | null; // [PrivateAsset]
+    publicAssets: Array<NexusGenRootTypes['PublicAsset'] | null> | null; // [PublicAsset]
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   PrivateAsset: { // field return type
@@ -910,9 +911,9 @@ export interface NexusGenFieldTypes {
     symbol: string | null; // String
   }
   Query: { // field return type
+    myPortfolios: Array<NexusGenRootTypes['Portfolio'] | null> | null; // [Portfolio]
     myUser: NexusGenRootTypes['User'] | null; // User
     portfolio: NexusGenRootTypes['Portfolio'] | null; // Portfolio
-    portfolios: NexusGenRootTypes['Portfolio'][]; // [Portfolio!]!
     privateAsset: NexusGenRootTypes['PrivateAsset'] | null; // PrivateAsset
     privateAssets: NexusGenRootTypes['PrivateAsset'][]; // [PrivateAsset!]!
     publicAsset: NexusGenRootTypes['PublicAsset'] | null; // PublicAsset
@@ -982,12 +983,13 @@ export interface NexusGenFieldTypeNames {
     updateOneUser: 'User'
   }
   Portfolio: { // field return type name
-    assets: 'Asset'
     createdAt: 'DateTime'
     description: 'String'
     id: 'Int'
     name: 'String'
     owner: 'User'
+    privateAssets: 'PrivateAsset'
+    publicAssets: 'PublicAsset'
     updatedAt: 'DateTime'
   }
   PrivateAsset: { // field return type name
@@ -1002,9 +1004,9 @@ export interface NexusGenFieldTypeNames {
     symbol: 'String'
   }
   Query: { // field return type name
+    myPortfolios: 'Portfolio'
     myUser: 'User'
     portfolio: 'Portfolio'
-    portfolios: 'Portfolio'
     privateAsset: 'PrivateAsset'
     privateAssets: 'PrivateAsset'
     publicAsset: 'PublicAsset'
@@ -1092,14 +1094,6 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
   }
-  Portfolio: {
-    assets: { // args
-      after?: NexusGenInputs['AssetWhereUniqueInput'] | null; // AssetWhereUniqueInput
-      before?: NexusGenInputs['AssetWhereUniqueInput'] | null; // AssetWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-    }
-  }
   PrivateAsset: {
     historicalValues: { // args
       after?: NexusGenInputs['HistoricalValueWhereUniqueInput'] | null; // HistoricalValueWhereUniqueInput
@@ -1111,12 +1105,6 @@ export interface NexusGenArgTypes {
   Query: {
     portfolio: { // args
       where: NexusGenInputs['PortfolioWhereUniqueInput']; // PortfolioWhereUniqueInput!
-    }
-    portfolios: { // args
-      after?: NexusGenInputs['PortfolioWhereUniqueInput'] | null; // PortfolioWhereUniqueInput
-      before?: NexusGenInputs['PortfolioWhereUniqueInput'] | null; // PortfolioWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
     }
     privateAsset: { // args
       where: NexusGenInputs['PrivateAssetWhereUniqueInput']; // PrivateAssetWhereUniqueInput!
