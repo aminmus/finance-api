@@ -5,7 +5,7 @@ import { isAuthenticated, isPortfolioOwner } from './rules';
 const permissions = shield({
   Query: {
     portfolio: isAuthenticated,
-    portfolios: isAuthenticated,
+    myPortfolios: isAuthenticated,
     privateAsset: isAuthenticated,
     privateAssets: isAuthenticated,
     publicAsset: isAuthenticated,
