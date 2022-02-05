@@ -36,7 +36,21 @@ export const PortfolioQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.portfolio();
-    t.crud.portfolios();
+    t.list.field('myPortfolios', {
+      type: 'Portfolio',
+      resolve: (root, args, ctx) => {
+        const portfolios = ctx.prisma.portfolio.findMany({
+          where: { owner: { id: { equals: ctx.req.user.id } } },
+          include: {
+            assets: {
+              include:
+                { privateAsset: { include: { historicalValues: true } }, publicAsset: true },
+            },
+          },
+        });
+        return portfolios;
+      },
+    });
   },
 });
 
