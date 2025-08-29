@@ -4,13 +4,14 @@ datasource db {
 }
 
 generator prisma_client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
+  output   = "./generated/client"
   // binaryTargets   = "darwin"
 }
 
 model User {
   id         Int         @id @default(autoincrement())
-  updatedAt  DateTime    @updatedAt @default(now())
+  updatedAt  DateTime    @default(now()) @updatedAt
   createdAt  DateTime    @default(now())
   name       String
   email      String      @unique
@@ -19,15 +20,15 @@ model User {
 }
 
 model Asset {
-  id           Int           @id @default(autoincrement())
-  updatedAt    DateTime      @updatedAt @default(now())
-  createdAt    DateTime      @default(now())
+  id           Int                 @id @default(autoincrement())
+  updatedAt    DateTime            @default(now()) @updatedAt
+  createdAt    DateTime            @default(now())
   name         String
   description  String?
-  quantity     Int           @default(0)
-  portfolio    Portfolio     @relation(fields: [portfolioId], references: [id])
+  quantity     Int                 @default(0)
+  portfolio    Portfolio           @relation(fields: [portfolioId], references: [id])
   portfolioId  Int
-  transactions  TransactionRecord[]
+  transactions TransactionRecord[]
   privateAsset PrivateAsset?
   publicAsset  PublicAsset?
 }
@@ -46,20 +47,20 @@ model PrivateAsset {
 }
 
 model HistoricalValue {
-  id        Int          @id @default(autoincrement())
-  updatedAt DateTime     @updatedAt @default(now())
-  createdAt DateTime     @default(now())
-  date      DateTime     @default(now())
-  unitPrice Int
-  currency  String
+  id          Int          @id @default(autoincrement())
+  updatedAt   DateTime     @default(now()) @updatedAt
+  createdAt   DateTime     @default(now())
+  date        DateTime     @default(now())
+  unitPrice   Int
+  currency    String
   description String?
-  asset     PrivateAsset @relation(fields: [assetId], references: [id])
-  assetId   Int
+  asset       PrivateAsset @relation(fields: [assetId], references: [id])
+  assetId     Int
 }
 
 model Portfolio {
   id          Int      @id @default(autoincrement())
-  updatedAt   DateTime @updatedAt @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
   createdAt   DateTime @default(now())
   name        String
   description String?
@@ -70,7 +71,7 @@ model Portfolio {
 
 model TransactionRecord {
   id              Int             @id @default(autoincrement())
-  updatedAt       DateTime        @updatedAt @default(now())
+  updatedAt       DateTime        @default(now()) @updatedAt
   createdAt       DateTime        @default(now())
   date            DateTime        @default(now())
   note            String?
