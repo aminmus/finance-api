@@ -1,0 +1,126 @@
+# Sample GraphQL operations for finance-api
+# Each operation is followed by example variables or headers in comments.
+
+## 1. Register a new user
+mutation CreateUser($data: UserCreateInput!) {
+  createOneUser(data: $data) {
+    id
+    email
+    name
+  }
+}
+# Variables:
+# {
+#   "data": {
+#     "email": "alice@example.com",
+#     "name": "Alice",
+#     "password": "secret123"
+#   }
+# }
+
+## 2. Authenticate a user
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    token
+    user { id email name }
+  }
+}
+# Variables:
+# {
+#   "email": "alice@example.com",
+#   "password": "secret123"
+# }
+# Try changing the email or password to test invalid credentials.
+
+## 3. Fetch information about the current user
+# Requires header: { "Authorization": "Bearer <token>" }
+query MyUser {
+  myUser {
+    id
+    email
+    name
+  }
+}
+
+## 4. Create a portfolio for the authenticated user
+# Requires header: { "Authorization": "Bearer <token>" }
+mutation CreatePortfolio($data: PortfolioCreateInput!) {
+  createOnePortfolio(data: $data) {
+    id
+    name
+    description
+  }
+}
+# Variables:
+# {
+#   "data": {
+#     "name": "Main Portfolio",
+#     "description": "Primary account",
+#     "owner": { "connect": { "id": 1 } }
+#   }
+# }
+
+## 5. List portfolios for the authenticated user
+# Requires header: { "Authorization": "Bearer <token>" }
+query MyPortfolios {
+  myPortfolios {
+    id
+    name
+    description
+    assetQuantity
+  }
+}
+
+## 6. Create a public asset under a portfolio
+# Requires header: { "Authorization": "Bearer <token>" }
+mutation CreatePublicAsset($data: PublicAssetCreateInput!) {
+  createOnePublicAsset(data: $data) {
+    id
+    symbol
+    market
+    baseAsset {
+      id
+      name
+      quantity
+      portfolioId
+    }
+  }
+}
+# Variables:
+# {
+#   "data": {
+#     "symbol": "AAPL",
+#     "market": "NASDAQ",
+#     "baseAsset": {
+#       "create": {
+#         "name": "Apple Stock",
+#         "quantity": 0,
+#         "portfolio": { "connect": { "id": 1 } }
+#       }
+#     }
+#   }
+# }
+
+## 7. Make a transaction on an asset
+# Requires header: { "Authorization": "Bearer <token>" }
+mutation MakeTransaction($data: TransactionCreateInput!) {
+  makeTransaction(data: $data) {
+    id
+    transactionType
+    assetQuantity
+    unitPrice
+    totalPrice
+    assetId
+  }
+}
+# Variables:
+# {
+#   "data": {
+#     "assetId": 1,
+#     "transactionType": "buy",
+#     "assetQuantity": 10,
+#     "currency": "USD",
+#     "unitPrice": 100
+#   }
+# }
+# To test validation, try negative values or a sell transaction with quantity greater than owned.

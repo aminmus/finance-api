@@ -12,6 +12,7 @@
     "build": "nexus build",
     "start": "node .nexus/build/api",
     "docker": "docker-compose up -d && docker-compose logs -f",
+    "seed": "ts-node seed.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
