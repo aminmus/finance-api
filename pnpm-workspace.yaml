@@ -5,7 +5,7 @@ onlyBuiltDependencies:
   - '@apollo/protobufjs'
   - '@prisma/client'
   - '@prisma/engines'
-  - bcrypt
+  - bcryptjs
   - core-js-pure
   - nexus-plugin-prisma
   - prisma

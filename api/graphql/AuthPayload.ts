@@ -1,7 +1,7 @@
 import {
   objectType, extendType, stringArg, nonNull,
 } from 'nexus';
-import { compare } from 'bcrypt';
+import { compare } from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const AuthPayload = objectType({

@@ -12,7 +12,7 @@
     "build": "nexus build",
     "start": "node .nexus/build/api",
     "docker": "docker-compose up -d && docker-compose logs -f",
-    "seed": "ts-node seed.ts",
+    "seed": "ts-node --transpile-only seed.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
@@ -22,7 +22,7 @@
     "trailingComma": "all"
   },
   "devDependencies": {
-    "@types/bcrypt": "^3.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.11",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^16.11.19",
@@ -44,7 +44,7 @@
   "dependencies": {
     "@prisma/client": "^2.19.0",
     "apollo-server-express": "^2.22.1",
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.19.2",
     "graphql": "^15.5.0",

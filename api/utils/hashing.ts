@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 // eslint-disable-next-line import/prefer-default-export
 export function hashPassword(password: string): Promise<string> {
