@@ -20,7 +20,14 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/lines-between-class-members": "off",
+    "lines-between-class-members": "off",
+    "max-len": "off",
+    "object-curly-newline": "off"
   },
-  "ignorePatterns": ["nexus-typegen.ts"]
+  "ignorePatterns": [
+    "nexus-typegen.ts",
+    "prisma/generated/**"
+  ]
 }
