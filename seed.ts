@@ -1,6 +1,9 @@
 import { Prisma } from '@prisma/client';
+import dotenv from 'dotenv';
 import prismaClient from './api/prismaClient';
 import { hashPassword } from './api/utils/hashing';
+
+dotenv.config();
 
 const userSeedData: Prisma.UserCreateInput = {
   email: 'finance-guy@example.com',
