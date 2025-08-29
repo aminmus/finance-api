@@ -1,10 +1,10 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import dotenv from 'dotenv';
-import fs from 'fs';
-import path from 'path';
 // import { PrismaClient } from '@prisma/client';
 import prismaClient from './prismaClient';
+
+import playgroundTabs from '../playground/examples';
 
 import schema from './schema';
 import authenticateUser from './authenticationMiddleware';
@@ -15,11 +15,6 @@ const app = express();
 
 app.use(authenticateUser);
 
-const playgroundQuery = fs.readFileSync(
-  path.join(__dirname, '..', 'playground', 'requests.graphql'),
-  'utf8',
-);
-
 const apollo = new ApolloServer({
   schema,
   context: ({ req }) => ({
@@ -27,12 +22,7 @@ const apollo = new ApolloServer({
     req,
   }),
   playground: {
-    tabs: [
-      {
-        endpoint: '/graphql',
-        query: playgroundQuery,
-      },
-    ],
+    tabs: playgroundTabs,
   },
 });
 
