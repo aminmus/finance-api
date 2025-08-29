@@ -9,6 +9,7 @@ export const Portfolio = objectType({
     t.model.name();
     t.model.description();
     t.model.owner();
+    t.field('assetQuantity', { type: 'Int', resolve: (root, args, ctx) => ctx.prisma.asset.count({ where: { portfolioId: root.id } }) });
     t.list.field('privateAssets', {
       type: 'PrivateAsset',
       resolve: (root, args, ctx) => ctx.prisma.privateAsset.findMany({
