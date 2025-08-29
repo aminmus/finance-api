@@ -1,0 +1,89 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator prisma_client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+  // binaryTargets   = "darwin"
+}
+
+model User {
+  id         Int         @id @default(autoincrement())
+  updatedAt  DateTime    @default(now()) @updatedAt
+  createdAt  DateTime    @default(now())
+  name       String
+  email      String      @unique
+  password   String
+  portfolios Portfolio[]
+}
+
+model Asset {
+  id           Int                 @id @default(autoincrement())
+  updatedAt    DateTime            @default(now()) @updatedAt
+  createdAt    DateTime            @default(now())
+  name         String
+  description  String?
+  quantity     Int                 @default(0)
+  portfolio    Portfolio           @relation(fields: [portfolioId], references: [id])
+  portfolioId  Int
+  transactions TransactionRecord[]
+  privateAsset PrivateAsset?
+  publicAsset  PublicAsset?
+}
+
+model PublicAsset {
+  id        Int     @unique
+  baseAsset Asset   @relation(fields: [id], references: [id])
+  symbol    String?
+  market    String?
+}
+
+model PrivateAsset {
+  id               Int               @unique
+  baseAsset        Asset             @relation(fields: [id], references: [id])
+  historicalValues HistoricalValue[]
+}
+
+model HistoricalValue {
+  id          Int          @id @default(autoincrement())
+  updatedAt   DateTime     @default(now()) @updatedAt
+  createdAt   DateTime     @default(now())
+  date        DateTime     @default(now())
+  unitPrice   Int
+  currency    String
+  description String?
+  asset       PrivateAsset @relation(fields: [assetId], references: [id])
+  assetId     Int
+}
+
+model Portfolio {
+  id          Int      @id @default(autoincrement())
+  updatedAt   DateTime @default(now()) @updatedAt
+  createdAt   DateTime @default(now())
+  name        String
+  description String?
+  assets      Asset[]
+  owner       User     @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model TransactionRecord {
+  id              Int             @id @default(autoincrement())
+  updatedAt       DateTime        @default(now()) @updatedAt
+  createdAt       DateTime        @default(now())
+  date            DateTime        @default(now())
+  note            String?
+  currency        String
+  unitPrice       Int
+  assetQuantity   Int
+  asset           Asset           @relation(fields: [assetId], references: [id])
+  assetId         Int
+  transactionType TransactionType
+}
+
+enum TransactionType {
+  buy
+  sell
+}
