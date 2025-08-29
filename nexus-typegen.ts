@@ -4,7 +4,7 @@
  */
 
 
-import { Context as ContextModule } from "./api/types/context"
+import type { Context as ContextModule } from "./api/types/context"
 
 
 declare global {
@@ -19,10 +19,23 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AssetCreateManyPortfolioInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
+    id?: number | null; // Int
+    name: string; // String!
+    quantity?: number | null; // Int
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  AssetCreateManyPortfolioInputEnvelope: { // input type
+    data?: NexusGenInputs['AssetCreateManyPortfolioInput'][] | null; // [AssetCreateManyPortfolioInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
   AssetCreateNestedManyWithoutPortfolioInput: { // input type
     connect?: NexusGenInputs['AssetWhereUniqueInput'][] | null; // [AssetWhereUniqueInput!]
     connectOrCreate?: NexusGenInputs['AssetCreateOrConnectWithoutPortfolioInput'][] | null; // [AssetCreateOrConnectWithoutPortfolioInput!]
     create?: NexusGenInputs['AssetCreateWithoutPortfolioInput'][] | null; // [AssetCreateWithoutPortfolioInput!]
+    createMany?: NexusGenInputs['AssetCreateManyPortfolioInputEnvelope'] | null; // AssetCreateManyPortfolioInputEnvelope
   }
   AssetCreateNestedOneWithoutPrivateAssetInput: { // input type
     connect?: NexusGenInputs['AssetWhereUniqueInput'] | null; // AssetWhereUniqueInput
@@ -103,6 +116,7 @@ export interface NexusGenInputs {
     connect?: NexusGenInputs['AssetWhereUniqueInput'][] | null; // [AssetWhereUniqueInput!]
     connectOrCreate?: NexusGenInputs['AssetCreateOrConnectWithoutPortfolioInput'][] | null; // [AssetCreateOrConnectWithoutPortfolioInput!]
     create?: NexusGenInputs['AssetCreateWithoutPortfolioInput'][] | null; // [AssetCreateWithoutPortfolioInput!]
+    createMany?: NexusGenInputs['AssetCreateManyPortfolioInputEnvelope'] | null; // AssetCreateManyPortfolioInputEnvelope
     delete?: NexusGenInputs['AssetWhereUniqueInput'][] | null; // [AssetWhereUniqueInput!]
     deleteMany?: NexusGenInputs['AssetScalarWhereInput'][] | null; // [AssetScalarWhereInput!]
     disconnect?: NexusGenInputs['AssetWhereUniqueInput'][] | null; // [AssetWhereUniqueInput!]
@@ -206,10 +220,24 @@ export interface NexusGenInputs {
     unitPrice: number; // Int!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
+  HistoricalValueCreateManyAssetInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    currency: string; // String!
+    date?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
+    id?: number | null; // Int
+    unitPrice: number; // Int!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  HistoricalValueCreateManyAssetInputEnvelope: { // input type
+    data?: NexusGenInputs['HistoricalValueCreateManyAssetInput'][] | null; // [HistoricalValueCreateManyAssetInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
   HistoricalValueCreateNestedManyWithoutAssetInput: { // input type
     connect?: NexusGenInputs['HistoricalValueWhereUniqueInput'][] | null; // [HistoricalValueWhereUniqueInput!]
     connectOrCreate?: NexusGenInputs['HistoricalValueCreateOrConnectWithoutAssetInput'][] | null; // [HistoricalValueCreateOrConnectWithoutAssetInput!]
     create?: NexusGenInputs['HistoricalValueCreateWithoutAssetInput'][] | null; // [HistoricalValueCreateWithoutAssetInput!]
+    createMany?: NexusGenInputs['HistoricalValueCreateManyAssetInputEnvelope'] | null; // HistoricalValueCreateManyAssetInputEnvelope
   }
   HistoricalValueCreateOrConnectWithoutAssetInput: { // input type
     create: NexusGenInputs['HistoricalValueCreateWithoutAssetInput']; // HistoricalValueCreateWithoutAssetInput!
@@ -261,6 +289,7 @@ export interface NexusGenInputs {
     connect?: NexusGenInputs['HistoricalValueWhereUniqueInput'][] | null; // [HistoricalValueWhereUniqueInput!]
     connectOrCreate?: NexusGenInputs['HistoricalValueCreateOrConnectWithoutAssetInput'][] | null; // [HistoricalValueCreateOrConnectWithoutAssetInput!]
     create?: NexusGenInputs['HistoricalValueCreateWithoutAssetInput'][] | null; // [HistoricalValueCreateWithoutAssetInput!]
+    createMany?: NexusGenInputs['HistoricalValueCreateManyAssetInputEnvelope'] | null; // HistoricalValueCreateManyAssetInputEnvelope
     delete?: NexusGenInputs['HistoricalValueWhereUniqueInput'][] | null; // [HistoricalValueWhereUniqueInput!]
     deleteMany?: NexusGenInputs['HistoricalValueScalarWhereInput'][] | null; // [HistoricalValueScalarWhereInput!]
     disconnect?: NexusGenInputs['HistoricalValueWhereUniqueInput'][] | null; // [HistoricalValueWhereUniqueInput!]
@@ -369,10 +398,22 @@ export interface NexusGenInputs {
     owner: NexusGenInputs['UserCreateNestedOneWithoutPortfoliosInput']; // UserCreateNestedOneWithoutPortfoliosInput!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
+  PortfolioCreateManyOwnerInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    description?: string | null; // String
+    id?: number | null; // Int
+    name: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  PortfolioCreateManyOwnerInputEnvelope: { // input type
+    data?: NexusGenInputs['PortfolioCreateManyOwnerInput'][] | null; // [PortfolioCreateManyOwnerInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
   PortfolioCreateNestedManyWithoutOwnerInput: { // input type
     connect?: NexusGenInputs['PortfolioWhereUniqueInput'][] | null; // [PortfolioWhereUniqueInput!]
     connectOrCreate?: NexusGenInputs['PortfolioCreateOrConnectWithoutOwnerInput'][] | null; // [PortfolioCreateOrConnectWithoutOwnerInput!]
     create?: NexusGenInputs['PortfolioCreateWithoutOwnerInput'][] | null; // [PortfolioCreateWithoutOwnerInput!]
+    createMany?: NexusGenInputs['PortfolioCreateManyOwnerInputEnvelope'] | null; // PortfolioCreateManyOwnerInputEnvelope
   }
   PortfolioCreateNestedOneWithoutAssetsInput: { // input type
     connect?: NexusGenInputs['PortfolioWhereUniqueInput'] | null; // PortfolioWhereUniqueInput
@@ -434,6 +475,7 @@ export interface NexusGenInputs {
     connect?: NexusGenInputs['PortfolioWhereUniqueInput'][] | null; // [PortfolioWhereUniqueInput!]
     connectOrCreate?: NexusGenInputs['PortfolioCreateOrConnectWithoutOwnerInput'][] | null; // [PortfolioCreateOrConnectWithoutOwnerInput!]
     create?: NexusGenInputs['PortfolioCreateWithoutOwnerInput'][] | null; // [PortfolioCreateWithoutOwnerInput!]
+    createMany?: NexusGenInputs['PortfolioCreateManyOwnerInputEnvelope'] | null; // PortfolioCreateManyOwnerInputEnvelope
     delete?: NexusGenInputs['PortfolioWhereUniqueInput'][] | null; // [PortfolioWhereUniqueInput!]
     deleteMany?: NexusGenInputs['PortfolioScalarWhereInput'][] | null; // [PortfolioScalarWhereInput!]
     disconnect?: NexusGenInputs['PortfolioWhereUniqueInput'][] | null; // [PortfolioWhereUniqueInput!]
@@ -626,10 +668,26 @@ export interface NexusGenInputs {
     transactionType: NexusGenEnums['TransactionType']; // TransactionType!
     unitPrice: number; // Int!
   }
+  TransactionRecordCreateManyAssetInput: { // input type
+    assetQuantity: number; // Int!
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    currency: string; // String!
+    date?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: number | null; // Int
+    note?: string | null; // String
+    transactionType: NexusGenEnums['TransactionType']; // TransactionType!
+    unitPrice: number; // Int!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TransactionRecordCreateManyAssetInputEnvelope: { // input type
+    data?: NexusGenInputs['TransactionRecordCreateManyAssetInput'][] | null; // [TransactionRecordCreateManyAssetInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
   TransactionRecordCreateNestedManyWithoutAssetInput: { // input type
     connect?: NexusGenInputs['TransactionRecordWhereUniqueInput'][] | null; // [TransactionRecordWhereUniqueInput!]
     connectOrCreate?: NexusGenInputs['TransactionRecordCreateOrConnectWithoutAssetInput'][] | null; // [TransactionRecordCreateOrConnectWithoutAssetInput!]
     create?: NexusGenInputs['TransactionRecordCreateWithoutAssetInput'][] | null; // [TransactionRecordCreateWithoutAssetInput!]
+    createMany?: NexusGenInputs['TransactionRecordCreateManyAssetInputEnvelope'] | null; // TransactionRecordCreateManyAssetInputEnvelope
   }
   TransactionRecordCreateOrConnectWithoutAssetInput: { // input type
     create: NexusGenInputs['TransactionRecordCreateWithoutAssetInput']; // TransactionRecordCreateWithoutAssetInput!
@@ -678,6 +736,7 @@ export interface NexusGenInputs {
     connect?: NexusGenInputs['TransactionRecordWhereUniqueInput'][] | null; // [TransactionRecordWhereUniqueInput!]
     connectOrCreate?: NexusGenInputs['TransactionRecordCreateOrConnectWithoutAssetInput'][] | null; // [TransactionRecordCreateOrConnectWithoutAssetInput!]
     create?: NexusGenInputs['TransactionRecordCreateWithoutAssetInput'][] | null; // [TransactionRecordCreateWithoutAssetInput!]
+    createMany?: NexusGenInputs['TransactionRecordCreateManyAssetInputEnvelope'] | null; // TransactionRecordCreateManyAssetInputEnvelope
     delete?: NexusGenInputs['TransactionRecordWhereUniqueInput'][] | null; // [TransactionRecordWhereUniqueInput!]
     deleteMany?: NexusGenInputs['TransactionRecordScalarWhereInput'][] | null; // [TransactionRecordScalarWhereInput!]
     disconnect?: NexusGenInputs['TransactionRecordWhereUniqueInput'][] | null; // [TransactionRecordWhereUniqueInput!]
@@ -890,6 +949,7 @@ export interface NexusGenFieldTypes {
     updateOneUser: NexusGenRootTypes['User'] | null; // User
   }
   Portfolio: { // field return type
+    assetQuantity: number | null; // Int
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
     id: number; // Int!
@@ -983,6 +1043,7 @@ export interface NexusGenFieldTypeNames {
     updateOneUser: 'User'
   }
   Portfolio: { // field return type name
+    assetQuantity: 'Int'
     createdAt: 'DateTime'
     description: 'String'
     id: 'Int'
@@ -1186,6 +1247,8 @@ export interface NexusGenTypes {
 
 declare global {
   interface NexusGenPluginTypeConfig<TypeName extends string> {
+  }
+  interface NexusGenPluginInputTypeConfig<TypeName extends string> {
   }
   interface NexusGenPluginFieldConfig<TypeName extends string, FieldName extends string> {
   }

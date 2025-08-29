@@ -12,10 +12,25 @@ type Asset {
   updatedAt: DateTime!
 }
 
+input AssetCreateManyPortfolioInput {
+  createdAt: DateTime
+  description: String
+  id: Int
+  name: String!
+  quantity: Int
+  updatedAt: DateTime
+}
+
+input AssetCreateManyPortfolioInputEnvelope {
+  data: [AssetCreateManyPortfolioInput!]
+  skipDuplicates: Boolean
+}
+
 input AssetCreateNestedManyWithoutPortfolioInput {
   connect: [AssetWhereUniqueInput!]
   connectOrCreate: [AssetCreateOrConnectWithoutPortfolioInput!]
   create: [AssetCreateWithoutPortfolioInput!]
+  createMany: AssetCreateManyPortfolioInputEnvelope
 }
 
 input AssetCreateNestedOneWithoutPrivateAssetInput {
@@ -108,6 +123,7 @@ input AssetUpdateManyWithoutPortfolioInput {
   connect: [AssetWhereUniqueInput!]
   connectOrCreate: [AssetCreateOrConnectWithoutPortfolioInput!]
   create: [AssetCreateWithoutPortfolioInput!]
+  createMany: AssetCreateManyPortfolioInputEnvelope
   delete: [AssetWhereUniqueInput!]
   deleteMany: [AssetScalarWhereInput!]
   disconnect: [AssetWhereUniqueInput!]
@@ -246,10 +262,26 @@ input HistoricalValueCreateInput {
   updatedAt: DateTime
 }
 
+input HistoricalValueCreateManyAssetInput {
+  createdAt: DateTime
+  currency: String!
+  date: DateTime
+  description: String
+  id: Int
+  unitPrice: Int!
+  updatedAt: DateTime
+}
+
+input HistoricalValueCreateManyAssetInputEnvelope {
+  data: [HistoricalValueCreateManyAssetInput!]
+  skipDuplicates: Boolean
+}
+
 input HistoricalValueCreateNestedManyWithoutAssetInput {
   connect: [HistoricalValueWhereUniqueInput!]
   connectOrCreate: [HistoricalValueCreateOrConnectWithoutAssetInput!]
   create: [HistoricalValueCreateWithoutAssetInput!]
+  createMany: HistoricalValueCreateManyAssetInputEnvelope
 }
 
 input HistoricalValueCreateOrConnectWithoutAssetInput {
@@ -308,6 +340,7 @@ input HistoricalValueUpdateManyWithoutAssetInput {
   connect: [HistoricalValueWhereUniqueInput!]
   connectOrCreate: [HistoricalValueCreateOrConnectWithoutAssetInput!]
   create: [HistoricalValueCreateWithoutAssetInput!]
+  createMany: HistoricalValueCreateManyAssetInputEnvelope
   delete: [HistoricalValueWhereUniqueInput!]
   deleteMany: [HistoricalValueScalarWhereInput!]
   disconnect: [HistoricalValueWhereUniqueInput!]
@@ -442,6 +475,7 @@ input NullableStringFieldUpdateOperationsInput {
 }
 
 type Portfolio {
+  assetQuantity: Int
   createdAt: DateTime!
   description: String
   id: Int!
@@ -461,10 +495,24 @@ input PortfolioCreateInput {
   updatedAt: DateTime
 }
 
+input PortfolioCreateManyOwnerInput {
+  createdAt: DateTime
+  description: String
+  id: Int
+  name: String!
+  updatedAt: DateTime
+}
+
+input PortfolioCreateManyOwnerInputEnvelope {
+  data: [PortfolioCreateManyOwnerInput!]
+  skipDuplicates: Boolean
+}
+
 input PortfolioCreateNestedManyWithoutOwnerInput {
   connect: [PortfolioWhereUniqueInput!]
   connectOrCreate: [PortfolioCreateOrConnectWithoutOwnerInput!]
   create: [PortfolioCreateWithoutOwnerInput!]
+  createMany: PortfolioCreateManyOwnerInputEnvelope
 }
 
 input PortfolioCreateNestedOneWithoutAssetsInput {
@@ -536,6 +584,7 @@ input PortfolioUpdateManyWithoutOwnerInput {
   connect: [PortfolioWhereUniqueInput!]
   connectOrCreate: [PortfolioCreateOrConnectWithoutOwnerInput!]
   create: [PortfolioCreateWithoutOwnerInput!]
+  createMany: PortfolioCreateManyOwnerInputEnvelope
   delete: [PortfolioWhereUniqueInput!]
   deleteMany: [PortfolioScalarWhereInput!]
   disconnect: [PortfolioWhereUniqueInput!]
@@ -812,10 +861,28 @@ input TransactionCreateInput {
   unitPrice: Int!
 }
 
+input TransactionRecordCreateManyAssetInput {
+  assetQuantity: Int!
+  createdAt: DateTime
+  currency: String!
+  date: DateTime
+  id: Int
+  note: String
+  transactionType: TransactionType!
+  unitPrice: Int!
+  updatedAt: DateTime
+}
+
+input TransactionRecordCreateManyAssetInputEnvelope {
+  data: [TransactionRecordCreateManyAssetInput!]
+  skipDuplicates: Boolean
+}
+
 input TransactionRecordCreateNestedManyWithoutAssetInput {
   connect: [TransactionRecordWhereUniqueInput!]
   connectOrCreate: [TransactionRecordCreateOrConnectWithoutAssetInput!]
   create: [TransactionRecordCreateWithoutAssetInput!]
+  createMany: TransactionRecordCreateManyAssetInputEnvelope
 }
 
 input TransactionRecordCreateOrConnectWithoutAssetInput {
@@ -870,6 +937,7 @@ input TransactionRecordUpdateManyWithoutAssetInput {
   connect: [TransactionRecordWhereUniqueInput!]
   connectOrCreate: [TransactionRecordCreateOrConnectWithoutAssetInput!]
   create: [TransactionRecordCreateWithoutAssetInput!]
+  createMany: TransactionRecordCreateManyAssetInputEnvelope
   delete: [TransactionRecordWhereUniqueInput!]
   deleteMany: [TransactionRecordScalarWhereInput!]
   disconnect: [TransactionRecordWhereUniqueInput!]
